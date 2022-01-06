@@ -4,23 +4,22 @@ public class ElevatorHMI {
 	
 	private static MqttPublisher mqttPublisher;
 	
+	private static MqttSubscriber mqttSubscriber;
+	
 	public static void main(String[] args) {
+		Elevator elevator = new Elevator(DoorState.CLOSE, ElevatorState.INSERVICE, 0, Direction.IDLE, ElevatorSpeed.SPEED1);
+		System.out.println(elevator.toString());
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				
 				try {
-					//ElevatorPanelControlOutside window = new ElevatorPanelControlOutside();
-					//window.frame.setVisible(true);
-					try {
-						mqttPublisher = new MqttPublisher();
-						mqttPublisher.startConnection();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+					mqttPublisher = new MqttPublisher();
+					mqttPublisher.startConnection();
+					mqttSubscriber = new MqttSubscriber(elevator);
+					mqttSubscriber.subscribe();
 					ElevatorPanelControlOutside windowOuside = new ElevatorPanelControlOutside(mqttPublisher);
 					ElevatorPanelControlInside windowInside = new ElevatorPanelControlInside(mqttPublisher);
-					ElevatorView windowElevator = new ElevatorView();
-					Elevator elevator = new Elevator(DoorState.OPEN, ElevatorState.INSERVICE, CurrentLevel.LEVEL0, Direction.IDLE);
-					System.out.println(elevator.toString());
+					ElevatorView windowElevator = new ElevatorView(elevator);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.Timer;
 
+import org.json.JSONException;
+
 public class ElevatorPanelControlInside {
 
 	private JFrame frame;
@@ -75,6 +77,71 @@ public class ElevatorPanelControlInside {
 	private static URL urlLevel3Green = ElevatorPanelControlInside.class.getResource("/level3Green.png");
 	Icon iconLevel3 = new ImageIcon(urlLevel3);
 	Icon iconLevel3Green = new ImageIcon(urlLevel3Green);
+	
+	private static URL urlDigit0 = ElevatorPanelControlOutside.class.getResource("/digit0.png");
+	private static URL urlDigit0Green = ElevatorPanelControlOutside.class.getResource("/digit0Green.png");
+	Icon iconDigit0 = new ImageIcon(urlDigit0);
+	Icon iconDigit0Green = new ImageIcon(urlDigit0Green);
+	
+	private static URL urlDigit1 = ElevatorPanelControlOutside.class.getResource("/digit1.png");
+	private static URL urlDigit1Green = ElevatorPanelControlOutside.class.getResource("/digit1Green.png");
+	Icon iconDigit1 = new ImageIcon(urlDigit1);
+	Icon iconDigit1Green = new ImageIcon(urlDigit1Green);
+	
+	private static URL urlDigit2 = ElevatorPanelControlOutside.class.getResource("/digit2.png");
+	private static URL urlDigit2Green = ElevatorPanelControlOutside.class.getResource("/digit2Green.png");
+	Icon iconDigit2 = new ImageIcon(urlDigit2);
+	Icon iconDigit2Green = new ImageIcon(urlDigit2Green);
+	
+	private static URL urlDigit3 = ElevatorPanelControlOutside.class.getResource("/digit3.png");
+	private static URL urlDigit3Green = ElevatorPanelControlOutside.class.getResource("/digit3Green.png");
+	Icon iconDigit3 = new ImageIcon(urlDigit3);
+	Icon iconDigit3Green = new ImageIcon(urlDigit3Green);
+	
+	private static URL urlDigit4 = ElevatorPanelControlOutside.class.getResource("/digit4.png");
+	private static URL urlDigit4Green = ElevatorPanelControlOutside.class.getResource("/digit4Green.png");
+	Icon iconDigit4 = new ImageIcon(urlDigit4);
+	Icon iconDigit4Green = new ImageIcon(urlDigit4Green);
+	
+	private static URL urlDigit5 = ElevatorPanelControlOutside.class.getResource("/digit5.png");
+	private static URL urlDigit5Green = ElevatorPanelControlOutside.class.getResource("/digit5Green.png");
+	Icon iconDigit5 = new ImageIcon(urlDigit5);
+	Icon iconDigit5Green = new ImageIcon(urlDigit5Green);
+	
+	private static URL urlDigit6 = ElevatorPanelControlOutside.class.getResource("/digit6.png");
+	private static URL urlDigit6Green = ElevatorPanelControlOutside.class.getResource("/digit6Green.png");
+	Icon iconDigit6 = new ImageIcon(urlDigit6);
+	Icon iconDigit6Green = new ImageIcon(urlDigit6Green);
+	
+	private static URL urlDigit7 = ElevatorPanelControlOutside.class.getResource("/digit7.png");
+	private static URL urlDigit7Green = ElevatorPanelControlOutside.class.getResource("/digit7Green.png");
+	Icon iconDigit7 = new ImageIcon(urlDigit7);
+	Icon iconDigit7Green = new ImageIcon(urlDigit7Green);
+	
+	private static URL urlDigit8 = ElevatorPanelControlOutside.class.getResource("/digit8.png");
+	private static URL urlDigit8Green = ElevatorPanelControlOutside.class.getResource("/digit8Green.png");
+	Icon iconDigit8 = new ImageIcon(urlDigit8);
+	Icon iconDigit8Green = new ImageIcon(urlDigit8Green);
+	
+	private static URL urlDigit9 = ElevatorPanelControlOutside.class.getResource("/digit9.png");
+	private static URL urlDigit9Green = ElevatorPanelControlOutside.class.getResource("/digit9Green.png");
+	Icon iconDigit9 = new ImageIcon(urlDigit9);
+	Icon iconDigit9Green = new ImageIcon(urlDigit9Green);
+	
+	private static URL urlCross = ElevatorPanelControlOutside.class.getResource("/cross.png");
+	private static URL urlCrossPressed = ElevatorPanelControlOutside.class.getResource("/crossPressed.png");
+	Icon iconCross = new ImageIcon(urlCross);
+	Icon iconCrossPressed = new ImageIcon(urlCrossPressed);
+	
+	private static URL urlCheck = ElevatorPanelControlOutside.class.getResource("/check.png");
+	private static URL urlCheckPressed = ElevatorPanelControlOutside.class.getResource("/checkPressed.png");
+	Icon iconCheck = new ImageIcon(urlCheck);
+	Icon iconCheckPressed = new ImageIcon(urlCheckPressed);
+	
+	private static URL urlUser = ElevatorPanelControlOutside.class.getResource("/user.png");
+	private static URL urlSupervisor = ElevatorPanelControlOutside.class.getResource("/supervisor.png");
+	Icon iconUser = new ImageIcon(urlUser);
+	Icon iconSupervisor = new ImageIcon(urlSupervisor);
 	
 	private JButton btnLevel1;
 	private JButton btnLevel3;
@@ -161,7 +228,7 @@ public class ElevatorPanelControlInside {
 
 	    });
 		
-		supervisorOnOff = new JToggleButton("User");
+		supervisorOnOff = new JToggleButton(iconUser);
 		supervisorOnOff.addActionListener(new ActionListener() {
 
 		    @Override
@@ -169,13 +236,13 @@ public class ElevatorPanelControlInside {
 		    	
 		    	if (supervisorOnOff.isSelected()) {
 		    		//add something to login
-		    		supervisorOnOff.setText("Supervisor");
+		    		supervisorOnOff.setIcon(iconSupervisor);
 		    		//we display the code to enter the code to use the panel as supervisor
 		    		codeAccessSupervisor = true;
 		    		supervisor = true;
 		    		
 		    	} else {
-		    		supervisorOnOff.setText("User");
+		    		supervisorOnOff.setIcon(iconUser);
 		    		supervisor = false;
 		    		codeAccessSupervisor = false;
 		    	}
@@ -192,52 +259,220 @@ public class ElevatorPanelControlInside {
 		panelCodeAccessSupervisor.setVisible(false);
 		panelCodeAccessSupervisor.setLayout(null);
 		
-		btnDigit1 = new JButton("1");
+		btnDigit1 = new JButton(iconDigit1);
 		btnDigit1.setBounds(0, 20, 40, 40);
+		btnDigit1.addActionListener(new ActionListener() {
+
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	btnDigit1.setIcon(iconDigit1Green);
+		    	int delay = 1000; //milliseconds
+		    	  ActionListener taskPerformer = new ActionListener() {
+		    	      public void actionPerformed(ActionEvent evt) {
+		    	    	  btnDigit1.setIcon(iconDigit1);
+		    	      }
+		    	  };
+		    	  new Timer(delay, taskPerformer).start();
+		    }
+		});
 		panelCodeAccessSupervisor.add(btnDigit1);
 		
-		btnDigit2 = new JButton("2");
+		btnDigit2 = new JButton(iconDigit2);
 		btnDigit2.setBounds(40, 20, 40, 40);
+		btnDigit2.addActionListener(new ActionListener() {
+
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	btnDigit2.setIcon(iconDigit2Green);
+		    	int delay = 1000; //milliseconds
+		    	  ActionListener taskPerformer = new ActionListener() {
+		    	      public void actionPerformed(ActionEvent evt) {
+		    	    	  btnDigit2.setIcon(iconDigit2);
+		    	      }
+		    	  };
+		    	  new Timer(delay, taskPerformer).start();
+		    }
+		});
 		panelCodeAccessSupervisor.add(btnDigit2);
 		
-		btnDigit3 = new JButton("3");
+		btnDigit3 = new JButton(iconDigit3);
 		btnDigit3.setBounds(80, 20, 40, 40);
+		btnDigit3.addActionListener(new ActionListener() {
+
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	btnDigit3.setIcon(iconDigit3Green);
+		    	int delay = 1000; //milliseconds
+		    	  ActionListener taskPerformer = new ActionListener() {
+		    	      public void actionPerformed(ActionEvent evt) {
+		    	    	  btnDigit3.setIcon(iconDigit3);
+		    	      }
+		    	  };
+		    	  new Timer(delay, taskPerformer).start();
+		    }
+		});
 		panelCodeAccessSupervisor.add(btnDigit3);
 		
-		btnDigit4 = new JButton("4");
+		btnDigit4 = new JButton(iconDigit4);
 		btnDigit4.setBounds(0, 60, 40, 40);
+		btnDigit4.addActionListener(new ActionListener() {
+
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	btnDigit4.setIcon(iconDigit4Green);
+		    	int delay = 1000; //milliseconds
+		    	  ActionListener taskPerformer = new ActionListener() {
+		    	      public void actionPerformed(ActionEvent evt) {
+		    	    	  btnDigit4.setIcon(iconDigit4);
+		    	      }
+		    	  };
+		    	  new Timer(delay, taskPerformer).start();
+		    }
+		});
 		panelCodeAccessSupervisor.add(btnDigit4);
 		
-		btnDigit5 = new JButton("5");
+		btnDigit5 = new JButton(iconDigit5);
 		btnDigit5.setBounds(40, 60, 40, 40);
+		btnDigit5.addActionListener(new ActionListener() {
+
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	btnDigit5.setIcon(iconDigit5Green);
+		    	int delay = 1000; //milliseconds
+		    	  ActionListener taskPerformer = new ActionListener() {
+		    	      public void actionPerformed(ActionEvent evt) {
+		    	    	  btnDigit5.setIcon(iconDigit5);
+		    	      }
+		    	  };
+		    	  new Timer(delay, taskPerformer).start();
+		    }
+		});
 		panelCodeAccessSupervisor.add(btnDigit5);
 		
-		btnDigit6 = new JButton("6");
+		btnDigit6 = new JButton(iconDigit6);
 		btnDigit6.setBounds(80, 60, 40, 40);
+		btnDigit6.addActionListener(new ActionListener() {
+
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	btnDigit6.setIcon(iconDigit6Green);
+		    	int delay = 1000; //milliseconds
+		    	  ActionListener taskPerformer = new ActionListener() {
+		    	      public void actionPerformed(ActionEvent evt) {
+		    	    	  btnDigit6.setIcon(iconDigit6);
+		    	      }
+		    	  };
+		    	  new Timer(delay, taskPerformer).start();
+		    }
+		});
 		panelCodeAccessSupervisor.add(btnDigit6);
 		
-		btnDigit7 = new JButton("7");
+		btnDigit7 = new JButton(iconDigit7);
 		btnDigit7.setBounds(0, 100, 40, 40);
+		btnDigit7.addActionListener(new ActionListener() {
+
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	btnDigit7.setIcon(iconDigit7Green);
+		    	int delay = 1000; //milliseconds
+		    	  ActionListener taskPerformer = new ActionListener() {
+		    	      public void actionPerformed(ActionEvent evt) {
+		    	    	  btnDigit7.setIcon(iconDigit7);
+		    	      }
+		    	  };
+		    	  new Timer(delay, taskPerformer).start();
+		    }
+		});
 		panelCodeAccessSupervisor.add(btnDigit7);
 		
-		btnDigit8 = new JButton("8");
+		btnDigit8 = new JButton(iconDigit8);
 		btnDigit8.setBounds(40, 100, 40, 40);
+		btnDigit8.addActionListener(new ActionListener() {
+
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	btnDigit8.setIcon(iconDigit8Green);
+		    	int delay = 1000; //milliseconds
+		    	  ActionListener taskPerformer = new ActionListener() {
+		    	      public void actionPerformed(ActionEvent evt) {
+		    	    	  btnDigit8.setIcon(iconDigit8);
+		    	      }
+		    	  };
+		    	  new Timer(delay, taskPerformer).start();
+		    }
+		});
 		panelCodeAccessSupervisor.add(btnDigit8);
 		
-		btnDigit9 = new JButton("9");
+		btnDigit9 = new JButton(iconDigit9);
 		btnDigit9.setBounds(80, 100, 40, 40);
+		btnDigit9.addActionListener(new ActionListener() {
+
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	btnDigit9.setIcon(iconDigit9Green);
+		    	int delay = 1000; //milliseconds
+		    	  ActionListener taskPerformer = new ActionListener() {
+		    	      public void actionPerformed(ActionEvent evt) {
+		    	    	  btnDigit9.setIcon(iconDigit9);
+		    	      }
+		    	  };
+		    	  new Timer(delay, taskPerformer).start();
+		    }
+		});
 		panelCodeAccessSupervisor.add(btnDigit9);
 		
-		btnValidate = new JButton("\u2713");
+		btnValidate = new JButton(iconCheck);
 		btnValidate.setBounds(0, 140, 40, 40);
+		btnValidate.addActionListener(new ActionListener() {
+
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	btnValidate.setIcon(iconCheckPressed);
+		    	int delay = 1000; //milliseconds
+		    	  ActionListener taskPerformer = new ActionListener() {
+		    	      public void actionPerformed(ActionEvent evt) {
+		    	    	  btnValidate.setIcon(iconCheck);
+		    	      }
+		    	  };
+		    	  new Timer(delay, taskPerformer).start();
+		    }
+		});
 		panelCodeAccessSupervisor.add(btnValidate);
 		
-		btnDigit0 = new JButton("0");
+		btnDigit0 = new JButton(iconDigit0);
 		btnDigit0.setBounds(40, 140, 40, 40);
+		btnDigit0.addActionListener(new ActionListener() {
+
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	btnDigit0.setIcon(iconDigit0Green);
+		    	int delay = 1000; //milliseconds
+		    	  ActionListener taskPerformer = new ActionListener() {
+		    	      public void actionPerformed(ActionEvent evt) {
+		    	    	  btnDigit0.setIcon(iconDigit0);
+		    	      }
+		    	  };
+		    	  new Timer(delay, taskPerformer).start();
+		    }
+		});
 		panelCodeAccessSupervisor.add(btnDigit0);
 		
-		btnCancel = new JButton("X");
+		btnCancel = new JButton(iconCross);
 		btnCancel.setBounds(80, 140, 40, 40);
+		btnCancel.addActionListener(new ActionListener() {
+
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	btnCancel.setIcon(iconCrossPressed);
+		    	int delay = 1000; //milliseconds
+		    	  ActionListener taskPerformer = new ActionListener() {
+		    	      public void actionPerformed(ActionEvent evt) {
+		    	    	  btnCancel.setIcon(iconCross);
+		    	      }
+		    	  };
+		    	  new Timer(delay, taskPerformer).start();
+		    }
+		});
 		panelCodeAccessSupervisor.add(btnCancel);
 		
 		lblPassword = new JLabel("Tap the password");
@@ -295,6 +530,14 @@ public class ElevatorPanelControlInside {
 
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
+		    	Request request = new Request("TravReq", "Elevator Panel", "move to level 0");
+		    	try {
+					System.out.println(request.toJSON());
+					mqttPublisher.sendMessage(request.toJSON().toString());
+				} catch (JSONException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		    	btnLevel0.setIcon(iconLevel0Green);
 		    	int delay = 1000; //milliseconds
 		    	  ActionListener taskPerformer = new ActionListener() {
@@ -316,6 +559,14 @@ public class ElevatorPanelControlInside {
 
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
+		    	Request request = new Request("TravReq", "Elevator Panel", "move to level 1");
+		    	try {
+					System.out.println(request.toJSON());
+					mqttPublisher.sendMessage(request.toJSON().toString());
+				} catch (JSONException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		    	btnLevel1.setIcon(iconLevel1Green);
 		    	int delay = 1000; //milliseconds
 		    	  ActionListener taskPerformer = new ActionListener() {
@@ -337,6 +588,14 @@ public class ElevatorPanelControlInside {
 
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
+		    	Request request = new Request("TravReq", "Elevator Panel", "move to level 2");
+		    	try {
+					System.out.println(request.toJSON());
+					mqttPublisher.sendMessage(request.toJSON().toString());
+				} catch (JSONException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		    	btnLevel2.setIcon(iconLevel2Green);
 		    	int delay = 1000; //milliseconds
 		    	  ActionListener taskPerformer = new ActionListener() {
@@ -358,6 +617,14 @@ public class ElevatorPanelControlInside {
 
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
+		    	Request request = new Request("TravReq", "Elevator Panel", "move to level 3");
+		    	try {
+					System.out.println(request.toJSON());
+					mqttPublisher.sendMessage(request.toJSON().toString());
+				} catch (JSONException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		    	btnLevel3.setIcon(iconLevel3Green);
 		    	int delay = 1000; //milliseconds
 		    	  ActionListener taskPerformer = new ActionListener() {
@@ -378,6 +645,14 @@ public class ElevatorPanelControlInside {
 
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
+		    	Request request = new Request("TravReq", "Elevator Panel", "emergency");
+		    	try {
+					System.out.println(request.toJSON());
+					mqttPublisher.sendMessage(request.toJSON().toString());
+				} catch (JSONException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		    	btnStop.setIcon(iconStopPressed);
 		    	int delay = 1000; //milliseconds
 		    	  ActionListener taskPerformer = new ActionListener() {
@@ -398,6 +673,14 @@ public class ElevatorPanelControlInside {
 
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
+		    	Request request = new Request("TravReq", "Elevator Panel", "open door");
+		    	try {
+					System.out.println(request.toJSON());
+					mqttPublisher.sendMessage(request.toJSON().toString());
+				} catch (JSONException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		    	btnOpen.setIcon(iconOpenGreen);
 		    	int delay = 1000; //milliseconds
 		    	  ActionListener taskPerformer = new ActionListener() {
@@ -418,6 +701,14 @@ public class ElevatorPanelControlInside {
 
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
+		    	Request request = new Request("TravReq", "Elevator Panel", "close door");
+		    	try {
+					System.out.println(request.toJSON());
+					mqttPublisher.sendMessage(request.toJSON().toString());
+				} catch (JSONException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		    	btnClose.setIcon(iconCloseGreen);
 		    	int delay = 1000; //milliseconds
 		    	  ActionListener taskPerformer = new ActionListener() {
