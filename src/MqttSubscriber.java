@@ -90,10 +90,12 @@ public class MqttSubscriber implements MqttCallback{
 		case "DoorState":
 			requestBack = new RequestBackState(jsonmsg.get("type").toString(), jsonmsg.get("device").toString(), jsonmsg.get("state").toString(), jsonmsg.get("time").toString());
 			System.out.println("State");
+			elevator.treatRequestBackState( (RequestBackState) requestBack);
 			break;
 		case "CurrentLevel":
 			requestBack = new RequestBackLevel(jsonmsg.get("type").toString(), jsonmsg.get("device").toString(), jsonmsg.get("level").toString(), jsonmsg.get("time").toString());
 			System.out.println("Level");
+			elevator.treatRequestBackLevel( (RequestBackLevel) requestBack);
 			break;
 		case "DirInd":
 			requestBack = new RequestBackDirection(jsonmsg.get("type").toString(), jsonmsg.get("device").toString(), jsonmsg.get("direction").toString(), jsonmsg.get("time").toString());
@@ -106,7 +108,6 @@ public class MqttSubscriber implements MqttCallback{
 		default:
 			 System.out.println("no request back match");
 		}
-		elevator.treatRequestBack(requestBack);
 		
 	}
 

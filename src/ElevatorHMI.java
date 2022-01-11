@@ -17,7 +17,7 @@ public class ElevatorHMI {
 					mqttPublisher.startConnection();
 					mqttSubscriber = new MqttSubscriber(elevator);
 					mqttSubscriber.subscribe();
-					ElevatorPanelControlOutside windowOuside = new ElevatorPanelControlOutside(mqttPublisher);
+					ElevatorPanelControlOutside windowOutside = new ElevatorPanelControlOutside(mqttPublisher);
 					ElevatorPanelControlInside windowInside = new ElevatorPanelControlInside(mqttPublisher);
 					ElevatorView windowElevator = new ElevatorView(elevator);
 				} catch (Exception e) {

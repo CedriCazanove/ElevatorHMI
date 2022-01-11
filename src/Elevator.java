@@ -107,34 +107,6 @@ public class Elevator {
 						  "\n - CurrentLevel : " + this.currentLevel +
 						  "\n - Direction : " + this.direction;
 	}
-
-	public void treatRequestBack(RequestBack requestBack) {
-		if (requestBack != null) {
-			System.out.println("Elevator received a request to treat");
-			switch(requestBack.getTypeRequestBack()) {
-			case STATE:
-				treatRequestBackState( (RequestBackState) requestBack);
-				break;
-			case LEVEL:
-				treatRequestBackLevel( (RequestBackLevel) requestBack);
-				break;
-			case DIRECTION:
-				System.out.println("Elevator received a direction request to treat");
-				break;
-			case ANSWER:
-				System.out.println("Elevator received a answer request to treat");
-				break;
-			case LOGERROR:
-				System.out.println("Elevator received a log error request to treat");
-				break;
-			default:
-				break;
-				
-			}
-		} else {
-			System.out.println("Elevator received a null request");
-		}
-	}
 	
 	public void treatRequestBackState(RequestBackState requestState) {
 		System.out.println("Elevator received a state request to treat");
