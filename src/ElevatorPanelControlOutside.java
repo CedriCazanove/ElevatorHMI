@@ -131,6 +131,13 @@ public class ElevatorPanelControlOutside {
 	private static URL urlSupervisor = ElevatorPanelControlOutside.class.getResource("/supervisor.png");
 	Icon iconUser = new ImageIcon(urlUser);
 	Icon iconSupervisor = new ImageIcon(urlSupervisor);
+	
+	private JButton btnFloor1;
+	private JButton btnFloor0;
+	private JButton btnFloor2;
+	private JButton btnFloor3;
+	
+	private String currentFloorPanel = "0";
 
 	/**
 	 * Launch the application.
@@ -221,13 +228,21 @@ public class ElevatorPanelControlOutside {
 		
 		
 		btnUp = new JButton(iconUp);
-		btnUp.setBounds(40, 59, 50, 50);
+		btnUp.setBounds(14, 59, 50, 50);
 		btnUp.setFocusPainted(false);
 		btnUp.setFocusable(false);
 		btnUp.addActionListener(new ActionListener() {
 
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
+		    	Request request = new Request("TravReq", "Elevator Panel", "move to level " + currentFloorPanel);
+		    	try {
+					System.out.println(request.toJSON());
+					mqttPublisher.sendMessage(request.toJSON().toString());
+				} catch (JSONException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		    	btnUp.setIcon(iconUpGreen);
 		    	int delay = 1000; //milliseconds
 		    	  ActionListener taskPerformer = new ActionListener() {
@@ -242,13 +257,21 @@ public class ElevatorPanelControlOutside {
 		frame.getContentPane().add(btnUp);
 		
 		btnDown = new JButton(iconDown);
-		btnDown.setBounds(40, 109, 50, 50);
+		btnDown.setBounds(14, 109, 50, 50);
 		btnDown.setFocusPainted(false);
 		btnDown.setFocusable(false);
 		btnDown.addActionListener(new ActionListener() {
 
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
+		    	Request request = new Request("TravReq", "Elevator Panel", "move to level " + currentFloorPanel);
+		    	try {
+					System.out.println(request.toJSON());
+					mqttPublisher.sendMessage(request.toJSON().toString());
+				} catch (JSONException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		    	btnDown.setIcon(iconDownGreen);
 		    	int delay = 1000; //milliseconds
 		    	  ActionListener taskPerformer = new ActionListener() {
@@ -283,11 +306,11 @@ public class ElevatorPanelControlOutside {
 		    	panelCodeAccessSupervisor.setVisible(codeAccessSupervisor);
 		    }
 		});
-		supervisorOnOff.setBounds(194, 23, 120, 21);
+		supervisorOnOff.setBounds(194, 10, 120, 21);
 		frame.getContentPane().add(supervisorOnOff);
 		
 		panelCodeAccessSupervisor = new JPanel();
-		panelCodeAccessSupervisor.setBounds(194, 45, 120, 180);
+		panelCodeAccessSupervisor.setBounds(194, 33, 120, 180);
 		frame.getContentPane().add(panelCodeAccessSupervisor);
 		panelCodeAccessSupervisor.setVisible(false);
 		panelCodeAccessSupervisor.setLayout(null);
@@ -554,5 +577,70 @@ public class ElevatorPanelControlOutside {
 		    }
 		});
 		panelSupervisor.add(btnSpeed1);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(14, 10, 160, 40);
+		frame.getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		btnFloor0 = new JButton(iconDigit0Green);
+		btnFloor0.setBounds(0, 0, 40, 40);
+		btnFloor0.addActionListener(new ActionListener() {
+
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	btnFloor0.setIcon(iconDigit0Green);
+	    	    btnFloor1.setIcon(iconDigit1);
+	    	    btnFloor2.setIcon(iconDigit2);
+	    	    btnFloor3.setIcon(iconDigit3);
+	    	    currentFloorPanel = "0";
+		    }
+		});
+		panel.add(btnFloor0);
+		
+		btnFloor1 = new JButton(iconDigit1);
+		btnFloor1.setBounds(40, 0, 40, 40);
+		btnFloor1.addActionListener(new ActionListener() {
+
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	btnFloor1.setIcon(iconDigit1Green);
+	    	    btnFloor2.setIcon(iconDigit2);
+	    	    btnFloor0.setIcon(iconDigit0);
+	    	    btnFloor3.setIcon(iconDigit3);
+	    	    currentFloorPanel = "1";
+		    }
+		});
+		panel.add(btnFloor1);
+		
+		btnFloor2 = new JButton(iconDigit2);
+		btnFloor2.setBounds(80, 0, 40, 40);
+		btnFloor2.addActionListener(new ActionListener() {
+
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	btnFloor2.setIcon(iconDigit2Green);
+	    	    btnFloor1.setIcon(iconDigit1);
+	    	    btnFloor0.setIcon(iconDigit0);
+	    	    btnFloor3.setIcon(iconDigit3);
+	    	    currentFloorPanel = "2";
+		    }
+		});
+		panel.add(btnFloor2);
+		
+		btnFloor3 = new JButton(iconDigit3);
+		btnFloor3.setBounds(120, 0, 40, 40);
+		btnFloor3.addActionListener(new ActionListener() {
+
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	btnFloor3.setIcon(iconDigit3Green);
+	    	    btnFloor1.setIcon(iconDigit1);
+	    	    btnFloor0.setIcon(iconDigit0);
+	    	    btnFloor2.setIcon(iconDigit2);
+	    	    currentFloorPanel = "3";
+		    }
+		});
+		panel.add(btnFloor3);
 	}
 }

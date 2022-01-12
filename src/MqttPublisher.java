@@ -6,9 +6,9 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 public class MqttPublisher {
 	
-	private String topic = "test";//"21WS-SysArch/test";
+	private String topic = "/21WS-SysArch/test";
 	
-	private String broker = "tcp://localhost:1883";//"tcp://ce121caz@ea-pc165.ei.htwg-konstanz.de:1883";// 
+	private String broker = "tcp://localhost:1888";//"tcp://ce121caz@ea-pc165.ei.htwg-konstanz.de:1883";// 
 	
     private String clientId = "JavaSample";
     
@@ -29,8 +29,8 @@ public class MqttPublisher {
 	    	sampleClient = new MqttClient(this.broker, this.clientId, this.persistence);
 	        connOpts = new MqttConnectOptions();
 	        connOpts.setCleanSession(true);
-	        //connOpts.setUserName(username);
-	        //connOpts.setPassword(password.toCharArray());
+	        connOpts.setUserName(username);
+	        connOpts.setPassword(password.toCharArray());
     	} catch(MqttException me) {
             System.out.println("reason " + me.getReasonCode());
             System.out.println("msg " + me.getMessage());
