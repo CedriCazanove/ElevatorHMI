@@ -150,7 +150,7 @@ public class ElevatorView {
 		JPanel panelFloor = new JPanel();
 		panelFloor.setBounds(9, 10, 10, 543);
 		frame.getContentPane().add(panelFloor);
-		panelFloor.setLayout(null);
+		panelFloor.setLayout(null); 
 		
 		Icon iconFloorIndicator = new ImageIcon(urlFloorIndicator);
 		lblFloorIndicator = new JLabel(iconFloorIndicator);
