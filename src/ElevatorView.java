@@ -15,6 +15,10 @@ public class ElevatorView {
 
 	private JFrame frame;
 	
+	private Elevator elevator;
+	
+	Timer timer;
+	
 	private static JLabel labelElevator;
 	
 	private JLabel lblFloorIndicator;
@@ -48,8 +52,78 @@ public class ElevatorView {
 	/**
 	 * Create the application.
 	 */
-	public ElevatorView() {
+	public ElevatorView(Elevator elevator) {
 		initialize();
+		this.elevator = elevator;
+		this.elevator.setListener(new Elevator.ElevatorListener() {
+    		private Elevator elevatorView = elevator;
+    		
+			@Override
+    		public void doorStateChanged() {
+    		    System.out.println("ElevatorView : The state of the elevator change");
+    		    System.out.println(elevatorView.toString());
+    		    switch(elevatorView.getDoorState()) {
+    		    case OPEN:
+    		    	labelElevator.setIcon(iconElevatorOpen);
+    		    	break;
+    		    case CLOSE:
+    		    	labelElevator.setIcon(iconElevatorClose);
+    		    	break;
+    		    case OPENING:
+    		    case CLOSING:
+    		    	labelElevator.setIcon(iconElevatorInTransition);
+    		    	break;
+		    	default:
+    		    	System.out.println("ElevatorView : no match");	
+    		    }
+    		}
+			@Override
+			public void currentLevelChanged() {
+				System.out.println("ElevatorView : currentLevelChanged");
+				int delay = 1; //milliseconds
+				
+		    	timer = new Timer(delay, new ActionListener() {
+		    		
+		    		public void actionPerformed(ActionEvent evt) {
+		    			int previousLevel = labelElevator.getY();
+						int nextLevel = (3 - elevatorView.getCurrentLevel())*135 + 3;
+						//System.out.println("previousLevel : " + previousLevel);
+						//System.out.println("nextLevel : " + nextLevel);
+						int direction = 0;
+						if (previousLevel > nextLevel) {
+							direction = -1;
+						} else {
+							direction = 1;
+						}
+						if (previousLevel == nextLevel) {
+							timer.stop();
+						} else {
+							labelElevator.setBounds(0, labelElevator.getY() + direction * elevatorView.getSpeed().toInteger(), 100, 135);
+						}
+		    			
+		    		}
+		    	});
+		    	timer.start();
+				
+				
+				
+			}
+			@Override
+			public void elevatorStateChanged() {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void directionChanged() {
+				// TODO Auto-generated method stub
+				
+			}
+			@Override
+			public void speedChanged() {
+				// TODO Auto-generated method stub
+				
+			}
+    	});
 	}
 
 	/**
@@ -76,24 +150,11 @@ public class ElevatorView {
 		JPanel panelFloor = new JPanel();
 		panelFloor.setBounds(9, 10, 10, 543);
 		frame.getContentPane().add(panelFloor);
-		panelFloor.setLayout(null);
+		panelFloor.setLayout(null); 
 		
 		Icon iconFloorIndicator = new ImageIcon(urlFloorIndicator);
 		lblFloorIndicator = new JLabel(iconFloorIndicator);
 		lblFloorIndicator.setBounds(0, 0, 10, 543);
 		panelFloor.add(lblFloorIndicator);
-		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(229, 224, 85, 21);
-		btnNewButton.setVisible(false);
-		btnNewButton.addActionListener(new ActionListener() {
-
-		    @Override
-		    public void actionPerformed(ActionEvent e) {
-		    	System.out.println(labelElevator.getY());
-		    	labelElevator.setBounds(0, labelElevator.getY() - 50, 100, 135);
-		    }
-		});
-		frame.getContentPane().add(btnNewButton);
 	}
 }
