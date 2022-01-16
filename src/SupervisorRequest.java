@@ -15,11 +15,11 @@ public class SupervisorRequest {
 
     private String control;
 
-    private String state;
+    private Object state;
 
     private String time;
 
-    public SupervisorRequest(String type, String device, String mode, String control, String state) {
+    public SupervisorRequest(String type, String device, String mode, String control, Object state) {
         this.type = type;
         this.device = device;
         this.mode = mode;
@@ -84,11 +84,11 @@ public class SupervisorRequest {
         this.mode = mode;
     }
 
-    public String getState() {
+    public Object getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(Object state) {
         this.state = state;
     }
 }
