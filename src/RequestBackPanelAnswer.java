@@ -1,32 +1,30 @@
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class LogError implements Request {
+public class RequestBackPanelAnswer implements Request {
 	
 	private String type;
 	
-	private String message;
-	
 	private String device;
+	
+	private JSONArray states;
 	
 	private String time;
 	
-	private String severity;
-	
-	public LogError(String type, String message, String device, String time, String severity) {
+	public RequestBackPanelAnswer(String type, String device, JSONArray states, String time) {
 		this.type = type;
-		this.message = message;
 		this.device = device;
-		this.severity = severity;
+		this.states = states;
+		this.time = time; 
 	}
 
 	@Override
 	public JSONObject toJSON() throws JSONException {
 		JSONObject obj = new JSONObject();
 		obj.put("type", this.type);
-		obj.put("message", this.message);
 		obj.put("device", this.device);
-		obj.put("severity", this.severity);
+		obj.put("states", this.states);
 		obj.put("time", this.time);
 		return obj;
 	}
@@ -40,14 +38,6 @@ public class LogError implements Request {
 		this.type = type;
 	}
 
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
 	@Override
 	public String getDevice() {
 		return device;
@@ -57,6 +47,14 @@ public class LogError implements Request {
 		this.device = device;
 	}
 
+	public JSONArray getAnswer() {
+		return states;
+	}
+
+	public void setAnswer(JSONArray states) {
+		this.states = states;
+	}
+
 	@Override
 	public String getTime() {
 		return time;
@@ -64,14 +62,6 @@ public class LogError implements Request {
 
 	public void setTime(String time) {
 		this.time = time;
-	}
-
-	public String getSeverity() {
-		return severity;
-	}
-
-	public void setSeverity(String severity) {
-		this.severity = severity;
 	}
 
 }

@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
-public class SupervisorRequest {
+public class SupervisorRequest implements Request {
 
     private String type;
 
@@ -33,6 +33,7 @@ public class SupervisorRequest {
         this.time = sdf.format(date);
     }
 
+    @Override
     public JSONObject toJSON() throws JSONException {
         JSONObject obj = new JSONObject();
         obj.put("type", this.type);
@@ -44,10 +45,12 @@ public class SupervisorRequest {
         return obj;
     }
 
+    @Override
     public String getType() {
         return this.type;
     }
 
+    @Override
     public String getDevice() {
         return this.device;
     }
@@ -56,6 +59,7 @@ public class SupervisorRequest {
         return this.control;
     }
 
+    @Override
     public String getTime() {
         return this.time;
     }

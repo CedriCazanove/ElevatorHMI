@@ -1,4 +1,3 @@
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -9,32 +8,24 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JToggleButton;
 import javax.swing.Timer;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 public class ElevatorPanelControlInside {
 
 	private JFrame frame;
 
+	private Elevator elevatorInside;
+
 	private static MqttPublisher mqttPublisher;
 
 	private Boolean codeAccessSupervisor = false, supervisor = false;
 
-	private JButton btnLevel0, btnLevel2;
-
-	private static URL urlSpeedFast = ElevatorPanelControlInside.class.getResource("/speedFast.png");
-	private static URL urlSpeedFastGreen = ElevatorPanelControlInside.class.getResource("/speedFastGreen.png");
-	Icon iconSpeedFast = new ImageIcon(urlSpeedFast);
-	Icon iconSpeedFastGreen = new ImageIcon(urlSpeedFastGreen);
-
-	private static URL urlSpeedSlow = ElevatorPanelControlInside.class.getResource("/speedSlow.png");
-	private static URL urlSpeedSlowGreen = ElevatorPanelControlInside.class.getResource("/speedSlowGreen.png");
-	Icon iconSpeedSlow = new ImageIcon(urlSpeedSlow);
-	Icon iconSpeedSlowGreen = new ImageIcon(urlSpeedSlowGreen);
+	private JButton btnLevel0, btnLevel1, btnLevel2, btnLevel3, btnStop, btnOpen, btnClose;
 
 	private static URL urlStop = ElevatorPanelControlInside.class.getResource("/stop.png");
 	private static URL urlStopPressed = ElevatorPanelControlInside.class.getResource("/stopPressed.png");
@@ -136,12 +127,6 @@ public class ElevatorPanelControlInside {
 	Icon iconUser = new ImageIcon(urlUser);
 	Icon iconSupervisor = new ImageIcon(urlSupervisor);
 
-	private JButton btnLevel1;
-	private JButton btnLevel3;
-	private JButton btnStop;
-	private JButton btnOpen;
-	private JButton btnClose;
-
 	/**
 	 * Launch the application.
 	 */
@@ -161,9 +146,55 @@ public class ElevatorPanelControlInside {
 	/**
 	 * Create the application.
 	 */
-	public ElevatorPanelControlInside(MqttPublisher mqttPublisher) {
+	public ElevatorPanelControlInside(MqttPublisher mqttPublisher, Elevator elevator) {
 		initialize();
 		this.mqttPublisher = mqttPublisher;
+		this.elevatorInside = elevator;
+		this.elevatorInside.setListener(new Elevator.ElevatorListener() {
+			private Elevator elevatorView = elevator;
+
+			@Override
+			public void doorStateChanged() {
+
+			}
+
+			@Override
+			public void currentLevelChanged() {
+				int currentLevel = elevatorView.getCurrentLevel();
+				if (currentLevel == 0) {
+					btnLevel0.setIcon(iconLevel0Green);
+				} else if (currentLevel == 1) {
+					btnLevel1.setIcon(iconLevel1Green);
+				} else if (currentLevel == 2) {
+					btnLevel2.setIcon(iconLevel2Green);
+				} else if (currentLevel == 3) {
+					btnLevel3.setIcon(iconLevel3Green);
+				}
+				System.out.println("Message BIEN RECU");
+				/*int delay = 1000; //milliseconds
+				ActionListener taskPerformer = new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						btnLevel1.setIcon(iconLevel1);
+					}
+				};
+				new Timer(delay, taskPerformer).start();*/
+			}
+
+			@Override
+			public void elevatorStateChanged() {
+
+			}
+
+			@Override
+			public void directionChanged() {
+
+			}
+
+			@Override
+			public void speedChanged() {
+
+			}
+		});
 	}
 
 	/**
@@ -235,23 +266,16 @@ public class ElevatorPanelControlInside {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Request request = new Request("TravReq", "Elevator Panel", "move to level 0");
+				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "1REQ");
+				RequestBackLevel requestBackLevel = new RequestBackLevel("CurrentLevel", "Elevator", "0", "yo");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
+					mqttPublisher.sendMessage(requestBackLevel.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				btnLevel0.setIcon(iconLevel0Green);
-				int delay = 1000; //milliseconds
-				ActionListener taskPerformer = new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						btnLevel0.setIcon(iconLevel0);
-					}
-				};
-				new Timer(delay, taskPerformer).start();
-
 			}
 		});
 
@@ -264,23 +288,16 @@ public class ElevatorPanelControlInside {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Request request = new Request("TravReq", "Elevator Panel", "move to level 1");
+				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "move to level 1");
+				RequestBackLevel requestBackLevel = new RequestBackLevel("CurrentLevel", "Elevator", "1", "yo");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
+					mqttPublisher.sendMessage(requestBackLevel.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				btnLevel1.setIcon(iconLevel1Green);
-				int delay = 1000; //milliseconds
-				ActionListener taskPerformer = new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						btnLevel1.setIcon(iconLevel1);
-					}
-				};
-				new Timer(delay, taskPerformer).start();
-
 			}
 		});
 
@@ -293,23 +310,16 @@ public class ElevatorPanelControlInside {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Request request = new Request("TravReq", "Elevator Panel", "move to level 2");
+				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "move to level 2");
+				RequestBackLevel requestBackLevel = new RequestBackLevel("CurrentLevel", "Elevator", "2", "yo");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
+					mqttPublisher.sendMessage(requestBackLevel.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				btnLevel2.setIcon(iconLevel2Green);
-				int delay = 1000; //milliseconds
-				ActionListener taskPerformer = new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						btnLevel2.setIcon(iconLevel2);
-					}
-				};
-				new Timer(delay, taskPerformer).start();
-
 			}
 		});
 
@@ -322,23 +332,16 @@ public class ElevatorPanelControlInside {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Request request = new Request("TravReq", "Elevator Panel", "move to level 3");
+				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "move to level 3");
+				RequestBackLevel requestBackLevel = new RequestBackLevel("CurrentLevel", "Elevator", "3", "yo");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
+					mqttPublisher.sendMessage(requestBackLevel.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				btnLevel3.setIcon(iconLevel3Green);
-				int delay = 1000; //milliseconds
-				ActionListener taskPerformer = new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						btnLevel3.setIcon(iconLevel3);
-					}
-				};
-				new Timer(delay, taskPerformer).start();
-
 			}
 		});
 
@@ -351,7 +354,7 @@ public class ElevatorPanelControlInside {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Request request = new Request("TravReq", "Elevator Panel", "emergency");
+				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "emergency");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
@@ -359,14 +362,6 @@ public class ElevatorPanelControlInside {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				btnStop.setIcon(iconStopPressed);
-				int delay = 1000; //milliseconds
-				ActionListener taskPerformer = new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						btnStop.setIcon(iconStop);
-					}
-				};
-				new Timer(delay, taskPerformer).start();
 			}
 		});
 
@@ -379,7 +374,7 @@ public class ElevatorPanelControlInside {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Request request = new Request("TravReq", "Elevator Panel", "open door");
+				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "open door");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
@@ -387,14 +382,6 @@ public class ElevatorPanelControlInside {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				btnOpen.setIcon(iconOpenGreen);
-				int delay = 1000; //milliseconds
-				ActionListener taskPerformer = new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						btnOpen.setIcon(iconOpen);
-					}
-				};
-				new Timer(delay, taskPerformer).start();
 			}
 		});
 
@@ -407,7 +394,7 @@ public class ElevatorPanelControlInside {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Request request = new Request("TravReq", "Elevator Panel", "close door");
+				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "close door");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
@@ -415,14 +402,6 @@ public class ElevatorPanelControlInside {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				btnClose.setIcon(iconCloseGreen);
-				int delay = 1000; //milliseconds
-				ActionListener taskPerformer = new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						btnClose.setIcon(iconClose);
-					}
-				};
-				new Timer(delay, taskPerformer).start();
 			}
 		});
 	}

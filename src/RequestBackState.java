@@ -1,5 +1,7 @@
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class RequestBackState implements RequestBack {
+public class RequestBackState implements Request {
 	
 	private String type;
 	
@@ -9,8 +11,6 @@ public class RequestBackState implements RequestBack {
 	
 	private String time;
 	
-	private TypeRequestBack requestBackType = TypeRequestBack.STATE;
-	
 	public RequestBackState(String type, String device, String state, String time) {
 		this.type = type;
 		this.device = device;
@@ -18,6 +18,17 @@ public class RequestBackState implements RequestBack {
 		this.time = time; 
 	}
 
+	@Override
+	public JSONObject toJSON() throws JSONException {
+		JSONObject obj = new JSONObject();
+		obj.put("type", this.type);
+		obj.put("device", this.device);
+		obj.put("state", this.state);
+		obj.put("time", this.time);
+		return obj;
+	}
+
+	@Override
 	public String getType() {
 		return type;
 	}
@@ -26,6 +37,7 @@ public class RequestBackState implements RequestBack {
 		this.type = type;
 	}
 
+	@Override
 	public String getDevice() {
 		return device;
 	}
@@ -34,6 +46,7 @@ public class RequestBackState implements RequestBack {
 		this.device = device;
 	}
 
+	@Override
 	public String getTime() {
 		return time;
 	}
@@ -48,16 +61,6 @@ public class RequestBackState implements RequestBack {
 
 	public void setState(String state) {
 		this.state = state;
-	}
-	
-	@Override
-	public String getRequestBack() {
-		return getState();
-	}
-
-	@Override
-	public TypeRequestBack getTypeRequestBack() {
-		return requestBackType;
 	}
 
 

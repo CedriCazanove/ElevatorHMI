@@ -25,7 +25,7 @@ public class ElevatorPanelControlOutside {
 
 	private static MqttPublisher mqttPublisher;
 
-	private Boolean codeAccessSupervisor = false, supervisor = false, isPasswordCorrect = false;
+	private Boolean codeAccessSupervisor = false, supervisor = false;
 
 	private JButton btnDigit1, btnDigit2, btnDigit3, btnDigit4, btnDigit5, btnDigit6, btnDigit7, btnDigit8, btnDigit9, btnDigit0, btnValidate, btnCancel;
 
@@ -33,6 +33,8 @@ public class ElevatorPanelControlOutside {
 	private JPanel panelCodeAccessSupervisor;
 	private JPanel panelSupervisor;
 	JLabel lblPassword;
+	private JLabel lblPOdclose;
+	private JLabel lblPOdopen;
 
 	private static URL urlUp = ElevatorPanelControlOutside.class.getResource("/up.png");
 	private static URL urlUpGreen = ElevatorPanelControlOutside.class.getResource("/upGreen.png");
@@ -126,8 +128,6 @@ public class ElevatorPanelControlOutside {
 	Icon iconLedGreen = new ImageIcon(urlledGreen);
 	Icon iconLedRed = new ImageIcon(urlledRed);
 
-	private JLabel lblPOdclose;
-	private JLabel lblPOdopen;
 	JButton btnPOreset, btnPOdv2, btnPOdv1, btnPOdclose, btnPOdopen, btnPOuv2, btnPOuv1;
 
 	/**
@@ -183,7 +183,7 @@ public class ElevatorPanelControlOutside {
 		frame = new JFrame("Supervisor");
 		frame.setVisible(true);
 		frame.setResizable(false);
-		frame.setBounds(599, 100, 216, 400);
+		frame.setBounds(599, 100, 300, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.addWindowListener(new WindowListener() {
