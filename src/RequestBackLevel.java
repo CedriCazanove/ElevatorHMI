@@ -1,5 +1,7 @@
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class RequestBackLevel implements RequestBack {
+public class RequestBackLevel implements Request {
 
 	private String type;
 	
@@ -9,8 +11,6 @@ public class RequestBackLevel implements RequestBack {
 	
 	private String time;
 	
-	private TypeRequestBack requestBackType = TypeRequestBack.LEVEL;
-	
 	public RequestBackLevel(String type, String device, String level, String time) {
 		this.type = type;
 		this.device = device;
@@ -18,6 +18,17 @@ public class RequestBackLevel implements RequestBack {
 		this.time = time; 
 	}
 
+	@Override
+	public JSONObject toJSON() throws JSONException {
+		JSONObject obj = new JSONObject();
+		obj.put("type", this.type);
+		obj.put("device", this.device);
+		obj.put("level", this.level);
+		obj.put("time", this.time);
+		return obj;
+	}
+
+	@Override
 	public String getType() {
 		return type;
 	}
@@ -26,6 +37,7 @@ public class RequestBackLevel implements RequestBack {
 		this.type = type;
 	}
 
+	@Override
 	public String getDevice() {
 		return device;
 	}
@@ -34,6 +46,7 @@ public class RequestBackLevel implements RequestBack {
 		this.device = device;
 	}
 
+	@Override
 	public String getTime() {
 		return time;
 	}
@@ -48,16 +61,6 @@ public class RequestBackLevel implements RequestBack {
 
 	public void setLevel(String level) {
 		this.level = level;
-	}
-	
-	@Override
-	public String getRequestBack() {
-		return getLevel();
-	}
-
-	@Override
-	public TypeRequestBack getTypeRequestBack() {
-		return requestBackType;
 	}
 
 

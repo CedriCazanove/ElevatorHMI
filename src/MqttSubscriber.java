@@ -76,14 +76,10 @@ public class MqttSubscriber implements MqttCallback{
 		JSONObject jsonmsg = new JSONObject(new String(message.getPayload()));
 		System.out.println("Subscribe :\n" + jsonmsg);
 		System.out.println("Type : " + jsonmsg.get("type").toString());
-		RequestBack requestBack = null;
+		Request requestBack = null;
 		switch(jsonmsg.get("type").toString()) {
-		case "TravReqRes":
-			requestBack = new RequestBackReset(jsonmsg.get("type").toString(), jsonmsg.get("device").toString(), jsonmsg.get("reset").toString(), jsonmsg.get("time").toString());
-			System.out.println("Reset");
-			break;
 		case "ServPaAns":
-			requestBack = new RequestBackAnswer(jsonmsg.get("type").toString(), jsonmsg.get("device").toString(), jsonmsg.get("answer").toString(), jsonmsg.get("time").toString());
+			requestBack = new RequestBackPanelAnswer(jsonmsg.get("type").toString(), jsonmsg.get("device").toString(), jsonmsg.getJSONArray("states"), jsonmsg.get("time").toString());
 			System.out.println("Answer");
 			break;
 		case "ServState":

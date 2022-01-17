@@ -1,3 +1,4 @@
+import org.json.JSONArray;
 
 public class Elevator {
 	
@@ -118,7 +119,6 @@ public class Elevator {
 			} else if (requestState.getState().equals("in motion")) {
 				setDoorState(DoorState.CLOSING);
 			}
-			//System.out.println(toString());
 		}
 	}
 	
@@ -131,5 +131,10 @@ public class Elevator {
 		} catch(NumberFormatException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void treatRequestBackAnswer(RequestBackPanelAnswer requestBackPanelAnswer) {
+		System.out.println("Elevator received a panel answer request to treat");
+		JSONArray allStates = requestBackPanelAnswer.getAnswer();
 	}
 }

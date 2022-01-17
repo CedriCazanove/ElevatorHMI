@@ -1,5 +1,7 @@
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class RequestBackDirection implements RequestBack {
+public class RequestBackDirection implements Request {
 	
 	private String type;
 	
@@ -9,8 +11,6 @@ public class RequestBackDirection implements RequestBack {
 	
 	private String time;
 	
-	private TypeRequestBack requestBackType = TypeRequestBack.DIRECTION;
-	
 	public RequestBackDirection(String type, String device, String direction, String time) {
 		this.type = type;
 		this.device = device;
@@ -18,6 +18,17 @@ public class RequestBackDirection implements RequestBack {
 		this.time = time; 
 	}
 
+	@Override
+	public JSONObject toJSON() throws JSONException {
+		JSONObject obj = new JSONObject();
+		obj.put("type", this.type);
+		obj.put("device", this.device);
+		obj.put("direction", this.direction);
+		obj.put("time", this.time);
+		return obj;
+	}
+
+	@Override
 	public String getType() {
 		return type;
 	}
@@ -26,6 +37,7 @@ public class RequestBackDirection implements RequestBack {
 		this.type = type;
 	}
 
+	@Override
 	public String getDevice() {
 		return device;
 	}
@@ -34,6 +46,7 @@ public class RequestBackDirection implements RequestBack {
 		this.device = device;
 	}
 
+	@Override
 	public String getTime() {
 		return time;
 	}
@@ -48,16 +61,6 @@ public class RequestBackDirection implements RequestBack {
 
 	public void setDirection(String direction) {
 		this.direction = direction;
-	}
-	
-	@Override
-	public String getRequestBack() {
-		return getDirection();
-	}
-
-	@Override
-	public TypeRequestBack getTypeRequestBack() {
-		return requestBackType;
 	}
 
 }
