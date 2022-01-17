@@ -16,7 +16,7 @@ public class ElevatorView {
 
 	private static JLabel labelElevator;
 
-	private JLabel lblFloorIndicator;
+	private JLabel lblFloorIndicator, lblElevatorIndicator;
 
 	private JButton btnUp, btnUp_1, btnDown_1, btnUp_2, btnDown_2, btnDown_3;
 
@@ -181,12 +181,31 @@ public class ElevatorView {
 	Icon iconSupervisor = new ImageIcon(urlSupervisor);
 
 	//Picture for the led for the supervisor button
-	private static URL urlledOff = ElevatorPanelControlOutside.class.getResource("/ledOff.png");
-	private static URL urlledGreen = ElevatorPanelControlOutside.class.getResource("/ledGreen.png");
-	private static URL urlledRed = ElevatorPanelControlOutside.class.getResource("/ledRed.png");
-	Icon iconLedOff = new ImageIcon(urlledOff);
-	Icon iconLedGreen = new ImageIcon(urlledGreen);
-	Icon iconLedRed = new ImageIcon(urlledRed);
+	private static URL urlLedOff = ElevatorPanelControlOutside.class.getResource("/ledOff.png");
+	private static URL urlLedGreen = ElevatorPanelControlOutside.class.getResource("/ledGreen.png");
+	private static URL urlLedRed = ElevatorPanelControlOutside.class.getResource("/ledRed.png");
+	Icon iconLedOff = new ImageIcon(urlLedOff);
+	Icon iconLedGreen = new ImageIcon(urlLedGreen);
+	Icon iconLedRed = new ImageIcon(urlLedRed);
+
+	//Picture for the floor/direction indicator of the elevator
+	private static URL urlElevatorOff = ElevatorPanelControlOutside.class.getResource("/elevatorIndicatorOff.png");
+	private static URL urlElevator0 = ElevatorPanelControlOutside.class.getResource("/elevatorIndicator0.png");
+	private static URL urlElevator1 = ElevatorPanelControlOutside.class.getResource("/elevatorIndicator1.png");
+	private static URL urlElevator2 = ElevatorPanelControlOutside.class.getResource("/elevatorIndicator2.png");
+	private static URL urlElevator3 = ElevatorPanelControlOutside.class.getResource("/elevatorIndicator3.png");
+	private static URL urlElevatorUp = ElevatorPanelControlOutside.class.getResource("/elevatorIndicatorUp.png");
+	private static URL urlElevatorDown = ElevatorPanelControlOutside.class.getResource("/elevatorIndicatorDown.png");
+	private static URL urlElevatorSmile = ElevatorPanelControlOutside.class.getResource("/elevatorIndicatorSmile.png");
+	Icon iconElevatorOff = new ImageIcon(urlElevatorOff);
+	Icon iconElevator0 = new ImageIcon(urlElevator0);
+	Icon iconElevator1 = new ImageIcon(urlElevator1);
+	Icon iconElevator2 = new ImageIcon(urlElevator2);
+	Icon iconElevator3 = new ImageIcon(urlElevator3);
+	Icon iconElevatorUp = new ImageIcon(urlElevatorUp);
+	Icon iconElevatorDown = new ImageIcon(urlElevatorDown);
+	Icon iconElevatorSmile = new ImageIcon(urlElevatorSmile);
+
 
 	/**
 	 * Create the application.
@@ -419,7 +438,7 @@ public class ElevatorView {
 		frame.getContentPane().add(btnDown_3);
 
 		//Label to indicate the position of the elevator
-		JLabel lblElevatorIndicator = new JLabel("New label");
+		lblElevatorIndicator = new JLabel(iconElevatorOff);
 		lblElevatorIndicator.setBounds(10, 10, 190, 40);
 		frame.getContentPane().add(lblElevatorIndicator);
 
