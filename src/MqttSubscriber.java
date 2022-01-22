@@ -16,7 +16,7 @@ public class MqttSubscriber implements MqttCallback{
 	private static final String clientId = "clientId";
 
 	/** The topic. */
-	private static final String topic = "/21WS-SysArch/#";
+	private static final String topic = "/21WS-SysArch/C1";//
     
     private String username = "H1";
    
@@ -78,9 +78,10 @@ public class MqttSubscriber implements MqttCallback{
 		System.out.println("Type : " + jsonmsg.get("type").toString());
 		Request requestBack = null;
 		switch(jsonmsg.get("type").toString()) {
-		case "ServPaAns":
+		case "ServPAns":
 			requestBack = new RequestBackPanelAnswer(jsonmsg.get("type").toString(), jsonmsg.get("device").toString(), jsonmsg.getJSONArray("states"), jsonmsg.get("time").toString());
-			System.out.println("Answer");
+			System.out.println("ServPAns");
+			elevator.treatRequestBackAnswer( (RequestBackPanelAnswer) requestBack);
 			break;
 		case "ServState":
 		case "DoorState":
@@ -96,6 +97,7 @@ public class MqttSubscriber implements MqttCallback{
 		case "DirInd":
 			requestBack = new RequestBackDirection(jsonmsg.get("type").toString(), jsonmsg.get("device").toString(), jsonmsg.get("direction").toString(), jsonmsg.get("time").toString());
 			System.out.println("Direction");
+			elevator.treatRequestBackDirection((RequestBackDirection) requestBack);
 			break;
 		case "LogMsg":
 			requestBack = new LogError(jsonmsg.get("type").toString(), jsonmsg.get("message").toString(), jsonmsg.get("device").toString(), jsonmsg.get("time").toString(), jsonmsg.get("severity").toString());
@@ -103,8 +105,9 @@ public class MqttSubscriber implements MqttCallback{
 			break;
 		default:
 			 System.out.println("no request back match");
+			 break;
 		}
-		
+		System.out.println("END");
 	}
 
 }

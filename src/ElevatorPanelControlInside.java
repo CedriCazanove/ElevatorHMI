@@ -189,11 +189,6 @@ public class ElevatorPanelControlInside {
 			public void directionChanged() {
 
 			}
-
-			@Override
-			public void speedChanged() {
-
-			}
 		});
 	}
 

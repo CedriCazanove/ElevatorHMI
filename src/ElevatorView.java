@@ -24,6 +24,8 @@ public class ElevatorView {
 
 	private JButton btnDigit1, btnDigit2, btnDigit3, btnDigit4, btnDigit5, btnDigit6, btnDigit7, btnDigit8, btnDigit9, btnDigit0, btnValidate, btnCancel;
 
+	private int delay = 200; //milliseconds
+
 	private JButton btnPOreset, btnPOdv2, btnPOdv1, btnPOdclose, btnPOdopen, btnPOuv2, btnPOuv1;
 
 	private JToggleButton supervisorOnOff;
@@ -271,11 +273,6 @@ public class ElevatorView {
 				// TODO Auto-generated method stub
 
 			}
-			@Override
-			public void speedChanged() {
-				// TODO Auto-generated method stub
-
-			}
 		});
 	}
 
@@ -298,7 +295,7 @@ public class ElevatorView {
 		frame.getContentPane().add(panelElevator);
 		panelElevator.setLayout(null);
 
-		labelElevator = new JLabel(iconElevatorOpen);
+		labelElevator = new JLabel(iconElevatorClose);
 		labelElevator.setBounds(0, 408, 100, 135);
 		panelElevator.add(labelElevator);
 
@@ -320,10 +317,12 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "move to level 0");
+				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "1UP");
+				//RequestBackLevel requestBackLevel = new RequestBackLevel("CurrentLevel", "Elevator", "0");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
+					//mqttPublisher.sendMessage(requestBackLevel.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -341,10 +340,12 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "move to level 0");
+				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "2UP");
+				//RequestBackLevel requestBackLevel = new RequestBackLevel("CurrentLevel", "Elevator", "1");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
+				//	mqttPublisher.sendMessage(requestBackLevel.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -362,7 +363,7 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "move to level 1");
+				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "2DOWN");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
@@ -383,7 +384,7 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "move to level 0");
+				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "3UP");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
@@ -404,7 +405,7 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "move to level 0");
+				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "3DOWN");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
@@ -425,7 +426,7 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "move to level 0");
+				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "4DOWN");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
@@ -461,11 +462,11 @@ public class ElevatorView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "1REQ");
-				RequestBackLevel requestBackLevel = new RequestBackLevel("CurrentLevel", "Elevator", "0", "yo");
+				//RequestBackLevel requestBackLevel = new RequestBackLevel("CurrentLevel", "Elevator", "0", "yo");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
-					mqttPublisher.sendMessage(requestBackLevel.toJSON().toString());
+				//	mqttPublisher.sendMessage(requestBackLevel.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -483,12 +484,12 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "move to level 1");
-				RequestBackLevel requestBackLevel = new RequestBackLevel("CurrentLevel", "Elevator", "1", "yo");
+				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "2REQ");
+				//RequestBackLevel requestBackLevel = new RequestBackLevel("CurrentLevel", "Elevator", "1", "yo");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
-					mqttPublisher.sendMessage(requestBackLevel.toJSON().toString());
+					//mqttPublisher.sendMessage(requestBackLevel.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -506,12 +507,12 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "move to level 2");
-				RequestBackLevel requestBackLevel = new RequestBackLevel("CurrentLevel", "Elevator", "2", "yo");
+				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "3REQ");
+				//RequestBackLevel requestBackLevel = new RequestBackLevel("CurrentLevel", "Elevator", "2", "yo");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
-					mqttPublisher.sendMessage(requestBackLevel.toJSON().toString());
+				//	mqttPublisher.sendMessage(requestBackLevel.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -529,12 +530,12 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "move to level 3");
-				RequestBackLevel requestBackLevel = new RequestBackLevel("CurrentLevel", "Elevator", "3", "yo");
+				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "4REQ");
+				//RequestBackLevel requestBackLevel = new RequestBackLevel("CurrentLevel", "Elevator", "3", "yo");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
-					mqttPublisher.sendMessage(requestBackLevel.toJSON().toString());
+				//	mqttPublisher.sendMessage(requestBackLevel.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -573,7 +574,7 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "open door");
+				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "OPEN");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
@@ -594,7 +595,7 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "close door");
+				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "CLOSE");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
@@ -650,7 +651,6 @@ public class ElevatorView {
 			public void actionPerformed(ActionEvent e) {
 				password.addDigit(1);
 				btnDigit1.setIcon(iconDigit1Green);
-				int delay = 1000; //milliseconds
 				ActionListener taskPerformer = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						btnDigit1.setIcon(iconDigit1);
@@ -670,7 +670,6 @@ public class ElevatorView {
 			public void actionPerformed(ActionEvent e) {
 				password.addDigit(2);
 				btnDigit2.setIcon(iconDigit2Green);
-				int delay = 1000; //milliseconds
 				ActionListener taskPerformer = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						btnDigit2.setIcon(iconDigit2);
@@ -690,7 +689,6 @@ public class ElevatorView {
 			public void actionPerformed(ActionEvent e) {
 				password.addDigit(3);
 				btnDigit3.setIcon(iconDigit3Green);
-				int delay = 1000; //milliseconds
 				ActionListener taskPerformer = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						btnDigit3.setIcon(iconDigit3);
@@ -710,7 +708,6 @@ public class ElevatorView {
 			public void actionPerformed(ActionEvent e) {
 				password.addDigit(4);
 				btnDigit4.setIcon(iconDigit4Green);
-				int delay = 1000; //milliseconds
 				ActionListener taskPerformer = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						btnDigit4.setIcon(iconDigit4);
@@ -730,7 +727,6 @@ public class ElevatorView {
 			public void actionPerformed(ActionEvent e) {
 				password.addDigit(5);
 				btnDigit5.setIcon(iconDigit5Green);
-				int delay = 1000; //milliseconds
 				ActionListener taskPerformer = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						btnDigit5.setIcon(iconDigit5);
@@ -750,7 +746,6 @@ public class ElevatorView {
 			public void actionPerformed(ActionEvent e) {
 				password.addDigit(6);
 				btnDigit6.setIcon(iconDigit6Green);
-				int delay = 1000; //milliseconds
 				ActionListener taskPerformer = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						btnDigit6.setIcon(iconDigit6);
@@ -770,7 +765,6 @@ public class ElevatorView {
 			public void actionPerformed(ActionEvent e) {
 				password.addDigit(7);
 				btnDigit7.setIcon(iconDigit7Green);
-				int delay = 1000; //milliseconds
 				ActionListener taskPerformer = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						btnDigit7.setIcon(iconDigit7);
@@ -790,7 +784,6 @@ public class ElevatorView {
 			public void actionPerformed(ActionEvent e) {
 				password.addDigit(8);
 				btnDigit8.setIcon(iconDigit8Green);
-				int delay = 1000; //milliseconds
 				ActionListener taskPerformer = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						btnDigit8.setIcon(iconDigit8);
@@ -810,7 +803,6 @@ public class ElevatorView {
 			public void actionPerformed(ActionEvent e) {
 				password.addDigit(9);
 				btnDigit9.setIcon(iconDigit9Green);
-				int delay = 1000; //milliseconds
 				ActionListener taskPerformer = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						btnDigit9.setIcon(iconDigit9);
@@ -830,7 +822,6 @@ public class ElevatorView {
 			public void actionPerformed(ActionEvent e) {
 				password.isPassCorrect();
 				btnValidate.setIcon(iconCheckPressed);
-				int delay = 1000; //milliseconds
 				ActionListener taskPerformer = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						btnValidate.setIcon(iconCheck);
@@ -850,7 +841,6 @@ public class ElevatorView {
 			public void actionPerformed(ActionEvent e) {
 				password.addDigit(0);
 				btnDigit0.setIcon(iconDigit0Green);
-				int delay = 1000; //milliseconds
 				ActionListener taskPerformer = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						btnDigit0.setIcon(iconDigit0);
@@ -870,7 +860,6 @@ public class ElevatorView {
 			public void actionPerformed(ActionEvent e) {
 				password.removeLastDigit();
 				btnCancel.setIcon(iconCrossPressed);
-				int delay = 1000; //milliseconds
 				ActionListener taskPerformer = new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						btnCancel.setIcon(iconCross);
