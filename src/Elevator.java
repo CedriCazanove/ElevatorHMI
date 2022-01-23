@@ -29,8 +29,8 @@ public class Elevator {
 		//Action to trigger when up2 changes
 		public void up2Changed();
 
-		//Action to trigger when down2 changes
-		public void down2cCanged();
+		//Action to trigger when down2 changed
+		public void down2Changed();
 
 		//Action to trigger when req3 changes
 		public void req3Changed();
@@ -354,7 +354,7 @@ public class Elevator {
 	public void setDown2(Boolean down2) {
 		this.down2 = down2;
 		if (listener != null) {
-			listener.down2cCanged();
+			listener.down2Changed();
 		}
 	}
 
