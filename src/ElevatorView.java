@@ -1,8 +1,12 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
+import java.util.Hashtable;
 
+import javax.jws.soap.SOAPBinding;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import org.json.JSONException;
 
@@ -36,7 +40,9 @@ public class ElevatorView {
 
 	private JPanel panelCodeAccessSupervisor, panelSupervisor;
 
-	private JLabel lblPassword, lblPOreset, lblPOdv2, lblPOdv1, lblPOuv1, lblPOuv2, lblPOdclose, lblPOdopen;
+	private JLabel lblPassword, lblPOreset, lblPOdv2, lblPOdv1, lblPOuv1, lblPOuv2, lblPOdclose, lblPOdopen, lblPOv_crawlSelect, lblPOv_crawlValue;
+
+	private JSlider sliderPOv_crawlSelect;
 
 	//Picture for the displaying the level on the left
 	private static URL urlFloorIndicator = ElevatorView.class.getResource("/floorIndicator.png");
@@ -533,11 +539,12 @@ public class ElevatorView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "1UP");
-				//RequestBackLevel requestBackLevel = new RequestBackLevel("CurrentLevel", "Elevator", "0");
+				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
-					//mqttPublisher.sendMessage(requestBackLevel.toJSON().toString());
+					System.out.println(requestForStates.toJSON());
+					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -556,11 +563,12 @@ public class ElevatorView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "2UP");
-				//RequestBackLevel requestBackLevel = new RequestBackLevel("CurrentLevel", "Elevator", "1");
+				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
-				//	mqttPublisher.sendMessage(requestBackLevel.toJSON().toString());
+					System.out.println(requestForStates.toJSON());
+					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -579,9 +587,12 @@ public class ElevatorView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "2DOWN");
+				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
+					System.out.println(requestForStates.toJSON());
+					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -600,9 +611,12 @@ public class ElevatorView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "3UP");
+				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
+					System.out.println(requestForStates.toJSON());
+					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -621,9 +635,12 @@ public class ElevatorView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "3DOWN");
+				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
+					System.out.println(requestForStates.toJSON());
+					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -642,9 +659,12 @@ public class ElevatorView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "4DOWN");
+				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
+					System.out.println(requestForStates.toJSON());
+					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -677,11 +697,12 @@ public class ElevatorView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "1REQ");
-				//RequestBackLevel requestBackLevel = new RequestBackLevel("CurrentLevel", "Elevator", "0", "yo");
+				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
-				//	mqttPublisher.sendMessage(requestBackLevel.toJSON().toString());
+					System.out.println(requestForStates.toJSON());
+					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -700,11 +721,12 @@ public class ElevatorView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "2REQ");
-				//RequestBackLevel requestBackLevel = new RequestBackLevel("CurrentLevel", "Elevator", "1", "yo");
+				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
-					//mqttPublisher.sendMessage(requestBackLevel.toJSON().toString());
+					System.out.println(requestForStates.toJSON());
+					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -723,11 +745,12 @@ public class ElevatorView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "3REQ");
-				//RequestBackLevel requestBackLevel = new RequestBackLevel("CurrentLevel", "Elevator", "2", "yo");
+				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
-				//	mqttPublisher.sendMessage(requestBackLevel.toJSON().toString());
+					System.out.println(requestForStates.toJSON());
+					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -746,11 +769,12 @@ public class ElevatorView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "4REQ");
-				//RequestBackLevel requestBackLevel = new RequestBackLevel("CurrentLevel", "Elevator", "3", "yo");
+				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
-				//	mqttPublisher.sendMessage(requestBackLevel.toJSON().toString());
+					System.out.println(requestForStates.toJSON());
+					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -768,10 +792,13 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "emergency");
+				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "EMERGENCY");
+				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
+					System.out.println(requestForStates.toJSON());
+					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -790,9 +817,12 @@ public class ElevatorView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "OPEN");
+				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
+					System.out.println(requestForStates.toJSON());
+					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -811,9 +841,12 @@ public class ElevatorView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "CLOSE");
+				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
 					mqttPublisher.sendMessage(request.toJSON().toString());
+					System.out.println(requestForStates.toJSON());
+					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -835,11 +868,14 @@ public class ElevatorView {
 					supervisorOnOff.setIcon(iconSupervisor);
 					//we display the code to enter the code to use the panel as supervisor
 					codeAccessSupervisor = true;
+					lblPassword.setText("Tap the password");
+
 
 				} else {
 					supervisorOnOff.setIcon(iconUser);
 					supervisor = false;
 					codeAccessSupervisor = false;
+					password.clear();
 				}
 				panelSupervisor.setVisible(supervisor);
 				panelCodeAccessSupervisor.setVisible(codeAccessSupervisor);
@@ -1092,7 +1128,7 @@ public class ElevatorView {
 		panelCodeAccessSupervisor.add(lblPassword);
 
 		panelSupervisor = new JPanel();
-		panelSupervisor.setBounds(360, 40, 182, 379);
+		panelSupervisor.setBounds(360, 40, 182, 500);
 		frame.getContentPane().add(panelSupervisor);
 		panelSupervisor.setVisible(false);
 		panelSupervisor.setLayout(null);
@@ -1105,9 +1141,12 @@ public class ElevatorView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SupervisorRequest supervisorRequest = new SupervisorRequest("SupPanelReq", "Panel", "manual", "POreset", true);
+				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(supervisorRequest.toJSON());
 					mqttPublisher.sendMessage(supervisorRequest.toJSON().toString());
+					System.out.println(requestForStates.toJSON());
+					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1116,7 +1155,7 @@ public class ElevatorView {
 		});
 		panelSupervisor.add(btnPOreset);
 
-		lblPOreset = new JLabel("POreset");
+		lblPOreset = new JLabel("POreset :");
 		lblPOreset.setBounds(10, 10, 92, 13);
 		panelSupervisor.add(lblPOreset);
 
@@ -1128,9 +1167,12 @@ public class ElevatorView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SupervisorRequest supervisorRequest = new SupervisorRequest("SupPanelReq", "Panel", "manual", "POdv2", true);
+				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(supervisorRequest.toJSON());
 					mqttPublisher.sendMessage(supervisorRequest.toJSON().toString());
+					System.out.println(requestForStates.toJSON());
+					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1139,7 +1181,7 @@ public class ElevatorView {
 		});
 		panelSupervisor.add(btnPOdv2);
 
-		lblPOdv2 = new JLabel("POdv2");
+		lblPOdv2 = new JLabel("POdv2 :");
 		lblPOdv2.setBounds(10, 54, 92, 13);
 		panelSupervisor.add(lblPOdv2);
 
@@ -1151,9 +1193,12 @@ public class ElevatorView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SupervisorRequest supervisorRequest = new SupervisorRequest("SupPanelReq", "Panel", "manual", "POdv1", true);
+				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(supervisorRequest.toJSON());
 					mqttPublisher.sendMessage(supervisorRequest.toJSON().toString());
+					System.out.println(requestForStates.toJSON());
+					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1162,7 +1207,7 @@ public class ElevatorView {
 		});
 		panelSupervisor.add(btnPOdv1);
 
-		lblPOdv1 = new JLabel("POdv1");
+		lblPOdv1 = new JLabel("POdv1 :");
 		lblPOdv1.setBounds(10, 100, 92, 13);
 		panelSupervisor.add(lblPOdv1);
 
@@ -1174,9 +1219,12 @@ public class ElevatorView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SupervisorRequest supervisorRequest = new SupervisorRequest("SupPanelReq", "Panel", "manual", "POuv1", true);
+				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(supervisorRequest.toJSON());
 					mqttPublisher.sendMessage(supervisorRequest.toJSON().toString());
+					System.out.println(requestForStates.toJSON());
+					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1185,7 +1233,7 @@ public class ElevatorView {
 		});
 		panelSupervisor.add(btnPOuv1);
 
-		lblPOuv1 = new JLabel("POuv1");
+		lblPOuv1 = new JLabel("POuv1 :");
 		lblPOuv1.setBounds(10, 147, 92, 13);
 		panelSupervisor.add(lblPOuv1);
 
@@ -1197,9 +1245,12 @@ public class ElevatorView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SupervisorRequest supervisorRequest = new SupervisorRequest("SupPanelReq", "Panel", "manual", "POuv2", true);
+				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(supervisorRequest.toJSON());
 					mqttPublisher.sendMessage(supervisorRequest.toJSON().toString());
+					System.out.println(requestForStates.toJSON());
+					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1208,7 +1259,7 @@ public class ElevatorView {
 		});
 		panelSupervisor.add(btnPOuv2);
 
-		lblPOuv2 = new JLabel("POuv2");
+		lblPOuv2 = new JLabel("POuv2 :");
 		lblPOuv2.setBounds(10, 190, 92, 13);
 		panelSupervisor.add(lblPOuv2);
 
@@ -1220,9 +1271,12 @@ public class ElevatorView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SupervisorRequest supervisorRequest = new SupervisorRequest("SupPanelReq", "Panel", "manual", "POdclose", true);
+				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(supervisorRequest.toJSON());
 					mqttPublisher.sendMessage(supervisorRequest.toJSON().toString());
+					System.out.println(requestForStates.toJSON());
+					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1231,7 +1285,7 @@ public class ElevatorView {
 		});
 		panelSupervisor.add(btnPOdclose);
 
-		lblPOdclose = new JLabel("POdclose");
+		lblPOdclose = new JLabel("POdclose :");
 		lblPOdclose.setBounds(10, 234, 92, 13);
 		panelSupervisor.add(lblPOdclose);
 
@@ -1243,9 +1297,12 @@ public class ElevatorView {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				SupervisorRequest supervisorRequest = new SupervisorRequest("SupPanelReq", "Panel", "manual", "POdopen", true);
+				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(supervisorRequest.toJSON());
 					mqttPublisher.sendMessage(supervisorRequest.toJSON().toString());
+					System.out.println(requestForStates.toJSON());
+					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
 				} catch (JSONException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -1254,8 +1311,49 @@ public class ElevatorView {
 		});
 		panelSupervisor.add(btnPOdopen);
 
-		lblPOdopen = new JLabel("POdopen");
+		lblPOdopen = new JLabel("POdopen :");
 		lblPOdopen.setBounds(10, 284, 92, 13);
 		panelSupervisor.add(lblPOdopen);
+
+		lblPOv_crawlSelect = new JLabel("POv_crawlSelect :");
+		lblPOv_crawlSelect.setBounds(10, 334,110, 13);
+		panelSupervisor.add(lblPOv_crawlSelect);
+
+		lblPOv_crawlValue = new JLabel("int");
+		lblPOv_crawlValue.setBounds(130, 334,20, 13);
+		panelSupervisor.add(lblPOv_crawlValue);
+
+		sliderPOv_crawlSelect = new JSlider(JSlider.HORIZONTAL, -5, 5, 0);
+		sliderPOv_crawlSelect.setMajorTickSpacing(1);
+		sliderPOv_crawlSelect.setPaintTicks(true);
+		sliderPOv_crawlSelect.setMinorTickSpacing(1);
+		sliderPOv_crawlSelect.setBounds(5, 354, 150, 60);
+		Hashtable labelTable = new Hashtable();
+		labelTable.put( new Integer( -5 ), new JLabel("-5") );
+		labelTable.put( new Integer( 0 ), new JLabel("0") );
+		labelTable.put( new Integer( 5 ), new JLabel("5") );
+		sliderPOv_crawlSelect.setLabelTable(labelTable);
+		sliderPOv_crawlSelect.setPaintLabels(true);
+		sliderPOv_crawlSelect.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				JSlider source = (JSlider) e.getSource();
+				if (!source.getValueIsAdjusting()) {
+					int value = (int) source.getValue();
+					SupervisorRequest supervisorRequest = new SupervisorRequest("SupPanelReq", "Panel", "manual", "POv_crawlSelect", value);
+					UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
+					try {
+						System.out.println(supervisorRequest.toJSON());
+						mqttPublisher.sendMessage(supervisorRequest.toJSON().toString());
+						System.out.println(requestForStates.toJSON());
+						mqttPublisher.sendMessage(requestForStates.toJSON().toString());
+					} catch (JSONException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+		panelSupervisor.add(sliderPOv_crawlSelect);
 	}
 }

@@ -189,6 +189,221 @@ public class ElevatorPanelControlInside {
 			public void directionChanged() {
 
 			}
+
+			@Override
+			public void req1Changed() {
+
+			}
+
+			@Override
+			public void up1Changed() {
+
+			}
+
+			@Override
+			public void req2Changed() {
+
+			}
+
+			@Override
+			public void up2Changed() {
+
+			}
+
+			@Override
+			public void down2cCanged() {
+
+			}
+
+			@Override
+			public void req3Changed() {
+
+			}
+
+			@Override
+			public void up3Changed() {
+
+			}
+
+			@Override
+			public void down3Changed() {
+
+			}
+
+			@Override
+			public void req4Changed() {
+
+			}
+
+			@Override
+			public void down4Changed() {
+
+			}
+
+			@Override
+			public void openChanged() {
+
+			}
+
+			@Override
+			public void closeChanged() {
+
+			}
+
+			@Override
+			public void emergencyChanged() {
+
+			}
+
+			@Override
+			public void poresetChanged() {
+
+			}
+
+			@Override
+			public void podv2Changed() {
+
+			}
+
+			@Override
+			public void podv1Changed() {
+
+			}
+
+			@Override
+			public void pouv1Changed() {
+
+			}
+
+			@Override
+			public void pouv2Changed() {
+
+			}
+
+			@Override
+			public void podcloseChanged() {
+
+			}
+
+			@Override
+			public void podopenChanged() {
+
+			}
+
+			@Override
+			public void povcrawlselectChanged() {
+
+			}
+
+			@Override
+			public void pis_l1slChanged() {
+
+			}
+
+			@Override
+			public void pis_l1rChanged() {
+
+			}
+
+			@Override
+			public void pis_l1suChanged() {
+
+			}
+
+			@Override
+			public void pis_l1auChanged() {
+
+			}
+
+			@Override
+			public void pis_l2slChanged() {
+
+			}
+
+			@Override
+			public void pis_l2rChanged() {
+
+			}
+
+			@Override
+			public void pis_l2suChanged() {
+
+			}
+
+			@Override
+			public void pis_l2auChanged() {
+
+			}
+
+			@Override
+			public void pis_l3slChanged() {
+
+			}
+
+			@Override
+			public void pis_l3rChanged() {
+
+			}
+
+			@Override
+			public void pis_l3suChanged() {
+
+			}
+
+			@Override
+			public void pis_l3auChanged() {
+
+			}
+
+			@Override
+			public void pis_l4slChanged() {
+
+			}
+
+			@Override
+			public void pis_l4rChanged() {
+
+			}
+
+			@Override
+			public void pis_l4suChanged() {
+
+			}
+
+			@Override
+			public void pis_l4auChanged() {
+
+			}
+
+			@Override
+			public void pis_dopenedChanged() {
+
+			}
+
+			@Override
+			public void pis_dclosedChanged() {
+
+			}
+
+			@Override
+			public void pim_readyChanged() {
+
+			}
+
+			@Override
+			public void pim_onChanged() {
+
+			}
+
+			@Override
+			public void pim_errorChanged() {
+
+			}
+
+			@Override
+			public void pis_vChanged() {
+
+			}
 		});
 	}
 
