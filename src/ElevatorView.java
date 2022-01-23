@@ -284,7 +284,7 @@ public class ElevatorView {
 			@Override
 			public void elevatorStateChanged() {
 				// TODO Auto-generated method stub
-				switch(elevator.getElevatorState()) {
+				switch(elevatorView.getElevatorState()) {
 					case INSERVICE:
 						switch(elevatorView.getDoorState()) {
 							case OPEN:
@@ -322,7 +322,7 @@ public class ElevatorView {
 			@Override
 			public void directionChanged() {
 				// TODO Auto-generated method stub
-				switch(elevator.getDirection()) {
+				switch(elevatorView.getDirection()) {
 					case UP:
 						lblElevatorIndicator.setIcon(iconElevatorUp);
 						System.out.println("Elevator moving up");
@@ -333,7 +333,7 @@ public class ElevatorView {
 
 						break;
 					case IDLE:
-						switch(elevator.getCurrentLevel()) {
+						switch(elevatorView.getCurrentLevel()) {
 							case 0:
 								lblElevatorIndicator.setIcon(iconElevator0);
 								System.out.println("Elevator not moving; Actually level 0");
@@ -368,7 +368,7 @@ public class ElevatorView {
 
 			@Override
 			public void req1Changed() {
-				if(elevator.getReq1()) {
+				if(elevatorView.getReq1()) {
 					btnLevel0.setIcon(iconLevel0Green);
 					System.out.println("Req1 is true");
 				}else {
@@ -379,7 +379,7 @@ public class ElevatorView {
 
 			@Override
 			public void up1Changed() {
-				if(elevator.getUp1()) {
+				if(elevatorView.getUp1()) {
 
 					btnUp.setIcon(iconUpGreen);
 					System.out.println("Up1 is true");
@@ -392,7 +392,7 @@ public class ElevatorView {
 
 			@Override
 			public void req2Changed() {
-				if(elevator.getReq2()) {
+				if(elevatorView.getReq2()) {
 					btnLevel1.setIcon(iconLevel1Green);
 					System.out.println("Req2 is true");
 				}else {
@@ -403,7 +403,7 @@ public class ElevatorView {
 
 			@Override
 			public void up2Changed() {
-				if(elevator.getUp2()) {
+				if(elevatorView.getUp2()) {
 
 					btnUp_1.setIcon(iconUpGreen);
 					System.out.println("Up2 is true");
@@ -416,7 +416,7 @@ public class ElevatorView {
 
 			@Override
 			public void down2Changed() {
-				if(elevator.getDown2()) {
+				if(elevatorView.getDown2()) {
 
 					btnDown_1.setIcon(iconDownGreen);
 					System.out.println("Down2 is true");
@@ -429,7 +429,7 @@ public class ElevatorView {
 
 			@Override
 			public void req3Changed() {
-				if(elevator.getReq3()) {
+				if(elevatorView.getReq3()) {
 					btnLevel2.setIcon(iconLevel2Green);
 					System.out.println("Req3 is true");
 				}else {
@@ -440,7 +440,7 @@ public class ElevatorView {
 
 			@Override
 			public void up3Changed() {
-				if(elevator.getUp3()) {
+				if(elevatorView.getUp3()) {
 
 					btnUp_2.setIcon(iconUpGreen);
 					System.out.println("Up3 is true");
@@ -453,7 +453,7 @@ public class ElevatorView {
 
 			@Override
 			public void down3Changed() {
-				if(elevator.getDown3()) {
+				if(elevatorView.getDown3()) {
 
 					btnDown_2.setIcon(iconDownGreen);
 					System.out.println("Down3 is true");
@@ -466,7 +466,7 @@ public class ElevatorView {
 
 			@Override
 			public void req4Changed() {
-				if(elevator.getReq4()) {
+				if(elevatorView.getReq4()) {
 					btnLevel3.setIcon(iconLevel3Green);
 					System.out.println("Req4 is true");
 				}else {
@@ -477,7 +477,7 @@ public class ElevatorView {
 
 			@Override
 			public void down4Changed() {
-				if(elevator.getDown4()) {
+				if(elevatorView.getDown4()) {
 
 					btnDown_3.setIcon(iconDownGreen);
 					System.out.println("Down4 is true");
@@ -490,7 +490,7 @@ public class ElevatorView {
 
 			@Override
 			public void openChanged() {
-				if(elevator.getOpen()) {
+				if(elevatorView.getOpen()) {
 					btnOpen.setIcon(iconOpenGreen);
 					System.out.println("Open is true");
 				} else {
@@ -501,7 +501,7 @@ public class ElevatorView {
 
 			@Override
 			public void closeChanged() {
-				if(elevator.getClose()) {
+				if(elevatorView.getClose()) {
 					btnClose.setIcon(iconCloseGreen);
 					System.out.println("Close is true");
 				} else {
@@ -512,7 +512,7 @@ public class ElevatorView {
 
 			@Override
 			public void emergencyChanged() {
-				if(elevator.getEmergency()) {
+				if(elevatorView.getEmergency()) {
 					btnLevel0.setIcon(iconLevel0Red);
 					btnLevel1.setIcon(iconLevel1Red);
 					btnLevel2.setIcon(iconLevel2Red);
@@ -534,7 +534,7 @@ public class ElevatorView {
 
 			@Override
 			public void poresetChanged() {
-				if(elevator.getPOreset()) {
+				if(elevatorView.getPOreset()) {
 					btnLevel0.setIcon(iconLevel0);
 					btnLevel1.setIcon(iconLevel1);
 					btnLevel2.setIcon(iconLevel2);
@@ -564,7 +564,7 @@ public class ElevatorView {
 
 			@Override
 			public void podv2Changed() {
-				if(elevator.getPOdv2()) {
+				if(elevatorView.getPOdv2()) {
 					btnPOdv2.setIcon(iconLedGreen);
 				} else {
 					btnPOdv2.setIcon(iconLedOff);
@@ -573,7 +573,7 @@ public class ElevatorView {
 
 			@Override
 			public void podv1Changed() {
-				if(elevator.getPOdv1()) {
+				if(elevatorView.getPOdv1()) {
 					btnPOdv1.setIcon(iconLedGreen);
 				} else {
 					btnPOdv1.setIcon(iconLedOff);
@@ -582,7 +582,7 @@ public class ElevatorView {
 
 			@Override
 			public void pouv1Changed() {
-				if(elevator.getPOuv1()) {
+				if(elevatorView.getPOuv1()) {
 					btnPOuv1.setIcon(iconLedGreen);
 				} else {
 					btnPOuv1.setIcon(iconLedOff);
@@ -591,7 +591,7 @@ public class ElevatorView {
 
 			@Override
 			public void pouv2Changed() {
-				if(elevator.getPOuv2()) {
+				if(elevatorView.getPOuv2()) {
 					btnPOuv2.setIcon(iconLedGreen);
 				} else {
 					btnPOuv2.setIcon(iconLedOff);
@@ -600,7 +600,7 @@ public class ElevatorView {
 
 			@Override
 			public void podcloseChanged() {
-				if(elevator.getPOdclose()) {
+				if(elevatorView.getPOdclose()) {
 					btnPOdclose.setIcon(iconLedGreen);
 				} else {
 					btnPOdclose.setIcon(iconLedOff);
@@ -609,7 +609,7 @@ public class ElevatorView {
 
 			@Override
 			public void podopenChanged() {
-				if(elevator.getPOdopen()) {
+				if(elevatorView.getPOdopen()) {
 					btnPOdopen.setIcon(iconLedGreen);
 				} else {
 					btnPOdopen.setIcon(iconLedOff);
@@ -618,8 +618,8 @@ public class ElevatorView {
 
 			@Override
 			public void povcrawlselectChanged() {
-				lblPOv_crawlValue.setText("" + elevator.getPOv_crawlSelect());
-				sliderPOv_crawlSelect.setValue(elevator.getPOv_crawlSelect());
+				lblPOv_crawlValue.setText("" + elevatorView.getPOv_crawlSelect());
+				sliderPOv_crawlSelect.setValue(elevatorView.getPOv_crawlSelect());
 			}
 
 			@Override
@@ -629,7 +629,7 @@ public class ElevatorView {
 
 			@Override
 			public void pis_l1rChanged() {
-				if(elevator.getPIs_l1r()) {
+				if(elevatorView.getPIs_l1r()) {
 					System.out.println("ElevatorView : L1 Reached");
 					int nextLevel = (3)*135 + 3;
 					labelElevator.setBounds(0, nextLevel, 100, 135);
@@ -653,7 +653,7 @@ public class ElevatorView {
 
 			@Override
 			public void pis_l2rChanged() {
-				if(elevator.getPIs_l2r()) {
+				if(elevatorView.getPIs_l2r()) {
 					System.out.println("ElevatorView : L2 Reached");
 					int nextLevel = (2)*135 + 3;
 					labelElevator.setBounds(0, nextLevel, 100, 135);
@@ -677,7 +677,7 @@ public class ElevatorView {
 
 			@Override
 			public void pis_l3rChanged() {
-				if(elevator.getPIs_l3r()) {
+				if(elevatorView.getPIs_l3r()) {
 					System.out.println("ElevatorView : L3 Reached");
 					int nextLevel = (1)*135 + 3;
 					labelElevator.setBounds(0, nextLevel, 100, 135);
@@ -701,7 +701,7 @@ public class ElevatorView {
 
 			@Override
 			public void pis_l4rChanged() {
-				if(elevator.getPIs_l4r()) {
+				if(elevatorView.getPIs_l4r()) {
 					System.out.println("ElevatorView : L4 Reached");
 					int nextLevel = 3;
 					labelElevator.setBounds(0, nextLevel, 100, 135);
