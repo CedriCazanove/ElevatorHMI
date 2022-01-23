@@ -1,6 +1,9 @@
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Elevator {
 	
 	public interface ElevatorListener {
@@ -240,15 +243,15 @@ public class Elevator {
 	private Boolean PIm_error = false;
 
 	private int PIs_v;
-	
-	private ElevatorListener listener;
+
+	private ArrayList<ElevatorListener> allListener;
 
 	Elevator() {
 		this.doorState = DoorState.CLOSE;
 		this.elevatorState = ElevatorState.OUTOFSERVICE;
 		this.direction = Direction.IDLE;
 		this.currentLevel = 0;
-		this.setListener(null);
+		this.setAllListener(null);
 	}
 	
 	public Elevator(DoorState doorState, ElevatorState elevatorState, int currentLevel, Direction direction) {
@@ -256,7 +259,14 @@ public class Elevator {
 		this.elevatorState = elevatorState;
 		this.direction = direction;
 		this.currentLevel = currentLevel;
-		this.setListener(null);
+		this.setAllListener(null);
+	}
+
+	public void addNewElevatorListener(ElevatorListener elevatorListener) {
+		if (this.allListener == null) {
+			this.allListener = new ArrayList<>();
+		}
+		this.allListener.add(elevatorListener);
 	}
 
 	public DoorState getDoorState() {
@@ -265,8 +275,10 @@ public class Elevator {
 
 	public void setDoorState(DoorState doorState) {
 		this.doorState = doorState;
-		if (listener != null) {
-            listener.doorStateChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.doorStateChanged();
+			}
 		}
 	}
 
@@ -276,8 +288,10 @@ public class Elevator {
 
 	public void setElevatorState(ElevatorState elevatorState) {
 		this.elevatorState = elevatorState;
-		if (listener != null) {
-            listener.elevatorStateChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.elevatorStateChanged();
+			}
 		}
 	}
 
@@ -287,8 +301,10 @@ public class Elevator {
 
 	public void setDirection(Direction direction) {
 		this.direction = direction;
-		if (listener != null) {
-            listener.directionChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.directionChanged();
+			}
 		}
 	}
 
@@ -298,8 +314,10 @@ public class Elevator {
 
 	public void setCurrentLevel(int currentLevel) {
 		this.currentLevel = currentLevel;
-		if (listener != null) {
-            listener.currentLevelChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.currentLevelChanged();
+			}
 		}
 	}
 
@@ -309,8 +327,10 @@ public class Elevator {
 
 	public void setReq1(Boolean req1) {
 		this.req1 = req1;
-		if (listener != null) {
-			listener.req1Changed();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.req1Changed();
+			}
 		}
 	}
 
@@ -320,8 +340,10 @@ public class Elevator {
 
 	public void setUp1(Boolean up1) {
 		this.up1 = up1;
-		if (listener != null) {
-			listener.up1Changed();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.up1Changed();
+			}
 		}
 	}
 
@@ -331,8 +353,10 @@ public class Elevator {
 
 	public void setReq2(Boolean req2) {
 		this.req2 = req2;
-		if (listener != null) {
-			listener.req2Changed();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.req2Changed();
+			}
 		}
 	}
 
@@ -342,8 +366,10 @@ public class Elevator {
 
 	public void setUp2(Boolean up2) {
 		this.up2 = up2;
-		if (listener != null) {
-			listener.up2Changed();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.up2Changed();
+			}
 		}
 	}
 
@@ -353,8 +379,10 @@ public class Elevator {
 
 	public void setDown2(Boolean down2) {
 		this.down2 = down2;
-		if (listener != null) {
-			listener.down2Changed();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.down2Changed();
+			}
 		}
 	}
 
@@ -364,8 +392,10 @@ public class Elevator {
 
 	public void setReq3(Boolean req3) {
 		this.req3 = req3;
-		if (listener != null) {
-			listener.req3Changed();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.req3Changed();
+			}
 		}
 	}
 
@@ -375,8 +405,10 @@ public class Elevator {
 
 	public void setUp3(Boolean up3) {
 		this.up3 = up3;
-		if (listener != null) {
-			listener.up3Changed();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.up3Changed();
+			}
 		}
 	}
 
@@ -386,8 +418,10 @@ public class Elevator {
 
 	public void setDown3(Boolean down3) {
 		this.down3 = down3;
-		if (listener != null) {
-			listener.down3Changed();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.down3Changed();
+			}
 		}
 	}
 
@@ -397,8 +431,10 @@ public class Elevator {
 
 	public void setReq4(Boolean req4) {
 		this.req4 = req4;
-		if (listener != null) {
-			listener.req4Changed();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.req4Changed();
+			}
 		}
 	}
 
@@ -408,8 +444,10 @@ public class Elevator {
 
 	public void setDown4(Boolean down4) {
 		this.down4 = down4;
-		if (listener != null) {
-			listener.down4Changed();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.down4Changed();
+			}
 		}
 	}
 
@@ -419,8 +457,10 @@ public class Elevator {
 
 	public void setOpen(Boolean open) {
 		this.open = open;
-		if (listener != null) {
-			listener.openChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.openChanged();
+			}
 		}
 	}
 
@@ -430,8 +470,10 @@ public class Elevator {
 
 	public void setClose(Boolean close) {
 		this.close = close;
-		if (listener != null) {
-			listener.closeChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.closeChanged();
+			}
 		}
 	}
 
@@ -441,8 +483,10 @@ public class Elevator {
 
 	public void setEmergency(Boolean emergency) {
 		this.emergency = emergency;
-		if (listener != null) {
-			listener.emergencyChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.emergencyChanged();
+			}
 		}
 	}
 
@@ -452,8 +496,10 @@ public class Elevator {
 
 	public void setPOreset(Boolean POreset) {
 		this.POreset = POreset;
-		if (listener != null) {
-			listener.poresetChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.poresetChanged();
+			}
 		}
 	}
 
@@ -463,8 +509,10 @@ public class Elevator {
 
 	public void setPOdv2(Boolean POdv2) {
 		this.POdv2 = POdv2;
-		if (listener != null) {
-			listener.podv2Changed();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.podv2Changed();
+			}
 		}
 	}
 
@@ -474,8 +522,10 @@ public class Elevator {
 
 	public void setPOdv1(Boolean POdv1) {
 		this.POdv1 = POdv1;
-		if (listener != null) {
-			listener.podv1Changed();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.podv1Changed();
+			}
 		}
 	}
 
@@ -485,8 +535,10 @@ public class Elevator {
 
 	public void setPOuv1(Boolean POuv1) {
 		this.POuv1 = POuv1;
-		if (listener != null) {
-			listener.pouv1Changed();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pouv1Changed();
+			}
 		}
 	}
 
@@ -496,8 +548,10 @@ public class Elevator {
 
 	public void setPOuv2(Boolean POuv2) {
 		this.POuv2 = POuv2;
-		if (listener != null) {
-			listener.pouv2Changed();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pouv2Changed();
+			}
 		}
 	}
 
@@ -507,8 +561,10 @@ public class Elevator {
 
 	public void setPOdclose(Boolean POdclose) {
 		this.POdclose = POdclose;
-		if (listener != null) {
-			listener.podcloseChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.podcloseChanged();
+			}
 		}
 	}
 
@@ -518,8 +574,10 @@ public class Elevator {
 
 	public void setPOdopen(Boolean POdopen) {
 		this.POdopen = POdopen;
-		if (listener != null) {
-			listener.podopenChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.podopenChanged();
+			}
 		}
 	}
 
@@ -529,8 +587,10 @@ public class Elevator {
 
 	public void setPOv_crawlSelect(int POv_crawlSelect) {
 		this.POv_crawlSelect = POv_crawlSelect;
-		if (listener != null) {
-			listener.povcrawlselectChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.povcrawlselectChanged();
+			}
 		}
 	}
 
@@ -540,8 +600,10 @@ public class Elevator {
 
 	public void setPIs_l1sl(Boolean PIs_l1sl) {
 		this.PIs_l1sl = PIs_l1sl;
-		if (listener != null) {
-			listener.pis_l1slChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_l1slChanged();
+			}
 		}
 	}
 
@@ -551,8 +613,10 @@ public class Elevator {
 
 	public void setPIs_l1r(Boolean PIs_l1r) {
 		this.PIs_l1r = PIs_l1r;
-		if (listener != null) {
-			listener.pis_l1rChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_l1rChanged();
+			}
 		}
 	}
 
@@ -562,8 +626,10 @@ public class Elevator {
 
 	public void setPIs_l1su(Boolean PIs_l1su) {
 		this.PIs_l1su = PIs_l1su;
-		if (listener != null) {
-			listener.pis_l1suChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_l1suChanged();
+			}
 		}
 	}
 
@@ -573,8 +639,10 @@ public class Elevator {
 
 	public void setPIs_l1au(Boolean PIs_l1au) {
 		this.PIs_l1au = PIs_l1au;
-		if (listener != null) {
-			listener.pis_l1auChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_l1auChanged();
+			}
 		}
 	}
 
@@ -584,8 +652,10 @@ public class Elevator {
 
 	public void setPIs_l2sl(Boolean PIs_l2sl) {
 		this.PIs_l2sl = PIs_l2sl;
-		if (listener != null) {
-			listener.pis_l2slChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_l2slChanged();
+			}
 		}
 	}
 
@@ -595,8 +665,10 @@ public class Elevator {
 
 	public void setPIs_l2r(Boolean PIs_l2r) {
 		this.PIs_l2r = PIs_l2r;
-		if (listener != null) {
-			listener.pis_l2rChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_l2rChanged();
+			}
 		}
 	}
 
@@ -606,8 +678,10 @@ public class Elevator {
 
 	public void setPIs_l2su(Boolean PIs_l2su) {
 		this.PIs_l2su = PIs_l2su;
-		if (listener != null) {
-			listener.pis_l2suChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_l2suChanged();
+			}
 		}
 	}
 
@@ -617,8 +691,10 @@ public class Elevator {
 
 	public void setPIs_l2au(Boolean PIs_l2au) {
 		this.PIs_l2au = PIs_l2au;
-		if (listener != null) {
-			listener.pis_l2auChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_l2auChanged();
+			}
 		}
 	}
 
@@ -628,8 +704,10 @@ public class Elevator {
 
 	public void setPIs_l3sl(Boolean PIs_l3sl) {
 		this.PIs_l3sl = PIs_l3sl;
-		if (listener != null) {
-			listener.pis_l3slChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_l3slChanged();
+			}
 		}
 	}
 
@@ -639,8 +717,10 @@ public class Elevator {
 
 	public void setPIs_l3r(Boolean PIs_l3r) {
 		this.PIs_l3r = PIs_l3r;
-		if (listener != null) {
-			listener.pis_l3rChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_l3rChanged();
+			}
 		}
 	}
 
@@ -650,8 +730,10 @@ public class Elevator {
 
 	public void setPIs_l3su(Boolean PIs_l3su) {
 		this.PIs_l3su = PIs_l3su;
-		if (listener != null) {
-			listener.pis_l3suChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_l3suChanged();
+			}
 		}
 	}
 
@@ -661,8 +743,10 @@ public class Elevator {
 
 	public void setPIs_l3au(Boolean PIs_l3au) {
 		this.PIs_l3au = PIs_l3au;
-		if (listener != null) {
-			listener.pis_l3auChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_l3auChanged();
+			}
 		}
 	}
 
@@ -672,8 +756,10 @@ public class Elevator {
 
 	public void setPIs_l4sl(Boolean PIs_l4sl) {
 		this.PIs_l4sl = PIs_l4sl;
-		if (listener != null) {
-			listener.pis_l4slChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_l4slChanged();
+			}
 		}
 	}
 
@@ -683,8 +769,10 @@ public class Elevator {
 
 	public void setPIs_l4r(Boolean PIs_l4r) {
 		this.PIs_l4r = PIs_l4r;
-		if (listener != null) {
-			listener.pis_l4rChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_l4rChanged();
+			}
 		}
 	}
 
@@ -694,8 +782,10 @@ public class Elevator {
 
 	public void setPIs_l4su(Boolean PIs_l4su) {
 		this.PIs_l4su = PIs_l4su;
-		if (listener != null) {
-			listener.pis_l4suChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_l4suChanged();
+			}
 		}
 	}
 
@@ -705,8 +795,10 @@ public class Elevator {
 
 	public void setPIs_l4au(Boolean PIs_l4au) {
 		this.PIs_l4au = PIs_l4au;
-		if (listener != null) {
-			listener.pis_l4auChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_l4auChanged();
+			}
 		}
 	}
 
@@ -716,8 +808,10 @@ public class Elevator {
 
 	public void setPIs_dopened(Boolean PIs_dopened) {
 		this.PIs_dopened = PIs_dopened;
-		if (listener != null) {
-			listener.pis_dopenedChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_dopenedChanged();
+			}
 		}
 	}
 
@@ -727,8 +821,10 @@ public class Elevator {
 
 	public void setPIs_dclosed(Boolean PIs_dclosed) {
 		this.PIs_dclosed = PIs_dclosed;
-		if (listener != null) {
-			listener.pis_dclosedChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_dclosedChanged();
+			}
 		}
 	}
 
@@ -738,8 +834,10 @@ public class Elevator {
 
 	public void setPIm_ready(Boolean PIm_ready) {
 		this.PIm_ready = PIm_ready;
-		if (listener != null) {
-			listener.pim_readyChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pim_readyChanged();
+			}
 		}
 	}
 
@@ -749,8 +847,10 @@ public class Elevator {
 
 	public void setPIm_on(Boolean PIm_on) {
 		this.PIm_on = PIm_on;
-		if (listener != null) {
-			listener.pim_onChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pim_onChanged();
+			}
 		}
 	}
 
@@ -760,8 +860,10 @@ public class Elevator {
 
 	public void setPIm_error(Boolean PIm_error) {
 		this.PIm_error = PIm_error;
-		if (listener != null) {
-			listener.pim_errorChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pim_errorChanged();
+			}
 		}
 	}
 
@@ -771,19 +873,21 @@ public class Elevator {
 
 	public void setPIs_v(int PIs_v) {
 		this.PIs_v = PIs_v;
-		if (listener != null) {
-			listener.pis_vChanged();
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_vChanged();
+			}
 		}
 	}
 
-	public ElevatorListener getListener() {
-		return listener;
+	public ArrayList<ElevatorListener> getAllListener() {
+		return allListener;
 	}
 
-	public void setListener(ElevatorListener listener) {
-		this.listener = listener;
+	public void setAllListener(ArrayList<ElevatorListener> allListener) {
+		this.allListener = allListener;
 	}
-	
+
 	public String toString() {
 		return "Elevator : \n - DoorState : " + this.doorState + 
 						  "\n - ElevatorState : " + this.elevatorState +

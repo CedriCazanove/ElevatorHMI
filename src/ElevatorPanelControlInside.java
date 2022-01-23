@@ -150,7 +150,7 @@ public class ElevatorPanelControlInside {
 		initialize();
 		this.mqttPublisher = mqttPublisher;
 		this.elevatorInside = elevator;
-		this.elevatorInside.setListener(new Elevator.ElevatorListener() {
+		this.elevatorInside.addNewElevatorListener(new Elevator.ElevatorListener() {
 			private Elevator elevatorView = elevator;
 
 			@Override
