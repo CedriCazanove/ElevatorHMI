@@ -11,14 +11,11 @@ public class ElevatorHMI {
 		System.out.println(elevator.toString());
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				
 				try {
 					mqttSubscriber = new MqttSubscriber(elevator);
 					mqttSubscriber.subscribe();
 					mqttPublisher = new MqttPublisher();
 					mqttPublisher.startConnection();
-					//ElevatorPanelControlOutside windowOutside = new ElevatorPanelControlOutside(mqttPublisher);
-					//ElevatorPanelControlInside windowInside = new ElevatorPanelControlInside(mqttPublisher, elevator);
 					ElevatorView windowElevator = new ElevatorView(elevator, mqttPublisher);
 				} catch (Exception e) {
 					e.printStackTrace();

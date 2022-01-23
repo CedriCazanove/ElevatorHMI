@@ -1,10 +1,10 @@
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.Hashtable;
+import java.util.TimerTask;
 
-import javax.jws.soap.SOAPBinding;
+import javax.swing.Timer;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -53,9 +53,11 @@ public class ElevatorView {
 	private static URL urlElevatorOpen = ElevatorView.class.getResource("/elevatorOpen.png");
 	private static URL urlElevatorClose = ElevatorView.class.getResource("/elevatorClose.png");
 	private static URL urlElevatorInTransition = ElevatorView.class.getResource("/elevatorInTransition.png");
+	private static URL urlElevatorOutOfService = ElevatorView.class.getResource("/elevatorOutOfService.png");
 	private static Icon iconElevatorOpen = new ImageIcon(urlElevatorOpen);
 	private static Icon iconElevatorClose = new ImageIcon(urlElevatorClose);
 	private static Icon iconElevatorInTransition = new ImageIcon(urlElevatorInTransition);
+	private static Icon iconElevatorOutOfService = new ImageIcon(urlElevatorOutOfService);
 
 	//Picture for the Up button
 	private static URL urlUp = ElevatorPanelControlOutside.class.getResource("/up.png");
@@ -73,43 +75,55 @@ public class ElevatorView {
 	private static URL urlStop = ElevatorPanelControlInside.class.getResource("/stop.png");
 	private static URL urlStopPressed = ElevatorPanelControlInside.class.getResource("/stopPressed.png");
 	Icon iconStop = new ImageIcon(urlStop);
-	Icon iconStopPressed = new ImageIcon(urlStopPressed);
+	Icon iconStopRed = new ImageIcon(urlStopPressed);
 
 	//Picture for the open button
 	private static URL urlOpen = ElevatorPanelControlInside.class.getResource("/open.png");
 	private static URL urlOpenGreen = ElevatorPanelControlInside.class.getResource("/openGreen.png");
+	private static URL urlOpenRed = ElevatorPanelControlInside.class.getResource("/openRed.png");
 	Icon iconOpen = new ImageIcon(urlOpen);
 	Icon iconOpenGreen = new ImageIcon(urlOpenGreen);
+	Icon iconOpenRed = new ImageIcon(urlOpenRed);
 
 	//Picture for the close button
 	private static URL urlClose = ElevatorPanelControlInside.class.getResource("/close.png");
 	private static URL urlCloseGreen = ElevatorPanelControlInside.class.getResource("/closeGreen.png");
+	private static URL urlCloseRed = ElevatorPanelControlInside.class.getResource("/closeRed.png");
 	Icon iconClose = new ImageIcon(urlClose);
 	Icon iconCloseGreen = new ImageIcon(urlCloseGreen);
+	Icon iconCloseRed = new ImageIcon(urlCloseRed);
 
 	//Picture for the level 0 button
 	private static URL urlLevel0 = ElevatorPanelControlInside.class.getResource("/level0.png");
 	private static URL urlLevel0Green = ElevatorPanelControlInside.class.getResource("/level0Green.png");
+	private static URL urlLevel0Red = ElevatorPanelControlInside.class.getResource("/level0Red.png");
 	Icon iconLevel0 = new ImageIcon(urlLevel0);
 	Icon iconLevel0Green = new ImageIcon(urlLevel0Green);
+	Icon iconLevel0Red = new ImageIcon(urlLevel0Red);
 
 	//Picture for the level 1 button
 	private static URL urlLevel1 = ElevatorPanelControlInside.class.getResource("/level1.png");
 	private static URL urlLevel1Green = ElevatorPanelControlInside.class.getResource("/level1Green.png");
+	private static URL urlLevel1Red = ElevatorPanelControlInside.class.getResource("/level1Red.png");
 	Icon iconLevel1 = new ImageIcon(urlLevel1);
 	Icon iconLevel1Green = new ImageIcon(urlLevel1Green);
+	Icon iconLevel1Red = new ImageIcon(urlLevel1Red);
 
 	//Picture for the level 2 button
 	private static URL urlLevel2 = ElevatorPanelControlInside.class.getResource("/level2.png");
 	private static URL urlLevel2Green = ElevatorPanelControlInside.class.getResource("/level2Green.png");
+	private static URL urlLevel2Red = ElevatorPanelControlInside.class.getResource("/level2Red.png");
 	Icon iconLevel2 = new ImageIcon(urlLevel2);
+	Icon iconLevel2Red = new ImageIcon(urlLevel2Red);
 	Icon iconLevel2Green = new ImageIcon(urlLevel2Green);
 
 	//Picture for the level 3 button
 	private static URL urlLevel3 = ElevatorPanelControlInside.class.getResource("/level3.png");
 	private static URL urlLevel3Green = ElevatorPanelControlInside.class.getResource("/level3Green.png");
+	private static URL urlLevel3Red = ElevatorPanelControlInside.class.getResource("/level3Red.png");
 	Icon iconLevel3 = new ImageIcon(urlLevel3);
 	Icon iconLevel3Green = new ImageIcon(urlLevel3Green);
+	Icon iconLevel3Red = new ImageIcon(urlLevel3Red);
 
 	//Picture for the digit 0
 	private static URL urlDigit0 = ElevatorPanelControlOutside.class.getResource("/digit0.png");
@@ -258,9 +272,7 @@ public class ElevatorView {
 						labelElevator.setIcon(iconElevatorInTransition);
 						break;
 					default:
-						System.out.println("ElevatorView : no match");
-
-				}
+						System.out.println("ElevatorView : no match");				}
 			}
 			@Override
 			public void currentLevelChanged() {
@@ -272,117 +284,342 @@ public class ElevatorView {
 			@Override
 			public void elevatorStateChanged() {
 				// TODO Auto-generated method stub
+				switch(elevator.getElevatorState()) {
+					case INSERVICE:
+						switch(elevatorView.getDoorState()) {
+							case OPEN:
+								labelElevator.setIcon(iconElevatorOpen);
+								break;
+							case CLOSE:
+								labelElevator.setIcon(iconElevatorClose);
+								break;
+							case OPENING:
+							case CLOSING:
+								labelElevator.setIcon(iconElevatorInTransition);
+								break;
+							default:
+								System.out.println("ElevatorView : no match");
 
+						}
+						System.out.println("Elevator in service");
+						break;
+					case OUTOFSERVICE:
+						labelElevator.setIcon(iconElevatorOutOfService);
+						System.out.println("Elevator out of service");
+						break;
+					case EMERGENCY:
+						System.out.println("Emergency on the elevator");
+						break;
+					case POWEROFF:
+						labelElevator.setIcon(iconElevatorClose);
+						System.out.println("Elevator power off");
+						break;
+					default:
+						System.out.println("No match detected in the elevator state");
+						break;
+				}
 			}
 			@Override
 			public void directionChanged() {
 				// TODO Auto-generated method stub
+				switch(elevator.getDirection()) {
+					case UP:
+						lblElevatorIndicator.setIcon(iconElevatorUp);
+						System.out.println("Elevator moving up");
+						break;
+					case DOWN:
+						lblElevatorIndicator.setIcon(iconElevatorDown);
+						System.out.println("Elevator moving down");
 
+						break;
+					case IDLE:
+						switch(elevator.getCurrentLevel()) {
+							case 0:
+								lblElevatorIndicator.setIcon(iconElevator0);
+								System.out.println("Elevator not moving; Actually level 0");
+								break;
+							case 1:
+								lblElevatorIndicator.setIcon(iconElevator1);
+								System.out.println("Elevator not moving; Actually level 1");
+
+								break;
+							case 2:
+								lblElevatorIndicator.setIcon(iconElevator2);
+								System.out.println("Elevator not moving; Actually level 2");
+
+								break;
+							case 3:
+								lblElevatorIndicator.setIcon(iconElevator3);
+								System.out.println("Elevator not moving; Actually level 3");
+
+								break;
+							default:
+								System.out.println("Elevator not moving; No match on floor detected");
+								break;
+						}
+
+						break;
+					default:
+						System.out.println("No match detected in the elevator direction");
+
+						break;
+				}
 			}
 
 			@Override
 			public void req1Changed() {
-
+				if(elevator.getReq1()) {
+					btnLevel0.setIcon(iconLevel0Green);
+					System.out.println("Req1 is true");
+				}else {
+					btnLevel0.setIcon(iconLevel0);
+					System.out.println("Req1 is false");
+				}
 			}
 
 			@Override
 			public void up1Changed() {
+				if(elevator.getUp1()) {
 
+					btnUp.setIcon(iconUpGreen);
+					System.out.println("Up1 is true");
+				}else {
+
+					btnUp.setIcon(iconUp);
+					System.out.println("Up1 is false");
+				}
 			}
 
 			@Override
 			public void req2Changed() {
-
+				if(elevator.getReq2()) {
+					btnLevel1.setIcon(iconLevel1Green);
+					System.out.println("Req2 is true");
+				}else {
+					btnLevel1.setIcon(iconLevel1);
+					System.out.println("Req2 is false");
+				}
 			}
 
 			@Override
 			public void up2Changed() {
+				if(elevator.getUp2()) {
 
+					btnUp_1.setIcon(iconUpGreen);
+					System.out.println("Up2 is true");
+				}else {
+
+					btnUp_1.setIcon(iconUp);
+					System.out.println("Up2 is false");
+				}
 			}
 
 			@Override
-			public void down2cCanged() {
+			public void down2Changed() {
+				if(elevator.getDown2()) {
 
+					btnDown_1.setIcon(iconDownGreen);
+					System.out.println("Down2 is true");
+				}else {
+
+					btnDown_1.setIcon(iconDown);
+					System.out.println("Down2 is false");
+				}
 			}
 
 			@Override
 			public void req3Changed() {
-
+				if(elevator.getReq3()) {
+					btnLevel2.setIcon(iconLevel2Green);
+					System.out.println("Req3 is true");
+				}else {
+					btnLevel2.setIcon(iconLevel2);
+					System.out.println("Req3 is false");
+				}
 			}
 
 			@Override
 			public void up3Changed() {
+				if(elevator.getUp3()) {
 
+					btnUp_2.setIcon(iconUpGreen);
+					System.out.println("Up3 is true");
+				}else {
+
+					btnUp_2.setIcon(iconUp);
+					System.out.println("Up3 is false");
+				}
 			}
 
 			@Override
 			public void down3Changed() {
+				if(elevator.getDown3()) {
 
+					btnDown_2.setIcon(iconDownGreen);
+					System.out.println("Down3 is true");
+				}else {
+
+					btnDown_2.setIcon(iconDown);
+					System.out.println("Down3 is false");
+				}
 			}
 
 			@Override
 			public void req4Changed() {
-
+				if(elevator.getReq4()) {
+					btnLevel3.setIcon(iconLevel3Green);
+					System.out.println("Req4 is true");
+				}else {
+					btnLevel3.setIcon(iconLevel3);
+					System.out.println("Req4 is false");
+				}
 			}
 
 			@Override
 			public void down4Changed() {
+				if(elevator.getDown4()) {
 
+					btnDown_3.setIcon(iconDownGreen);
+					System.out.println("Down4 is true");
+				}else {
+
+					btnDown_3.setIcon(iconDown);
+					System.out.println("Down4 is false");
+				}
 			}
 
 			@Override
 			public void openChanged() {
-
+				if(elevator.getOpen()) {
+					btnOpen.setIcon(iconOpenGreen);
+					System.out.println("Open is true");
+				} else {
+					btnOpen.setIcon(iconOpen);
+					System.out.println("Open is false");
+				}
 			}
 
 			@Override
 			public void closeChanged() {
-
+				if(elevator.getClose()) {
+					btnClose.setIcon(iconCloseGreen);
+					System.out.println("Close is true");
+				} else {
+					btnClose.setIcon(iconClose);
+					System.out.println("Close is false");
+				}
 			}
 
 			@Override
 			public void emergencyChanged() {
+				if(elevator.getEmergency()) {
+					btnLevel0.setIcon(iconLevel0Red);
+					btnLevel1.setIcon(iconLevel1Red);
+					btnLevel2.setIcon(iconLevel2Red);
+					btnLevel3.setIcon(iconLevel3Red);
+					btnStop.setIcon(iconStopRed);
+					btnOpen.setIcon(iconOpenRed);
+					btnClose.setIcon(iconCloseRed);
 
+				} else {
+					btnLevel0.setIcon(iconLevel0);
+					btnLevel1.setIcon(iconLevel1);
+					btnLevel2.setIcon(iconLevel2);
+					btnLevel3.setIcon(iconLevel3);
+					btnStop.setIcon(iconStop);
+					btnOpen.setIcon(iconOpen);
+					btnClose.setIcon(iconClose);
+				}
 			}
 
 			@Override
 			public void poresetChanged() {
+				if(elevator.getPOreset()) {
+					btnLevel0.setIcon(iconLevel0);
+					btnLevel1.setIcon(iconLevel1);
+					btnLevel2.setIcon(iconLevel2);
+					btnLevel3.setIcon(iconLevel3);
+					btnStop.setIcon(iconStop);
+					btnOpen.setIcon(iconOpen);
+					btnClose.setIcon(iconClose);
+					btnUp.setIcon(iconUp);
+					btnUp_1.setIcon(iconUp);
+					btnUp_2.setIcon(iconUp);
+					btnDown_1.setIcon(iconDown);
+					btnDown_2.setIcon(iconDown);
+					btnDown_3.setIcon(iconDown);
+					btnPOreset.setIcon(iconLedGreen);
+					btnPOdv2.setIcon(iconLedOff);
+					btnPOdv1.setIcon(iconLedOff);
+					btnPOdclose.setIcon(iconLedOff);
+					btnPOdopen.setIcon(iconLedOff);
+					btnPOuv2.setIcon(iconLedOff);
+					btnPOuv1.setIcon(iconLedOff);
 
+				} else {
+
+					btnPOreset.setIcon(iconLedOff);
+				}
 			}
 
 			@Override
 			public void podv2Changed() {
-
+				if(elevator.getPOdv2()) {
+					btnPOdv2.setIcon(iconLedGreen);
+				} else {
+					btnPOdv2.setIcon(iconLedOff);
+				}
 			}
 
 			@Override
 			public void podv1Changed() {
-
+				if(elevator.getPOdv1()) {
+					btnPOdv1.setIcon(iconLedGreen);
+				} else {
+					btnPOdv1.setIcon(iconLedOff);
+				}
 			}
 
 			@Override
 			public void pouv1Changed() {
-
+				if(elevator.getPOuv1()) {
+					btnPOuv1.setIcon(iconLedGreen);
+				} else {
+					btnPOuv1.setIcon(iconLedOff);
+				}
 			}
 
 			@Override
 			public void pouv2Changed() {
-
+				if(elevator.getPOuv2()) {
+					btnPOuv2.setIcon(iconLedGreen);
+				} else {
+					btnPOuv2.setIcon(iconLedOff);
+				}
 			}
 
 			@Override
 			public void podcloseChanged() {
-
+				if(elevator.getPOdclose()) {
+					btnPOdclose.setIcon(iconLedGreen);
+				} else {
+					btnPOdclose.setIcon(iconLedOff);
+				}
 			}
 
 			@Override
 			public void podopenChanged() {
-
+				if(elevator.getPOdopen()) {
+					btnPOdopen.setIcon(iconLedGreen);
+				} else {
+					btnPOdopen.setIcon(iconLedOff);
+				}
 			}
 
 			@Override
 			public void povcrawlselectChanged() {
-
+				lblPOv_crawlValue.setText("" + elevator.getPOv_crawlSelect());
+				sliderPOv_crawlSelect.setValue(elevator.getPOv_crawlSelect());
 			}
 
 			@Override
@@ -392,7 +629,11 @@ public class ElevatorView {
 
 			@Override
 			public void pis_l1rChanged() {
-
+				if(elevator.getPIs_l1r()) {
+					System.out.println("ElevatorView : L1 Reached");
+					int nextLevel = (3)*135 + 3;
+					labelElevator.setBounds(0, nextLevel, 100, 135);
+				}
 			}
 
 			@Override
@@ -412,7 +653,11 @@ public class ElevatorView {
 
 			@Override
 			public void pis_l2rChanged() {
-
+				if(elevator.getPIs_l2r()) {
+					System.out.println("ElevatorView : L2 Reached");
+					int nextLevel = (2)*135 + 3;
+					labelElevator.setBounds(0, nextLevel, 100, 135);
+				}
 			}
 
 			@Override
@@ -432,7 +677,11 @@ public class ElevatorView {
 
 			@Override
 			public void pis_l3rChanged() {
-
+				if(elevator.getPIs_l3r()) {
+					System.out.println("ElevatorView : L3 Reached");
+					int nextLevel = (1)*135 + 3;
+					labelElevator.setBounds(0, nextLevel, 100, 135);
+				}
 			}
 
 			@Override
@@ -452,7 +701,11 @@ public class ElevatorView {
 
 			@Override
 			public void pis_l4rChanged() {
-
+				if(elevator.getPIs_l4r()) {
+					System.out.println("ElevatorView : L4 Reached");
+					int nextLevel = 3;
+					labelElevator.setBounds(0, nextLevel, 100, 135);
+				}
 			}
 
 			@Override
@@ -495,6 +748,24 @@ public class ElevatorView {
 
 			}
 		});
+		/**
+		 * Asking for all the state
+		 */
+		java.util.Timer timer = new java.util.Timer();
+		TimerTask timerTask = new TimerTask() {
+			@Override
+			public void run() {
+				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
+				try {
+					System.out.println(requestForStates.toJSON());
+					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
+				} catch (JSONException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		};
+		timer.schedule(timerTask, 0, 60000);//period is in ms (every 1min we ask)
 	}
 
 	/**

@@ -211,7 +211,7 @@ public class ElevatorPanelControlInside {
 			}
 
 			@Override
-			public void down2cCanged() {
+			public void down2Changed() {
 
 			}
 
