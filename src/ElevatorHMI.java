@@ -7,16 +7,16 @@ public class ElevatorHMI {
 	private static MqttSubscriber mqttSubscriber;
 	
 	public static void main(String[] args) {
-		Elevator elevator = new Elevator(DoorState.CLOSE, ElevatorState.INSERVICE, 0, Direction.IDLE, ElevatorSpeed.SPEED1);
+		Elevator elevator = new Elevator();
 		System.out.println(elevator.toString());
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				
 				try {
-					mqttPublisher = new MqttPublisher();
-					mqttPublisher.startConnection();
 					mqttSubscriber = new MqttSubscriber(elevator);
 					mqttSubscriber.subscribe();
+					mqttPublisher = new MqttPublisher();
+					mqttPublisher.startConnection();
 					//ElevatorPanelControlOutside windowOutside = new ElevatorPanelControlOutside(mqttPublisher);
 					//ElevatorPanelControlInside windowInside = new ElevatorPanelControlInside(mqttPublisher, elevator);
 					ElevatorView windowElevator = new ElevatorView(elevator, mqttPublisher);

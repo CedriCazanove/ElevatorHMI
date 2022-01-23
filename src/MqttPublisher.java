@@ -6,7 +6,7 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 public class MqttPublisher {
 	
-	private String topic = "/21WS-SysArch/test";
+	private String topic = "/21WS-SysArch/H1";
 	
 	private String broker = "tcp://localhost:1888";//"tcp://ce121caz@ea-pc165.ei.htwg-konstanz.de:1883";// 
 	

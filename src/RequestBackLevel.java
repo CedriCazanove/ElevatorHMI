@@ -1,6 +1,10 @@
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
+
 public class RequestBackLevel implements Request {
 
 	private String type;
@@ -10,6 +14,18 @@ public class RequestBackLevel implements Request {
 	private String level;
 	
 	private String time;
+
+	public RequestBackLevel(String type, String device, String level) {
+		this.type = type;
+		this.device = device;
+		this.level = level;
+		Date date = new Date(System.currentTimeMillis());
+		// Conversion
+		SimpleDateFormat sdf;
+		sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+		sdf.setTimeZone(TimeZone.getTimeZone("CET"));
+		this.time = sdf.format(date);
+	}
 	
 	public RequestBackLevel(String type, String device, String level, String time) {
 		this.type = type;

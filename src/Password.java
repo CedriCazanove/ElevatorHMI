@@ -62,9 +62,15 @@ public class Password {
                 listener.passwordIsCorrect();
             }
         }
+        clear();
+    }
+
+
+    public void clear() {
         this.pass = "";
         if (listener != null) {
             listener.changed();
         }
+
     }
 }
