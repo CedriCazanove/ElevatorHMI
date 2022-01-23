@@ -253,7 +253,7 @@ public class ElevatorView {
 		/**
 		 * Create the listener of the elevator which allow us to update the view
 		 */
-		this.elevator.setListener(new Elevator.ElevatorListener() {
+		this.elevator.addNewElevatorListener(new Elevator.ElevatorListener() {
 			private Elevator elevatorView = elevator;
 
 			@Override
@@ -277,7 +277,7 @@ public class ElevatorView {
 			@Override
 			public void currentLevelChanged() {
 				System.out.println("ElevatorView : currentLevelChanged");
-				int nextLevel = (3 - elevatorView.getCurrentLevel())*135 + 3;
+				int nextLevel = (4 - elevatorView.getCurrentLevel())*135 + 3;
 				labelElevator.setBounds(0, nextLevel, 100, 135);
 			}
 
