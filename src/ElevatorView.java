@@ -1329,9 +1329,17 @@ public class ElevatorView {
 		sliderPOv_crawlSelect.setMinorTickSpacing(1);
 		sliderPOv_crawlSelect.setBounds(5, 354, 150, 60);
 		Hashtable labelTable = new Hashtable();
-		labelTable.put( new Integer( -5 ), new JLabel("-5") );
-		labelTable.put( new Integer( 0 ), new JLabel("0") );
-		labelTable.put( new Integer( 5 ), new JLabel("5") );
+		labelTable.put( -5, new JLabel("-5") );
+		labelTable.put( -4, new JLabel("-4") );
+		labelTable.put( -3, new JLabel("-3") );
+		labelTable.put( -2, new JLabel("-2") );
+		labelTable.put( -1, new JLabel("-1") );
+		labelTable.put( 0, new JLabel("0") );
+		labelTable.put( 1, new JLabel("1") );
+		labelTable.put( 2, new JLabel("2") );
+		labelTable.put( 3, new JLabel("3") );
+		labelTable.put( 4, new JLabel("4") );
+		labelTable.put( 5, new JLabel("5") );
 		sliderPOv_crawlSelect.setLabelTable(labelTable);
 		sliderPOv_crawlSelect.setPaintLabels(true);
 		sliderPOv_crawlSelect.addChangeListener(new ChangeListener() {
