@@ -5,18 +5,146 @@ public class Elevator {
 	
 	public interface ElevatorListener {
 
-		//Action to trigger when the door state of the elevator change
+		//Action to trigger when the door state of the elevator changes
 		public void doorStateChanged();
       
-		//Action to trigger when the current level of the elevator change
+		//Action to trigger when the current level of the elevator changes
 		public void currentLevelChanged();
 		
-		//Action to trigger when the state of the elevator change
+		//Action to trigger when the state of the elevator changes
 		public void elevatorStateChanged();
 		
-		//Action to trigger when the direction of the elevator change
+		//Action to trigger when the direction of the elevator changes
 		public void directionChanged();
-	      
+
+		//Action to trigger when req1 changes
+		public void req1Changed();
+
+		//Action to trigger when up1 changes
+		public void up1Changed();
+
+		//Action to trigger when req2 changes
+		public void req2Changed();
+
+		//Action to trigger when up2 changes
+		public void up2Changed();
+
+		//Action to trigger when down2 changes
+		public void down2cCanged();
+
+		//Action to trigger when req3 changes
+		public void req3Changed();
+
+		//Action to trigger when up3 changes
+		public void up3Changed();
+
+		//Action to trigger when down3 changes
+		public void down3Changed();
+
+		//Action to trigger when req4 changes
+		public void req4Changed();
+
+		//Action to trigger when down4 changes
+		public void down4Changed();
+
+		//Action to trigger when open changes
+		public void openChanged();
+
+		//Action to trigger when close changes
+		public void closeChanged();
+
+		//Action to trigger when emergency changes
+		public void emergencyChanged();
+
+		//Action to trigger when POreset changes
+		public void poresetChanged();
+
+		//Action to trigger when podv2 changes
+		public void podv2Changed();
+
+		//Action to trigger when podv1 changes
+		public void podv1Changed();
+
+		//Action to trigger when pouv1 changes
+		public void pouv1Changed();
+
+		//Action to trigger when pouv2 changes
+		public void pouv2Changed();
+
+		//Action to trigger when podclose changes
+		public void podcloseChanged();
+
+		//Action to trigger when podopen changes
+		public void podopenChanged();
+
+		//Action to trigger when pov_crawlselect changes
+		public void povcrawlselectChanged();
+
+		//Action to trigger when pis_l1sl changes
+		public void pis_l1slChanged();
+
+		//Action to trigger when pis_l1r changes
+		public void pis_l1rChanged();
+
+		//Action to trigger when pis_l1su changes
+		public void pis_l1suChanged();
+
+		//Action to trigger when pis_l1au changes
+		public void pis_l1auChanged();
+
+		//Action to trigger when pis_l2sl changes
+		public void pis_l2slChanged();
+
+		//Action to trigger when pis_l2r changes
+		public void pis_l2rChanged();
+
+		//Action to trigger when pis_l2su changes
+		public void pis_l2suChanged();
+
+		//Action to trigger when pis_l2au changes
+		public void pis_l2auChanged();
+
+		//Action to trigger when pis_l3sl changes
+		public void pis_l3slChanged();
+
+		//Action to trigger when pis_l3r changes
+		public void pis_l3rChanged();
+
+		//Action to trigger when pis_l3su changes
+		public void pis_l3suChanged();
+
+		//Action to trigger when pis_l3au changes
+		public void pis_l3auChanged();
+
+		//Action to trigger when pis_l4sl changes
+		public void pis_l4slChanged();
+
+		//Action to trigger when pis_l4r changes
+		public void pis_l4rChanged();
+
+		//Action to trigger when pis_l4su changes
+		public void pis_l4suChanged();
+
+		//Action to trigger when pis_l4au changes
+		public void pis_l4auChanged();
+
+		//Action to trigger when pis_dopened changes
+		public void pis_dopenedChanged();
+
+		//Action to trigger when pis_dclosed changes
+		public void pis_dclosedChanged();
+
+		//Action to trigger when pim_ready changes
+		public void pim_readyChanged();
+
+		//Action to trigger when pis_on changes
+		public void pim_onChanged();
+
+		//Action to trigger when pim_error changes
+		public void pim_errorChanged();
+
+		//Action to trigger when pis_v changes
+		public void pis_vChanged();
 	}
 	
 	private DoorState doorState;
@@ -181,6 +309,9 @@ public class Elevator {
 
 	public void setReq1(Boolean req1) {
 		this.req1 = req1;
+		if (listener != null) {
+			listener.req1Changed();
+		}
 	}
 
 	public Boolean getUp1() {
@@ -189,6 +320,9 @@ public class Elevator {
 
 	public void setUp1(Boolean up1) {
 		this.up1 = up1;
+		if (listener != null) {
+			listener.up1Changed();
+		}
 	}
 
 	public Boolean getReq2() {
@@ -197,6 +331,9 @@ public class Elevator {
 
 	public void setReq2(Boolean req2) {
 		this.req2 = req2;
+		if (listener != null) {
+			listener.req2Changed();
+		}
 	}
 
 	public Boolean getUp2() {
@@ -205,6 +342,9 @@ public class Elevator {
 
 	public void setUp2(Boolean up2) {
 		this.up2 = up2;
+		if (listener != null) {
+			listener.up2Changed();
+		}
 	}
 
 	public Boolean getDown2() {
@@ -213,6 +353,9 @@ public class Elevator {
 
 	public void setDown2(Boolean down2) {
 		this.down2 = down2;
+		if (listener != null) {
+			listener.down2cCanged();
+		}
 	}
 
 	public Boolean getReq3() {
@@ -221,6 +364,9 @@ public class Elevator {
 
 	public void setReq3(Boolean req3) {
 		this.req3 = req3;
+		if (listener != null) {
+			listener.req3Changed();
+		}
 	}
 
 	public Boolean getUp3() {
@@ -229,6 +375,9 @@ public class Elevator {
 
 	public void setUp3(Boolean up3) {
 		this.up3 = up3;
+		if (listener != null) {
+			listener.up3Changed();
+		}
 	}
 
 	public Boolean getDown3() {
@@ -237,6 +386,9 @@ public class Elevator {
 
 	public void setDown3(Boolean down3) {
 		this.down3 = down3;
+		if (listener != null) {
+			listener.down3Changed();
+		}
 	}
 
 	public Boolean getReq4() {
@@ -245,6 +397,9 @@ public class Elevator {
 
 	public void setReq4(Boolean req4) {
 		this.req4 = req4;
+		if (listener != null) {
+			listener.req4Changed();
+		}
 	}
 
 	public Boolean getDown4() {
@@ -253,6 +408,9 @@ public class Elevator {
 
 	public void setDown4(Boolean down4) {
 		this.down4 = down4;
+		if (listener != null) {
+			listener.down4Changed();
+		}
 	}
 
 	public Boolean getOpen() {
@@ -261,6 +419,9 @@ public class Elevator {
 
 	public void setOpen(Boolean open) {
 		this.open = open;
+		if (listener != null) {
+			listener.openChanged();
+		}
 	}
 
 	public Boolean getClose() {
@@ -269,6 +430,9 @@ public class Elevator {
 
 	public void setClose(Boolean close) {
 		this.close = close;
+		if (listener != null) {
+			listener.closeChanged();
+		}
 	}
 
 	public Boolean getEmergency() {
@@ -277,6 +441,9 @@ public class Elevator {
 
 	public void setEmergency(Boolean emergency) {
 		this.emergency = emergency;
+		if (listener != null) {
+			listener.emergencyChanged();
+		}
 	}
 
 	public Boolean getPOreset() {
@@ -285,6 +452,9 @@ public class Elevator {
 
 	public void setPOreset(Boolean POreset) {
 		this.POreset = POreset;
+		if (listener != null) {
+			listener.poresetChanged();
+		}
 	}
 
 	public Boolean getPOdv2() {
@@ -293,6 +463,9 @@ public class Elevator {
 
 	public void setPOdv2(Boolean POdv2) {
 		this.POdv2 = POdv2;
+		if (listener != null) {
+			listener.podv2Changed();
+		}
 	}
 
 	public Boolean getPOdv1() {
@@ -301,6 +474,9 @@ public class Elevator {
 
 	public void setPOdv1(Boolean POdv1) {
 		this.POdv1 = POdv1;
+		if (listener != null) {
+			listener.podv1Changed();
+		}
 	}
 
 	public Boolean getPOuv1() {
@@ -309,6 +485,9 @@ public class Elevator {
 
 	public void setPOuv1(Boolean POuv1) {
 		this.POuv1 = POuv1;
+		if (listener != null) {
+			listener.pouv1Changed();
+		}
 	}
 
 	public Boolean getPOuv2() {
@@ -317,6 +496,9 @@ public class Elevator {
 
 	public void setPOuv2(Boolean POuv2) {
 		this.POuv2 = POuv2;
+		if (listener != null) {
+			listener.pouv2Changed();
+		}
 	}
 
 	public Boolean getPOdclose() {
@@ -325,6 +507,9 @@ public class Elevator {
 
 	public void setPOdclose(Boolean POdclose) {
 		this.POdclose = POdclose;
+		if (listener != null) {
+			listener.podcloseChanged();
+		}
 	}
 
 	public Boolean getPOdopen() {
@@ -333,6 +518,9 @@ public class Elevator {
 
 	public void setPOdopen(Boolean POdopen) {
 		this.POdopen = POdopen;
+		if (listener != null) {
+			listener.podopenChanged();
+		}
 	}
 
 	public int getPOv_crawlSelect() {
@@ -341,6 +529,9 @@ public class Elevator {
 
 	public void setPOv_crawlSelect(int POv_crawlSelect) {
 		this.POv_crawlSelect = POv_crawlSelect;
+		if (listener != null) {
+			listener.povcrawlselectChanged();
+		}
 	}
 
 	public Boolean getPIs_l1sl() {
@@ -349,6 +540,9 @@ public class Elevator {
 
 	public void setPIs_l1sl(Boolean PIs_l1sl) {
 		this.PIs_l1sl = PIs_l1sl;
+		if (listener != null) {
+			listener.pis_l1slChanged();
+		}
 	}
 
 	public Boolean getPIs_l1r() {
@@ -357,6 +551,9 @@ public class Elevator {
 
 	public void setPIs_l1r(Boolean PIs_l1r) {
 		this.PIs_l1r = PIs_l1r;
+		if (listener != null) {
+			listener.pis_l1rChanged();
+		}
 	}
 
 	public Boolean getPIs_l1su() {
@@ -365,6 +562,9 @@ public class Elevator {
 
 	public void setPIs_l1su(Boolean PIs_l1su) {
 		this.PIs_l1su = PIs_l1su;
+		if (listener != null) {
+			listener.pis_l1suChanged();
+		}
 	}
 
 	public Boolean getPIs_l1au() {
@@ -373,6 +573,9 @@ public class Elevator {
 
 	public void setPIs_l1au(Boolean PIs_l1au) {
 		this.PIs_l1au = PIs_l1au;
+		if (listener != null) {
+			listener.pis_l1auChanged();
+		}
 	}
 
 	public Boolean getPIs_l2sl() {
@@ -381,6 +584,9 @@ public class Elevator {
 
 	public void setPIs_l2sl(Boolean PIs_l2sl) {
 		this.PIs_l2sl = PIs_l2sl;
+		if (listener != null) {
+			listener.pis_l2slChanged();
+		}
 	}
 
 	public Boolean getPIs_l2r() {
@@ -389,6 +595,9 @@ public class Elevator {
 
 	public void setPIs_l2r(Boolean PIs_l2r) {
 		this.PIs_l2r = PIs_l2r;
+		if (listener != null) {
+			listener.pis_l2rChanged();
+		}
 	}
 
 	public Boolean getPIs_l2su() {
@@ -397,6 +606,9 @@ public class Elevator {
 
 	public void setPIs_l2su(Boolean PIs_l2su) {
 		this.PIs_l2su = PIs_l2su;
+		if (listener != null) {
+			listener.pis_l2suChanged();
+		}
 	}
 
 	public Boolean getPIs_l2au() {
@@ -405,6 +617,9 @@ public class Elevator {
 
 	public void setPIs_l2au(Boolean PIs_l2au) {
 		this.PIs_l2au = PIs_l2au;
+		if (listener != null) {
+			listener.pis_l2auChanged();
+		}
 	}
 
 	public Boolean getPIs_l3sl() {
@@ -413,6 +628,9 @@ public class Elevator {
 
 	public void setPIs_l3sl(Boolean PIs_l3sl) {
 		this.PIs_l3sl = PIs_l3sl;
+		if (listener != null) {
+			listener.pis_l3slChanged();
+		}
 	}
 
 	public Boolean getPIs_l3r() {
@@ -421,6 +639,9 @@ public class Elevator {
 
 	public void setPIs_l3r(Boolean PIs_l3r) {
 		this.PIs_l3r = PIs_l3r;
+		if (listener != null) {
+			listener.pis_l3rChanged();
+		}
 	}
 
 	public Boolean getPIs_l3su() {
@@ -429,6 +650,9 @@ public class Elevator {
 
 	public void setPIs_l3su(Boolean PIs_l3su) {
 		this.PIs_l3su = PIs_l3su;
+		if (listener != null) {
+			listener.pis_l3suChanged();
+		}
 	}
 
 	public Boolean getPIs_l3au() {
@@ -437,6 +661,9 @@ public class Elevator {
 
 	public void setPIs_l3au(Boolean PIs_l3au) {
 		this.PIs_l3au = PIs_l3au;
+		if (listener != null) {
+			listener.pis_l3auChanged();
+		}
 	}
 
 	public Boolean getPIs_l4sl() {
@@ -445,6 +672,9 @@ public class Elevator {
 
 	public void setPIs_l4sl(Boolean PIs_l4sl) {
 		this.PIs_l4sl = PIs_l4sl;
+		if (listener != null) {
+			listener.pis_l4slChanged();
+		}
 	}
 
 	public Boolean getPIs_l4r() {
@@ -453,6 +683,9 @@ public class Elevator {
 
 	public void setPIs_l4r(Boolean PIs_l4r) {
 		this.PIs_l4r = PIs_l4r;
+		if (listener != null) {
+			listener.pis_l4rChanged();
+		}
 	}
 
 	public Boolean getPIs_l4su() {
@@ -461,6 +694,9 @@ public class Elevator {
 
 	public void setPIs_l4su(Boolean PIs_l4su) {
 		this.PIs_l4su = PIs_l4su;
+		if (listener != null) {
+			listener.pis_l4suChanged();
+		}
 	}
 
 	public Boolean getPIs_l4au() {
@@ -469,6 +705,9 @@ public class Elevator {
 
 	public void setPIs_l4au(Boolean PIs_l4au) {
 		this.PIs_l4au = PIs_l4au;
+		if (listener != null) {
+			listener.pis_l4auChanged();
+		}
 	}
 
 	public Boolean getPIs_dopened() {
@@ -477,6 +716,9 @@ public class Elevator {
 
 	public void setPIs_dopened(Boolean PIs_dopened) {
 		this.PIs_dopened = PIs_dopened;
+		if (listener != null) {
+			listener.pis_dopenedChanged();
+		}
 	}
 
 	public Boolean getPIs_dclosed() {
@@ -485,6 +727,9 @@ public class Elevator {
 
 	public void setPIs_dclosed(Boolean PIs_dclosed) {
 		this.PIs_dclosed = PIs_dclosed;
+		if (listener != null) {
+			listener.pis_dclosedChanged();
+		}
 	}
 
 	public Boolean getPIm_ready() {
@@ -493,6 +738,9 @@ public class Elevator {
 
 	public void setPIm_ready(Boolean PIm_ready) {
 		this.PIm_ready = PIm_ready;
+		if (listener != null) {
+			listener.pim_readyChanged();
+		}
 	}
 
 	public Boolean getPIm_on() {
@@ -501,6 +749,9 @@ public class Elevator {
 
 	public void setPIm_on(Boolean PIm_on) {
 		this.PIm_on = PIm_on;
+		if (listener != null) {
+			listener.pim_onChanged();
+		}
 	}
 
 	public Boolean getPIm_error() {
@@ -509,6 +760,9 @@ public class Elevator {
 
 	public void setPIm_error(Boolean PIm_error) {
 		this.PIm_error = PIm_error;
+		if (listener != null) {
+			listener.pim_errorChanged();
+		}
 	}
 
 	public int getPIs_v() {
@@ -517,6 +771,9 @@ public class Elevator {
 
 	public void setPIs_v(int PIs_v) {
 		this.PIs_v = PIs_v;
+		if (listener != null) {
+			listener.pis_vChanged();
+		}
 	}
 
 	public ElevatorListener getListener() {
