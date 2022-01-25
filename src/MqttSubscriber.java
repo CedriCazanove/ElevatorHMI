@@ -10,13 +10,13 @@ import org.json.JSONObject;
 public class MqttSubscriber implements MqttCallback{
 	
 	/** The broker url. */
-	private static final String brokerUrl ="tcp://localhost:1888";
+	private static final String brokerUrl ="tcp://localhost:1884";
 
 	/** The client id. */
 	private static final String clientId = "clientId";
 
 	/** The topic. */
-	private static final String topic = "/21WS-SysArch/C1";//
+	private static final String topic = "/21WS-SysArch/#";//
     
     private String username = "H1";
    
@@ -49,7 +49,7 @@ public class MqttSubscriber implements MqttCallback{
 			System.out.println("Mqtt Connected for listening");
 
 			sampleClient.setCallback(this);
-			sampleClient.subscribe(this.topic);
+			sampleClient.subscribe(this.topic, 2);
 
 			System.out.println("Subscribed");
 			System.out.println("Listening");

@@ -12,10 +12,10 @@ public class ElevatorHMI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					mqttSubscriber = new MqttSubscriber(elevator);
-					mqttSubscriber.subscribe();
 					mqttPublisher = new MqttPublisher();
 					mqttPublisher.startConnection();
+					mqttSubscriber = new MqttSubscriber(elevator);
+					mqttSubscriber.subscribe();
 					ElevatorView windowElevator = new ElevatorView(elevator, mqttPublisher);
 				} catch (Exception e) {
 					e.printStackTrace();

@@ -749,8 +749,29 @@ public class ElevatorView {
 			}
 		});
 		/**
+		 * Can only display the window when we have at least received the state once
+		 */
+/*
+		System.out.println("Waiting for the state of the elevator..");
+		while(!elevator.getPIm_ready()) {
+			UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
+			try {
+				System.out.println(requestForStates.toJSON());
+				mqttPublisher.sendMessage(requestForStates.toJSON().toString());
+			} catch (JSONException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+
+ */
+		this.frame.setVisible(true);
+
+		/**
 		 * Asking for all the state
 		 */
+
+		/*
 		java.util.Timer timer = new java.util.Timer();
 		TimerTask timerTask = new TimerTask() {
 			@Override
@@ -766,6 +787,7 @@ public class ElevatorView {
 			}
 		};
 		timer.schedule(timerTask, 0, 60000);//period is in ms (every 1min we ask)
+		*/
 	}
 
 	/**
@@ -773,7 +795,7 @@ public class ElevatorView {
 	 */
 	private void initialize() {
 		frame = new JFrame("Elevator");
-		frame.setVisible(true);
+		//frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 540, 660);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
