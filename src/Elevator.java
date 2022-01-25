@@ -248,7 +248,7 @@ public class Elevator {
 
 	Elevator() {
 		this.doorState = DoorState.CLOSE;
-		this.elevatorState = ElevatorState.OUTOFSERVICE;
+		this.elevatorState = ElevatorState.INSERVICE;
 		this.direction = Direction.IDLE;
 		this.currentLevel = 0;
 		this.setAllListener(null);
