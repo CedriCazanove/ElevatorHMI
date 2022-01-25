@@ -16,7 +16,7 @@ public class MqttSubscriber implements MqttCallback{
 	private static final String clientId = "clientId";
 
 	/** The topic. */
-	private static final String topic = "/21WS-SysArch/#";//
+	private static final String topic = "/21WS-SysArch/C2";//
     
     private String username = "H1";
    
@@ -36,7 +36,7 @@ public class MqttSubscriber implements MqttCallback{
     
     public void subscribe() {
 		try	{
-			sampleClient = new MqttClient(brokerUrl, clientId, persistence);
+			sampleClient = new MqttClient(brokerUrl, MqttClient.generateClientId(), persistence);
 			connOpts = new MqttConnectOptions();
 			connOpts.setCleanSession(true);
 			connOpts.setUserName(username);
@@ -79,29 +79,34 @@ public class MqttSubscriber implements MqttCallback{
 		Request requestBack = null;
 		switch(jsonmsg.get("type").toString()) {
 		case "ServPAns":
+			System.out.println("ServPAns");
 			requestBack = new RequestBackPanelAnswer(jsonmsg.get("type").toString(), jsonmsg.get("device").toString(), jsonmsg.getJSONArray("states"), jsonmsg.get("time").toString());
 			System.out.println("ServPAns");
 			elevator.treatRequestBackAnswer( (RequestBackPanelAnswer) requestBack);
 			break;
 		case "ServState":
 		case "DoorState":
+			System.out.println("State");
 			requestBack = new RequestBackState(jsonmsg.get("type").toString(), jsonmsg.get("device").toString(), jsonmsg.get("state").toString(), jsonmsg.get("time").toString());
 			System.out.println("State");
 			elevator.treatRequestBackState( (RequestBackState) requestBack);
 			break;
 		case "CurrentLevel":
+			System.out.println("Level");
 			requestBack = new RequestBackLevel(jsonmsg.get("type").toString(), jsonmsg.get("device").toString(), jsonmsg.get("level").toString(), jsonmsg.get("time").toString());
 			System.out.println("Level");
 			elevator.treatRequestBackLevel( (RequestBackLevel) requestBack);
 			break;
 		case "DirInd":
-			requestBack = new RequestBackDirection(jsonmsg.get("type").toString(), jsonmsg.get("device").toString(), jsonmsg.get("direction").toString(), jsonmsg.get("time").toString());
 			System.out.println("Direction");
+			requestBack = new RequestBackDirection(jsonmsg.get("type").toString(), jsonmsg.get("device").toString(), jsonmsg.get("direction").toString(), jsonmsg.get("time").toString());
+
 			elevator.treatRequestBackDirection((RequestBackDirection) requestBack);
 			break;
 		case "LogMsg":
-			requestBack = new LogError(jsonmsg.get("type").toString(), jsonmsg.get("message").toString(), jsonmsg.get("device").toString(), jsonmsg.get("time").toString(), jsonmsg.get("severity").toString());
 			System.out.println("Log Error");
+			requestBack = new LogError(jsonmsg.get("type").toString(), jsonmsg.get("message").toString(), jsonmsg.get("device").toString(), jsonmsg.get("time").toString(), jsonmsg.get("severity").toString());
+
 			break;
 		default:
 			 System.out.println("no request back match");

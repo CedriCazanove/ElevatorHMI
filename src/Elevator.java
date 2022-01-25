@@ -937,176 +937,176 @@ public class Elevator {
 			String name = allStates.getJSONObject(i).getString("name");
 			switch (name) {
 				case "PIs_l1sl":
-					setPIs_l1sl(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("PIs_l1sl");
+					setPIs_l1sl(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "PIs_l1r":
-					setPIs_l1r(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("PIs_l1r");
+					setPIs_l1r(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "PIs_l&su":
-					setPIs_l1su(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("PIs_l1su");
+					setPIs_l1su(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "PIs_l1au":
-					setPIs_l1au(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("PIs_l1au");
+					setPIs_l1au(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "PIs_l2sl":
-					setPIs_l2sl(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("PIs_l2sl");
+					setPIs_l2sl(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "PIs_l2r":
-					setPIs_l2r(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("PIs_l2r");
+					setPIs_l2r(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "PIs_l2su":
-					setPIs_l2su(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("PIs_l2su");
+					setPIs_l2su(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "PIs_l2au":
-					setPIs_l2au(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("PIs_l2au");
+					setPIs_l2au(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "PIs_l3sl":
-					setPIs_l3sl(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("PIs_l3sl");
+					setPIs_l3sl(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "PIs_l3r":
-					setPIs_l3r(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("PIs_l3r");
+					setPIs_l3r(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "PIs_l3su":
-					setPIs_l3su(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("PIs_l3su");
+					setPIs_l3su(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "PIs_l3au":
-					setPIs_l3au(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("PIs_l3au");
+					setPIs_l3au(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "PIs_l4sl":
-					setPIs_l4sl(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("PIs_l4sl");
+					setPIs_l4sl(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "PIs_l4r":
-					setPIs_l4r(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("PIs_l4r");
+					setPIs_l4r(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "PIs_l4su":
-					setPIs_l1su(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("PIs_l4su");
+					setPIs_l1su(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "PIs_l4au":
-					setPIs_l4au(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("PIs_l4au");
+					setPIs_l4au(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "POreset":
-					setPOreset(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("POreset");
+					setPOreset(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "POdv2":
-					setPOdv2(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("POdv2");
+					setPOdv2(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "POdv1":
-					setPOdv1(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("POdv1");
+					setPOdv1(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "POuv1":
-					setPOuv1(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("POuv1");
+					setPOuv1(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "POuv2":
-					setPOuv2(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("POuv2");
+					setPOuv2(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "POdclose":
-					setPOdclose(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("POdclose");
+					setPOdclose(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "POdopen":
-					setPOdopen(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("POdopen");
+					setPOdopen(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "POv_crawlSelect":
-					setPOv_crawlSelect(allStates.getJSONObject(i).getInt("value"));
 					System.out.println("POv_crawlSelect");
+					setPOv_crawlSelect(allStates.getJSONObject(i).getInt("value"));
 					break;
 				case "PIs_dopened":
-					setPIs_dopened(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("PIs_dopened");
+					setPIs_dopened(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "PIs_dclosed":
-					setPIs_dclosed(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("PIs_dclosed");
+					setPIs_dclosed(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "PIm_ready":
-					setPIm_ready(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("PIm_ready");
+					setPIm_ready(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "PIm_on":
-					setPIm_on(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("PIm_on");
+					setPIm_on(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "PIm_error":
-					setPIm_error(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("PIm_error");
+					setPIm_error(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "PIs_v":
-					setPIs_v(allStates.getJSONObject(i).getInt("value"));
 					System.out.println("PIs_v");
+					setPIs_v(allStates.getJSONObject(i).getInt("value"));
 					break;
 				case "1REQ":
-					setReq1(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("1REQ");
+					setReq1(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "1UP":
-					setUp1(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("1UP");
+					setUp1(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "2REQ":
-					setReq2(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("2REQ");
+					setReq2(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "2UP":
-					setUp2(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("2UP");
+					setUp2(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "2DOWN":
-					setDown2(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("2DOWN");
+					setDown2(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "3REQ":
-					setReq3(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("3REQ");
+					setReq3(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "3UP":
-					setUp3(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("3UP");
+					setUp3(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "3DOWN":
-					setDown3(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("3DOWN");
+					setDown3(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "4REQ":
-					setReq4(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("4REQ");
+					setReq4(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "4DOWN":
-					setDown4(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("4DOWN");
+					setDown4(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "OPEN":
-					setOpen(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("OPEN");
+					setOpen(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "CLOSE":
-					setClose(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("CLOSE");
+					setClose(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				case "EMERGENCY":
-					setEmergency(allStates.getJSONObject(i).getBoolean("value"));
 					System.out.println("EMERGENCY");
+					setEmergency(allStates.getJSONObject(i).getBoolean("value"));
 					break;
 				default:
 					System.out.println("No state match");

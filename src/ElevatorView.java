@@ -634,6 +634,7 @@ public class ElevatorView {
 					int nextLevel = (3)*135 + 3;
 					labelElevator.setBounds(0, nextLevel, 100, 135);
 				}
+				lblElevatorIndicator.setIcon(iconElevator0);
 			}
 
 			@Override
@@ -658,6 +659,7 @@ public class ElevatorView {
 					int nextLevel = (2)*135 + 3;
 					labelElevator.setBounds(0, nextLevel, 100, 135);
 				}
+				lblElevatorIndicator.setIcon(iconElevator1);
 			}
 
 			@Override
@@ -682,6 +684,7 @@ public class ElevatorView {
 					int nextLevel = (1)*135 + 3;
 					labelElevator.setBounds(0, nextLevel, 100, 135);
 				}
+				lblElevatorIndicator.setIcon(iconElevator2);
 			}
 
 			@Override
@@ -706,6 +709,7 @@ public class ElevatorView {
 					int nextLevel = 3;
 					labelElevator.setBounds(0, nextLevel, 100, 135);
 				}
+				lblElevatorIndicator.setIcon(iconElevator3);
 			}
 
 			@Override
@@ -720,12 +724,24 @@ public class ElevatorView {
 
 			@Override
 			public void pis_dopenedChanged() {
-
+				if(elevatorView.getPIs_dopened()) {
+					labelElevator.setIcon(iconElevatorOpen);
+					System.out.println("Open is true");
+				} else {
+					labelElevator.setIcon(iconElevatorClose);
+					System.out.println("Open is false");
+				}
 			}
 
 			@Override
 			public void pis_dclosedChanged() {
-
+				if(elevatorView.getPIs_dclosed()) {
+					labelElevator.setIcon(iconElevatorClose);
+					System.out.println("Open is true");
+				} else {
+					labelElevator.setIcon(iconElevatorOpen);
+					System.out.println("Open is false");
+				}
 			}
 
 			@Override
@@ -763,15 +779,14 @@ public class ElevatorView {
 				e1.printStackTrace();
 			}
 		}
-
- */
+*/
 		this.frame.setVisible(true);
 
 		/**
 		 * Asking for all the state
 		 */
 
-		/*
+
 		java.util.Timer timer = new java.util.Timer();
 		TimerTask timerTask = new TimerTask() {
 			@Override
@@ -787,7 +802,7 @@ public class ElevatorView {
 			}
 		};
 		timer.schedule(timerTask, 0, 60000);//period is in ms (every 1min we ask)
-		*/
+
 	}
 
 	/**
