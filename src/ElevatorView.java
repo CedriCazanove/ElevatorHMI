@@ -283,7 +283,6 @@ public class ElevatorView {
 
 			@Override
 			public void elevatorStateChanged() {
-				// TODO Auto-generated method stub
 				switch(elevatorView.getElevatorState()) {
 					case INSERVICE:
 						switch(elevatorView.getDoorState()) {
@@ -299,7 +298,7 @@ public class ElevatorView {
 								break;
 							default:
 								System.out.println("ElevatorView : no match");
-
+								break;
 						}
 						System.out.println("Elevator in service");
 						break;
@@ -321,7 +320,6 @@ public class ElevatorView {
 			}
 			@Override
 			public void directionChanged() {
-				// TODO Auto-generated method stub
 				switch(elevatorView.getDirection()) {
 					case UP:
 						lblElevatorIndicator.setIcon(iconElevatorUp);
@@ -330,38 +328,32 @@ public class ElevatorView {
 					case DOWN:
 						lblElevatorIndicator.setIcon(iconElevatorDown);
 						System.out.println("Elevator moving down");
-
 						break;
 					case IDLE:
 						switch(elevatorView.getCurrentLevel()) {
-							case 0:
+							case 1:
 								lblElevatorIndicator.setIcon(iconElevator0);
 								System.out.println("Elevator not moving; Actually level 0");
 								break;
-							case 1:
+							case 2:
 								lblElevatorIndicator.setIcon(iconElevator1);
 								System.out.println("Elevator not moving; Actually level 1");
-
-								break;
-							case 2:
-								lblElevatorIndicator.setIcon(iconElevator2);
-								System.out.println("Elevator not moving; Actually level 2");
-
 								break;
 							case 3:
+								lblElevatorIndicator.setIcon(iconElevator2);
+								System.out.println("Elevator not moving; Actually level 2");
+								break;
+							case 4:
 								lblElevatorIndicator.setIcon(iconElevator3);
 								System.out.println("Elevator not moving; Actually level 3");
-
 								break;
 							default:
 								System.out.println("Elevator not moving; No match on floor detected");
 								break;
 						}
-
 						break;
 					default:
 						System.out.println("No match detected in the elevator direction");
-
 						break;
 				}
 			}
@@ -380,11 +372,9 @@ public class ElevatorView {
 			@Override
 			public void up1Changed() {
 				if(elevatorView.getUp1()) {
-
 					btnUp.setIcon(iconUpGreen);
 					System.out.println("Up1 is true");
 				}else {
-
 					btnUp.setIcon(iconUp);
 					System.out.println("Up1 is false");
 				}
@@ -404,11 +394,9 @@ public class ElevatorView {
 			@Override
 			public void up2Changed() {
 				if(elevatorView.getUp2()) {
-
 					btnUp_1.setIcon(iconUpGreen);
 					System.out.println("Up2 is true");
 				}else {
-
 					btnUp_1.setIcon(iconUp);
 					System.out.println("Up2 is false");
 				}
@@ -417,7 +405,6 @@ public class ElevatorView {
 			@Override
 			public void down2Changed() {
 				if(elevatorView.getDown2()) {
-
 					btnDown_1.setIcon(iconDownGreen);
 					System.out.println("Down2 is true");
 				}else {
@@ -441,7 +428,6 @@ public class ElevatorView {
 			@Override
 			public void up3Changed() {
 				if(elevatorView.getUp3()) {
-
 					btnUp_2.setIcon(iconUpGreen);
 					System.out.println("Up3 is true");
 				}else {
@@ -454,7 +440,6 @@ public class ElevatorView {
 			@Override
 			public void down3Changed() {
 				if(elevatorView.getDown3()) {
-
 					btnDown_2.setIcon(iconDownGreen);
 					System.out.println("Down3 is true");
 				}else {
@@ -478,7 +463,6 @@ public class ElevatorView {
 			@Override
 			public void down4Changed() {
 				if(elevatorView.getDown4()) {
-
 					btnDown_3.setIcon(iconDownGreen);
 					System.out.println("Down4 is true");
 				}else {
@@ -681,7 +665,7 @@ public class ElevatorView {
 			public void pis_l3rChanged() {
 				if(elevatorView.getPIs_l3r()) {
 					System.out.println("ElevatorView : L3 Reached");
-					int nextLevel = (1)*135 + 3;
+					int nextLevel = 135 + 3;
 					labelElevator.setBounds(0, nextLevel, 100, 135);
 				}
 				lblElevatorIndicator.setIcon(iconElevator2);
@@ -1181,9 +1165,22 @@ public class ElevatorView {
 
 				} else {
 					supervisorOnOff.setIcon(iconUser);
+					password.clear();
+					//TODO send a request to say that we are in automatic mode
+					if (supervisor) {
+						SupervisorRequest supervisorRequest = new SupervisorRequest("SupPanelReq", "Panel", "automatic", "POreset", false);
+						UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
+						try {
+							System.out.println(supervisorRequest.toJSON());
+							mqttPublisher.sendMessage(supervisorRequest.toJSON().toString());
+							System.out.println(requestForStates.toJSON());
+							mqttPublisher.sendMessage(requestForStates.toJSON().toString());
+						} catch (JSONException e1) {
+							e1.printStackTrace();
+						}
+					}
 					supervisor = false;
 					codeAccessSupervisor = false;
-					password.clear();
 				}
 				panelSupervisor.setVisible(supervisor);
 				panelCodeAccessSupervisor.setVisible(codeAccessSupervisor);

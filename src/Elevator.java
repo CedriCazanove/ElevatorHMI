@@ -250,7 +250,7 @@ public class Elevator {
 		this.doorState = DoorState.CLOSE;
 		this.elevatorState = ElevatorState.INSERVICE;
 		this.direction = Direction.IDLE;
-		this.currentLevel = 0;
+		this.currentLevel = 1;
 		this.setAllListener(null);
 	}
 	
@@ -904,6 +904,16 @@ public class Elevator {
 				setDoorState(DoorState.CLOSE);
 			} else if (requestState.getState().equals("in motion")) {
 				setDoorState(DoorState.CLOSING);
+			}
+		} else if (requestState.getType().equals("ServState")) {
+			if (requestState.getState().equals("in service")) {
+				setElevatorState(ElevatorState.INSERVICE);
+			} else if (requestState.getState().equals("out of service")) {
+				setElevatorState(ElevatorState.OUTOFSERVICE);
+			} else if (requestState.getState().equals("emergency")) {
+				setElevatorState(ElevatorState.EMERGENCY);
+			} else if (requestState.getState().equals("power off")) {
+				setElevatorState(ElevatorState.POWEROFF);
 			}
 		}
 	}
