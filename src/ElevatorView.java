@@ -258,27 +258,61 @@ public class ElevatorView {
 
 			@Override
 			public void doorStateChanged() {
-				System.out.println("ElevatorView : The state of the elevator change");
-				System.out.println(elevatorView.toString());
-				switch(elevatorView.getDoorState()) {
-					case OPEN:
-						labelElevator.setIcon(iconElevatorOpen);
-						break;
-					case CLOSE:
-						labelElevator.setIcon(iconElevatorClose);
-						break;
-					case OPENING:
-					case CLOSING:
-						labelElevator.setIcon(iconElevatorInTransition);
+				System.out.println("ElevatorView : The state of door changed");
+				switch (elevatorView.getElevatorState()) {
+					case INSERVICE:
+						System.out.println(elevatorView.toString());
+						switch (elevatorView.getElevatorState()) {
+							case INSERVICE:
+								switch(elevatorView.getDoorState()) {
+									case OPEN:
+										labelElevator.setIcon(iconElevatorOpen);
+										break;
+									case CLOSE:
+										labelElevator.setIcon(iconElevatorClose);
+										break;
+									case OPENING:
+									case CLOSING:
+										labelElevator.setIcon(iconElevatorInTransition);
+										break;
+									default:
+										System.out.println("ElevatorView : no match");
+								}
+								break;
+							default:
+								System.out.println("ElevatorView is not in service");
+								break;
+						}
 						break;
 					default:
-						System.out.println("ElevatorView : no match");				}
+						System.out.println("Nothing match");
+						break;
+				}
+
 			}
 			@Override
 			public void currentLevelChanged() {
 				System.out.println("ElevatorView : currentLevelChanged");
-				int nextLevel = (4 - elevatorView.getCurrentLevel())*135 + 3;
-				labelElevator.setBounds(0, nextLevel, 100, 135);
+				if (elevatorView.getCurrentLevel() >= 0) {
+					int nextLevel = (4 - elevatorView.getCurrentLevel()) * 135 + 3;
+					labelElevator.setBounds(0, nextLevel, 100, 135);
+					switch (elevatorView.getCurrentLevel()) {
+						case 1:
+							lblElevatorIndicator.setIcon(iconElevator0);
+							break;
+						case 2:
+							lblElevatorIndicator.setIcon(iconElevator1);
+							break;
+						case 3:
+							lblElevatorIndicator.setIcon(iconElevator2);
+							break;
+						case 4:
+							lblElevatorIndicator.setIcon(iconElevator3);
+							break;
+						default:
+							System.out.println("Nothing match");
+					}
+				}
 			}
 
 			@Override
@@ -408,7 +442,6 @@ public class ElevatorView {
 					btnDown_1.setIcon(iconDownGreen);
 					System.out.println("Down2 is true");
 				}else {
-
 					btnDown_1.setIcon(iconDown);
 					System.out.println("Down2 is false");
 				}
@@ -431,7 +464,6 @@ public class ElevatorView {
 					btnUp_2.setIcon(iconUpGreen);
 					System.out.println("Up3 is true");
 				}else {
-
 					btnUp_2.setIcon(iconUp);
 					System.out.println("Up3 is false");
 				}
@@ -443,7 +475,6 @@ public class ElevatorView {
 					btnDown_2.setIcon(iconDownGreen);
 					System.out.println("Down3 is true");
 				}else {
-
 					btnDown_2.setIcon(iconDown);
 					System.out.println("Down3 is false");
 				}
@@ -466,7 +497,6 @@ public class ElevatorView {
 					btnDown_3.setIcon(iconDownGreen);
 					System.out.println("Down4 is true");
 				}else {
-
 					btnDown_3.setIcon(iconDown);
 					System.out.println("Down4 is false");
 				}
@@ -617,8 +647,10 @@ public class ElevatorView {
 					System.out.println("ElevatorView : L1 Reached");
 					int nextLevel = (3)*135 + 3;
 					labelElevator.setBounds(0, nextLevel, 100, 135);
+					lblElevatorIndicator.setIcon(iconElevator0);
+				} else {
+					directionChanged();
 				}
-				lblElevatorIndicator.setIcon(iconElevator0);
 			}
 
 			@Override
@@ -642,8 +674,10 @@ public class ElevatorView {
 					System.out.println("ElevatorView : L2 Reached");
 					int nextLevel = (2)*135 + 3;
 					labelElevator.setBounds(0, nextLevel, 100, 135);
+					lblElevatorIndicator.setIcon(iconElevator1);
+				} else {
+					directionChanged();
 				}
-				lblElevatorIndicator.setIcon(iconElevator1);
 			}
 
 			@Override
@@ -665,10 +699,12 @@ public class ElevatorView {
 			public void pis_l3rChanged() {
 				if(elevatorView.getPIs_l3r()) {
 					System.out.println("ElevatorView : L3 Reached");
-					int nextLevel = 135 + 3;
+					int nextLevel = 2*135 + 3;
 					labelElevator.setBounds(0, nextLevel, 100, 135);
+					lblElevatorIndicator.setIcon(iconElevator2);
+				} else {
+					directionChanged();
 				}
-				lblElevatorIndicator.setIcon(iconElevator2);
 			}
 
 			@Override
@@ -692,8 +728,28 @@ public class ElevatorView {
 					System.out.println("ElevatorView : L4 Reached");
 					int nextLevel = 3;
 					labelElevator.setBounds(0, nextLevel, 100, 135);
+					lblElevatorIndicator.setIcon(iconElevator3);
 				}
-				lblElevatorIndicator.setIcon(iconElevator3);
+			}
+
+			@Override
+			public void pis_l1alChanged() {
+
+			}
+
+			@Override
+			public void pis_l2alChanged() {
+
+			}
+
+			@Override
+			public void pis_l3alChanged() {
+
+			}
+
+			@Override
+			public void pis_l4alChanged() {
+
 			}
 
 			@Override
@@ -735,7 +791,6 @@ public class ElevatorView {
 
 			@Override
 			public void pim_onChanged() {
-
 			}
 
 			@Override
@@ -751,7 +806,7 @@ public class ElevatorView {
 		/**
 		 * Can only display the window when we have at least received the state once
 		 */
-/*
+
 		System.out.println("Waiting for the state of the elevator..");
 		while(!elevator.getPIm_ready()) {
 			UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
@@ -759,11 +814,10 @@ public class ElevatorView {
 				System.out.println(requestForStates.toJSON());
 				mqttPublisher.sendMessage(requestForStates.toJSON().toString());
 			} catch (JSONException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
-*/
+
 		this.frame.setVisible(true);
 
 		/**

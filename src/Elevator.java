@@ -125,6 +125,18 @@ public class Elevator {
 		//Action to trigger when pis_l4r changes
 		public void pis_l4rChanged();
 
+		//Action to trigger when pis_l1al changes
+		public void pis_l1alChanged();
+
+		//Action to trigger when pis_l2al changes
+		public void pis_l2alChanged();
+
+		//Action to trigger when pis_l3al changes
+		public void pis_l3alChanged();
+
+		//Action to trigger when pis_l4al changes
+		public void pis_l4alChanged();
+
 		//Action to trigger when pis_l4su changes
 		public void pis_l4suChanged();
 
@@ -207,6 +219,14 @@ public class Elevator {
 	private Boolean PIs_l1su = false;
 
 	private Boolean PIs_l1au = false;
+
+	private Boolean PIs_l1al = false;
+
+	private Boolean PIs_l2al = false;
+
+	private Boolean PIs_l3al = false;
+
+	private Boolean PIs_l4al = false;
 
 	private Boolean PIs_l2sl = false;
 
@@ -607,6 +627,58 @@ public class Elevator {
 		}
 	}
 
+	public Boolean getPIs_l1al() {
+		return PIs_l1al;
+	}
+
+	public void setPIs_l1al(Boolean PIs_l1al) {
+		this.PIs_l1al = PIs_l1al;
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_l1alChanged();
+			}
+		}
+	}
+
+	public Boolean getPIs_l2al() {
+		return PIs_l2al;
+	}
+
+	public void setPIs_l2al(Boolean PIs_l2al) {
+		this.PIs_l2al = PIs_l2al;
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_l2alChanged();
+			}
+		}
+	}
+
+	public Boolean getPIs_l3al() {
+		return PIs_l3al;
+	}
+
+	public void setPIs_l3al(Boolean PIs_l3al) {
+		this.PIs_l3al = PIs_l3al;
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_l3alChanged();
+			}
+		}
+	}
+
+	public Boolean getPIs_l4al() {
+		return PIs_l4al;
+	}
+
+	public void setPIs_l4al(Boolean PIs_l4al) {
+		this.PIs_l4al = PIs_l4al;
+		if (allListener != null) {
+			for (ElevatorListener listener : allListener) {
+				listener.pis_l4alChanged();
+			}
+		}
+	}
+
 	public Boolean getPIs_l1r() {
 		return PIs_l1r;
 	}
@@ -926,16 +998,17 @@ public class Elevator {
 			System.out.println(toString());
 		} catch(NumberFormatException e) {
 			e.printStackTrace();
+			setCurrentLevel(-1); //for in transition
 		}
 	}
 
 	public void treatRequestBackDirection(RequestBackDirection requestState) {
 		System.out.println("Elevator received a direction request to treat");
-		if (requestState.getDirection().equals("up")) {
+		if (requestState.getDirection().equals("UP")) {
 			setDirection(Direction.UP);
-		} else if (requestState.getDirection().equals("down")) {
+		} else if (requestState.getDirection().equals("DOWN")) {
 			setDirection(Direction.DOWN);
-		} else if (requestState.getDirection().equals("idle")) {
+		} else if (requestState.getDirection().equals("IDLE")) {
 			setDirection(Direction.IDLE);
 		}
 	}
@@ -950,11 +1023,30 @@ public class Elevator {
 					System.out.println("PIs_l1sl");
 					setPIs_l1sl(allStates.getJSONObject(i).getBoolean("value"));
 					break;
+				case "PIs_l1al":
+					System.out.println("PIs_l1al");
+					setPIs_l1al(allStates.getJSONObject(i).getBoolean("value"));
+					break;
+				case "PIs_l2al":
+					System.out.println("PIs_l2al");
+					setPIs_l2al(allStates.getJSONObject(i).getBoolean("value"));
+					break;
+				case "PIs_l3al":
+					System.out.println("PIs_l3al");
+					setPIs_l3al(allStates.getJSONObject(i).getBoolean("value"));
+					break;
+				case "PIs_l4al":
+					System.out.println("PIs_l4al");
+					setPIs_l4al(allStates.getJSONObject(i).getBoolean("value"));
+					break;
 				case "PIs_l1r":
 					System.out.println("PIs_l1r");
 					setPIs_l1r(allStates.getJSONObject(i).getBoolean("value"));
+					if (getPIs_l1r()) {
+						setCurrentLevel(1);
+					}
 					break;
-				case "PIs_l&su":
+				case "PIs_l1su":
 					System.out.println("PIs_l1su");
 					setPIs_l1su(allStates.getJSONObject(i).getBoolean("value"));
 					break;
@@ -969,6 +1061,9 @@ public class Elevator {
 				case "PIs_l2r":
 					System.out.println("PIs_l2r");
 					setPIs_l2r(allStates.getJSONObject(i).getBoolean("value"));
+					if (getPIs_l2r()) {
+						setCurrentLevel(2);
+					}
 					break;
 				case "PIs_l2su":
 					System.out.println("PIs_l2su");
@@ -985,6 +1080,9 @@ public class Elevator {
 				case "PIs_l3r":
 					System.out.println("PIs_l3r");
 					setPIs_l3r(allStates.getJSONObject(i).getBoolean("value"));
+					if (getPIs_l3r()) {
+						setCurrentLevel(3);
+					}
 					break;
 				case "PIs_l3su":
 					System.out.println("PIs_l3su");
@@ -1001,6 +1099,9 @@ public class Elevator {
 				case "PIs_l4r":
 					System.out.println("PIs_l4r");
 					setPIs_l4r(allStates.getJSONObject(i).getBoolean("value"));
+					if (getPIs_l4r()) {
+						setCurrentLevel(4);
+					}
 					break;
 				case "PIs_l4su":
 					System.out.println("PIs_l4su");

@@ -366,6 +366,26 @@ public class ElevatorPanelControlInside {
 			}
 
 			@Override
+			public void pis_l1alChanged() {
+
+			}
+
+			@Override
+			public void pis_l2alChanged() {
+
+			}
+
+			@Override
+			public void pis_l3alChanged() {
+
+			}
+
+			@Override
+			public void pis_l4alChanged() {
+
+			}
+
+			@Override
 			public void pis_l4suChanged() {
 
 			}

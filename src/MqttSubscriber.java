@@ -73,8 +73,8 @@ public class MqttSubscriber implements MqttCallback{
 
 	@Override
 	public void messageArrived(String topic, MqttMessage message) throws Exception {
+		System.out.println("Subscribe :\n" + new String(message.getPayload()));
 		JSONObject jsonmsg = new JSONObject(new String(message.getPayload()));
-		System.out.println("Subscribe :\n" + jsonmsg);
 		System.out.println("Type : " + jsonmsg.get("type").toString());
 		Request requestBack = null;
 		switch(jsonmsg.get("type").toString()) {
