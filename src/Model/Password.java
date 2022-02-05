@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
+
 public class Password {
 
     public interface PasswordListener {
@@ -18,10 +20,25 @@ public class Password {
 
     private Boolean isCorrect = false;
 
-    private Password.PasswordListener listener;
+    private ArrayList<Password.PasswordListener> allListener;
 
     public Password() {
-        this.setListener(null);
+        this.setAllListener(null);
+    }
+
+    public ArrayList<PasswordListener> getAllListener() {
+        return allListener;
+    }
+
+    public void setAllListener(ArrayList<PasswordListener> allListener) {
+        this.allListener = allListener;
+    }
+
+    public void addNewPasswordListener(Password.PasswordListener passwordListener) {
+        if (this.allListener == null) {
+            this.allListener = new ArrayList<>();
+        }
+        this.allListener.add(passwordListener);
     }
 
     public String getPass() {
@@ -32,17 +49,9 @@ public class Password {
         this.pass = pass;
     }
 
-    public PasswordListener getListener() {
-        return listener;
-    }
-
-    public void setListener(PasswordListener listener) {
-        this.listener = listener;
-    }
-
     public void addDigit(int digit) {
         this.pass += digit;
-        if (listener != null) {
+        for (PasswordListener listener : allListener) {
             listener.changed();
         }
     }
@@ -53,14 +62,14 @@ public class Password {
         } else {
             this.pass = "";
         }
-        if (listener != null) {
+        for (PasswordListener listener : allListener) {
             listener.changed();
         }
     }
 
     public void isPassCorrect() {
         if (this.pass.equals(this.password)) {
-            if (listener != null) {
+            for (PasswordListener listener : allListener) {
                 listener.passwordIsCorrect();
             }
         }
@@ -70,9 +79,8 @@ public class Password {
 
     public void clear() {
         this.pass = "";
-        if (listener != null) {
+        for (PasswordListener listener : allListener) {
             listener.changed();
         }
-
     }
 }

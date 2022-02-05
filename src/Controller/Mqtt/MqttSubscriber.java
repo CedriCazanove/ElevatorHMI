@@ -1,4 +1,4 @@
-package Controller;
+package Controller.Mqtt;
 
 import Model.Elevator;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -20,7 +20,7 @@ public class MqttSubscriber implements MqttCallback{
 	private static final String clientId = "clientId";
 
 	/** The topic. */
-	private static final String topic = "/21WS-SysArch/#";//
+	private static final String topic = "/21WS-SysArch/C1";//
     
     private String username = "H1";
    

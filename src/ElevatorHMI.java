@@ -1,5 +1,5 @@
-import Controller.MqttPublisher;
-import Controller.MqttSubscriber;
+import Controller.Mqtt.MqttPublisher;
+import Controller.Mqtt.MqttSubscriber;
 import Model.Elevator;
 import View.ElevatorView;
 

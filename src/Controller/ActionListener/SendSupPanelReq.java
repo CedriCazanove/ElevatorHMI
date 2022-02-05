@@ -1,8 +1,7 @@
 package Controller.ActionListener;
 
-import Controller.MqttPublisher;
+import Controller.Mqtt.MqttPublisher;
 import Controller.Request.SupervisorRequest;
-import Controller.Request.UserRequest;
 import org.json.JSONException;
 
 import java.awt.event.ActionEvent;

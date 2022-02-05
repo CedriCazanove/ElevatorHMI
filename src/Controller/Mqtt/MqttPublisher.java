@@ -1,4 +1,4 @@
-package Controller;
+package Controller.Mqtt;
 
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
