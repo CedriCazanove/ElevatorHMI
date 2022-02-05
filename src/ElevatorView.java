@@ -806,7 +806,7 @@ public class ElevatorView {
 		/**
 		 * Can only display the window when we have at least received the state once
 		 */
-
+/*
 		System.out.println("Waiting for the state of the elevator..");
 		while(!elevator.getPIm_ready()) {
 			UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
@@ -817,14 +817,12 @@ public class ElevatorView {
 				e1.printStackTrace();
 			}
 		}
-
+*/
 		this.frame.setVisible(true);
 
 		/**
 		 * Asking for all the state
 		 */
-
-
 		java.util.Timer timer = new java.util.Timer();
 		TimerTask timerTask = new TimerTask() {
 			@Override
