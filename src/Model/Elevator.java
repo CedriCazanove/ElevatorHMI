@@ -964,10 +964,10 @@ public class Elevator {
 	}
 
 	public String toString() {
-		return "Model.Elevator : \n - Model.DoorState : " + this.doorState +
-						  "\n - Model.ElevatorState : " + this.elevatorState +
+		return "Model.Elevator : \n - DoorState : " + this.doorState +
+						  "\n - ElevatorState : " + this.elevatorState +
 						  "\n - CurrentLevel : " + this.currentLevel +
-						  "\n - Model.Direction : " + this.direction;
+						  "\n - Direction : " + this.direction;
 	}
 	
 	public void treatRequestBackState(RequestBackState requestState) {
@@ -1006,7 +1006,7 @@ public class Elevator {
 	}
 
 	public void treatRequestBackDirection(RequestBackDirection requestState) {
-		System.out.println("Model.Elevator received a direction request to treat");
+		System.out.println("Elevator received a direction request to treat");
 		if (requestState.getDirection().equals("UP")) {
 			setDirection(Direction.UP);
 		} else if (requestState.getDirection().equals("DOWN")) {
@@ -1017,7 +1017,7 @@ public class Elevator {
 	}
 
 	public void treatRequestBackAnswer(RequestBackPanelAnswer requestBackPanelAnswer) throws JSONException {
-		System.out.println("Model.Elevator received a panel answer request to treat");
+		System.out.println("Elevator received a panel answer request to treat");
 		JSONArray allStates = requestBackPanelAnswer.getAnswer();
 		for (int i = 0; i < allStates.length(); i++) {
 			String name = allStates.getJSONObject(i).getString("name");

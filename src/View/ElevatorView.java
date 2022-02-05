@@ -11,11 +11,12 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import Controller.ActionListener.SendServPReq;
+import Controller.ActionListener.SendSupPanelReq;
+import Controller.ActionListener.SendTravReq;
 import Model.Elevator;
 import Model.Password;
-import Controller.Request.*;
 import Controller.MqttPublisher;
-import org.json.JSONException;
 
 public class ElevatorView {
 
@@ -239,8 +240,8 @@ public class ElevatorView {
 	 * Create the application.
 	 */
 	public ElevatorView(Elevator elevator, MqttPublisher mqttPublisher) {
-		initialize();
 		this.mqttPublisher = mqttPublisher;
+		initialize(mqttPublisher);
 		this.password = new Password();
 		this.password.setListener(new Password.PasswordListener() {
 			@Override
@@ -677,7 +678,7 @@ public class ElevatorView {
 			@Override
 			public void pis_l2rChanged() {
 				if(elevatorView.getPIs_l2r()) {
-					System.out.println("View.ElevatorView : L2 Reached");
+					System.out.println("ElevatorView : L2 Reached");
 					int nextLevel = (2)*135 + 3;
 					labelElevator.setBounds(0, nextLevel, 100, 135);
 					lblElevatorIndicator.setIcon(iconElevator1);
@@ -704,7 +705,7 @@ public class ElevatorView {
 			@Override
 			public void pis_l3rChanged() {
 				if(elevatorView.getPIs_l3r()) {
-					System.out.println("View.ElevatorView : L3 Reached");
+					System.out.println("ElevatorView : L3 Reached");
 					int nextLevel = 2*135 + 3;
 					labelElevator.setBounds(0, nextLevel, 100, 135);
 					lblElevatorIndicator.setIcon(iconElevator2);
@@ -731,7 +732,7 @@ public class ElevatorView {
 			@Override
 			public void pis_l4rChanged() {
 				if(elevatorView.getPIs_l4r()) {
-					System.out.println("View.ElevatorView : L4 Reached");
+					System.out.println("ElevatorView : L4 Reached");
 					int nextLevel = 3;
 					labelElevator.setBounds(0, nextLevel, 100, 135);
 					lblElevatorIndicator.setIcon(iconElevator3);
@@ -812,45 +813,40 @@ public class ElevatorView {
 		/**
 		 * Can only display the window when we have at least received the state once
 		 */
-/*
-		System.out.println("Waiting for the state of the elevator..");
-		while(!elevator.getPIm_ready()) {
-			Request.UserRequest requestForStates = new Request.UserRequest("ServPReq", "Service Panel", "show all states");
-			try {
-				System.out.println(requestForStates.toJSON());
-				mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-			} catch (JSONException e1) {
-				e1.printStackTrace();
-			}
-		}
-*/
-		this.frame.setVisible(true);
 
-		/**
-		 * Asking for all the state
-		 */
+
 		java.util.Timer timer = new java.util.Timer();
 		TimerTask timerTask = new TimerTask() {
 			@Override
 			public void run() {
-				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-				try {
-					System.out.println(requestForStates.toJSON());
-					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				new SendServPReq(mqttPublisher).actionPerformed(null);
+				System.out.println("Waiting for the state of the elevator..");
+			}
+		};
+		timer.schedule(timerTask, 0, 5000);//period is in ms (every 5sec we ask)
+
+		while(!elevator.getPIm_ready()) {
+		}
+		timer.cancel();
+
+		this.frame.setVisible(true);
+
+		/**
+		 * Asking for all the state every 1min
+		 */
+		timerTask = new TimerTask() {
+			@Override
+			public void run() {
+				new SendServPReq(mqttPublisher).actionPerformed(null);
 			}
 		};
 		timer.schedule(timerTask, 0, 60000);//period is in ms (every 1min we ask)
-
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(MqttPublisher mqttPublisher) {
 		frame = new JFrame("Model.Elevator");
 		//frame.setVisible(true);
 		frame.setResizable(false);
@@ -884,23 +880,7 @@ public class ElevatorView {
 		btnUp.setBounds(150, 512, 50, 50);
 		btnUp.setFocusPainted(false);
 		btnUp.setFocusable(false);
-		btnUp.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "1UP");
-				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-				try {
-					System.out.println(request.toJSON());
-					mqttPublisher.sendMessage(request.toJSON().toString());
-					System.out.println(requestForStates.toJSON());
-					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		btnUp.addActionListener(new SendTravReq(mqttPublisher, "1UP"));
 		frame.getContentPane().add(btnUp);
 
 		//Button to call the elevator to go up at the level 1
@@ -908,23 +888,7 @@ public class ElevatorView {
 		btnUp_1.setBounds(150, 347, 50, 50);
 		btnUp_1.setFocusPainted(false);
 		btnUp_1.setFocusable(false);
-		btnUp_1.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "2UP");
-				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-				try {
-					System.out.println(request.toJSON());
-					mqttPublisher.sendMessage(request.toJSON().toString());
-					System.out.println(requestForStates.toJSON());
-					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		btnUp_1.addActionListener(new SendTravReq(mqttPublisher, "2UP"));
 		frame.getContentPane().add(btnUp_1);
 
 		//Button to call the elevator to go down at the level 1
@@ -932,23 +896,7 @@ public class ElevatorView {
 		btnDown_1.setBounds(150, 408, 50, 50);
 		btnDown_1.setFocusPainted(false);
 		btnDown_1.setFocusable(false);
-		btnDown_1.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "2DOWN");
-				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-				try {
-					System.out.println(request.toJSON());
-					mqttPublisher.sendMessage(request.toJSON().toString());
-					System.out.println(requestForStates.toJSON());
-					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		btnDown_1.addActionListener(new SendTravReq(mqttPublisher, "2DOWN"));
 		frame.getContentPane().add(btnDown_1);
 
 		//Button to call the elevator to go up at the level 2
@@ -956,23 +904,7 @@ public class ElevatorView {
 		btnUp_2.setBounds(150, 212, 50, 50);
 		btnUp_2.setFocusPainted(false);
 		btnUp_2.setFocusable(false);
-		btnUp_2.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "3UP");
-				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-				try {
-					System.out.println(request.toJSON());
-					mqttPublisher.sendMessage(request.toJSON().toString());
-					System.out.println(requestForStates.toJSON());
-					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		btnUp_2.addActionListener(new SendTravReq(mqttPublisher, "3UP"));
 		frame.getContentPane().add(btnUp_2);
 
 		//Button to call the elevator to go down at the level 2
@@ -980,23 +912,7 @@ public class ElevatorView {
 		btnDown_2.setBounds(150, 273, 50, 50);
 		btnDown_2.setFocusPainted(false);
 		btnDown_2.setFocusable(false);
-		btnDown_2.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "3DOWN");
-				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-				try {
-					System.out.println(request.toJSON());
-					mqttPublisher.sendMessage(request.toJSON().toString());
-					System.out.println(requestForStates.toJSON());
-					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		btnDown_2.addActionListener(new SendTravReq(mqttPublisher, "3DOWN"));
 		frame.getContentPane().add(btnDown_2);
 
 		//Button to call the elevator to go down at the level 3
@@ -1004,23 +920,7 @@ public class ElevatorView {
 		btnDown_3.setBounds(150, 108, 50, 50);
 		btnDown_3.setFocusPainted(false);
 		btnDown_3.setFocusable(false);
-		btnDown_3.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "4DOWN");
-				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-				try {
-					System.out.println(request.toJSON());
-					mqttPublisher.sendMessage(request.toJSON().toString());
-					System.out.println(requestForStates.toJSON());
-					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		btnDown_3.addActionListener(new SendTravReq(mqttPublisher, "4DOWN"));
 		frame.getContentPane().add(btnDown_3);
 
 		//Label to indicate the position of the elevator
@@ -1042,23 +942,7 @@ public class ElevatorView {
 		panel.add(btnLevel0);
 		btnLevel0.setFocusPainted(false);
 		btnLevel0.setFocusable(false);
-		btnLevel0.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "1REQ");
-				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-				try {
-					System.out.println(request.toJSON());
-					mqttPublisher.sendMessage(request.toJSON().toString());
-					System.out.println(requestForStates.toJSON());
-					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		btnLevel0.addActionListener(new SendTravReq(mqttPublisher, "1REQ"));
 
 		//Button to go at the level 1 from inside the elevator
 		btnLevel1 = new JButton(iconLevel1);
@@ -1066,23 +950,7 @@ public class ElevatorView {
 		panel.add(btnLevel1);
 		btnLevel1.setFocusable(false);
 		btnLevel1.setFocusPainted(false);
-		btnLevel1.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "2REQ");
-				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-				try {
-					System.out.println(request.toJSON());
-					mqttPublisher.sendMessage(request.toJSON().toString());
-					System.out.println(requestForStates.toJSON());
-					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		btnLevel1.addActionListener(new SendTravReq(mqttPublisher, "2REQ"));
 
 		//Button to go at the level 2 from inside the elevator
 		btnLevel2 = new JButton(iconLevel2);
@@ -1090,23 +958,7 @@ public class ElevatorView {
 		panel.add(btnLevel2);
 		btnLevel2.setFocusPainted(false);
 		btnLevel2.setFocusable(false);
-		btnLevel2.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "3REQ");
-				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-				try {
-					System.out.println(request.toJSON());
-					mqttPublisher.sendMessage(request.toJSON().toString());
-					System.out.println(requestForStates.toJSON());
-					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		btnLevel2.addActionListener(new SendTravReq(mqttPublisher, "3REQ"));
 
 		//Button to go at the level 3 from inside the elevator
 		btnLevel3 = new JButton(iconLevel3);
@@ -1114,23 +966,7 @@ public class ElevatorView {
 		panel.add(btnLevel3);
 		btnLevel3.setFocusable(false);
 		btnLevel3.setFocusPainted(false);
-		btnLevel3.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "4REQ");
-				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-				try {
-					System.out.println(request.toJSON());
-					mqttPublisher.sendMessage(request.toJSON().toString());
-					System.out.println(requestForStates.toJSON());
-					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		btnLevel3.addActionListener(new SendTravReq(mqttPublisher, "4REQ"));
 
 		//Button to stop the elevator from inside
 		btnStop = new JButton(iconStop);
@@ -1138,23 +974,7 @@ public class ElevatorView {
 		panel.add(btnStop);
 		btnStop.setFocusable(false);
 		btnStop.setFocusPainted(false);
-		btnStop.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "EMERGENCY");
-				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-				try {
-					System.out.println(request.toJSON());
-					mqttPublisher.sendMessage(request.toJSON().toString());
-					System.out.println(requestForStates.toJSON());
-					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		btnStop.addActionListener(new SendTravReq(mqttPublisher, "STOP"));
 
 		//Button to open the door of the elevator
 		btnOpen = new JButton(iconOpen);
@@ -1162,23 +982,7 @@ public class ElevatorView {
 		panel.add(btnOpen);
 		btnOpen.setFocusable(false);
 		btnOpen.setFocusPainted(false);
-		btnOpen.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "OPEN");
-				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-				try {
-					System.out.println(request.toJSON());
-					mqttPublisher.sendMessage(request.toJSON().toString());
-					System.out.println(requestForStates.toJSON());
-					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		btnOpen.addActionListener(new SendTravReq(mqttPublisher, "OPEN"));
 
 		//Button to close the door of the elevator
 		btnClose = new JButton(iconClose);
@@ -1186,23 +990,7 @@ public class ElevatorView {
 		panel.add(btnClose);
 		btnClose.setFocusable(false);
 		btnClose.setFocusPainted(false);
-		btnClose.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "CLOSE");
-				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-				try {
-					System.out.println(request.toJSON());
-					mqttPublisher.sendMessage(request.toJSON().toString());
-					System.out.println(requestForStates.toJSON());
-					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		btnClose.addActionListener(new SendTravReq(mqttPublisher, "CLOSE"));
 
 		/**
 		 * Supervisor component
@@ -1224,19 +1012,8 @@ public class ElevatorView {
 				} else {
 					supervisorOnOff.setIcon(iconUser);
 					password.clear();
-					//TODO send a request to say that we are in automatic mode
-					if (supervisor) {
-						SupervisorRequest supervisorRequest = new SupervisorRequest("SupPanelReq", "Panel", "automatic", "POreset", false);
-						UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-						try {
-							System.out.println(supervisorRequest.toJSON());
-							mqttPublisher.sendMessage(supervisorRequest.toJSON().toString());
-							System.out.println(requestForStates.toJSON());
-							mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-						} catch (JSONException e1) {
-							e1.printStackTrace();
-						}
-					}
+					//send a request to say that we are in automatic mode
+					new SendSupPanelReq(mqttPublisher, "automatic", "P0reset", false).actionPerformed(null);
 					supervisor = false;
 					codeAccessSupervisor = false;
 				}
@@ -1499,23 +1276,7 @@ public class ElevatorView {
 		//Button for POreset
 		btnPOreset = new JButton(iconLedOff);
 		btnPOreset.setBounds(112, 0, 40, 40);
-		btnPOreset.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				SupervisorRequest supervisorRequest = new SupervisorRequest("SupPanelReq", "Panel", "manual", "POreset", true);
-				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-				try {
-					System.out.println(supervisorRequest.toJSON());
-					mqttPublisher.sendMessage(supervisorRequest.toJSON().toString());
-					System.out.println(requestForStates.toJSON());
-					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		btnPOreset.addActionListener(new SendSupPanelReq(mqttPublisher, "manual", "POreset", true));
 		panelSupervisor.add(btnPOreset);
 
 		lblPOreset = new JLabel("POreset :");
@@ -1525,23 +1286,7 @@ public class ElevatorView {
 		//Button for POdv2
 		btnPOdv2 = new JButton(iconLedOff);
 		btnPOdv2.setBounds(112, 44, 40, 40);
-		btnPOdv2.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				SupervisorRequest supervisorRequest = new SupervisorRequest("SupPanelReq", "Panel", "manual", "POdv2", true);
-				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-				try {
-					System.out.println(supervisorRequest.toJSON());
-					mqttPublisher.sendMessage(supervisorRequest.toJSON().toString());
-					System.out.println(requestForStates.toJSON());
-					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		btnPOdv2.addActionListener(new SendSupPanelReq(mqttPublisher, "manual", "POdv2", true));
 		panelSupervisor.add(btnPOdv2);
 
 		lblPOdv2 = new JLabel("POdv2 :");
@@ -1551,23 +1296,7 @@ public class ElevatorView {
 		//Button for POdv1
 		btnPOdv1 = new JButton(iconLedOff);
 		btnPOdv1.setBounds(112, 90, 40, 40);
-		btnPOdv1.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				SupervisorRequest supervisorRequest = new SupervisorRequest("SupPanelReq", "Panel", "manual", "POdv1", true);
-				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-				try {
-					System.out.println(supervisorRequest.toJSON());
-					mqttPublisher.sendMessage(supervisorRequest.toJSON().toString());
-					System.out.println(requestForStates.toJSON());
-					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		btnPOdv1.addActionListener(new SendSupPanelReq(mqttPublisher, "manual", "POdv1", true));
 		panelSupervisor.add(btnPOdv1);
 
 		lblPOdv1 = new JLabel("POdv1 :");
@@ -1577,23 +1306,7 @@ public class ElevatorView {
 		//Button for POuv1
 		btnPOuv1 = new JButton(iconLedOff);
 		btnPOuv1.setBounds(112, 137, 40, 40);
-		btnPOuv1.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				SupervisorRequest supervisorRequest = new SupervisorRequest("SupPanelReq", "Panel", "manual", "POuv1", true);
-				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-				try {
-					System.out.println(supervisorRequest.toJSON());
-					mqttPublisher.sendMessage(supervisorRequest.toJSON().toString());
-					System.out.println(requestForStates.toJSON());
-					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		btnPOuv1.addActionListener(new SendSupPanelReq(mqttPublisher, "manual", "POuv1", true));
 		panelSupervisor.add(btnPOuv1);
 
 		lblPOuv1 = new JLabel("POuv1 :");
@@ -1603,23 +1316,7 @@ public class ElevatorView {
 		//Button for POuv2
 		btnPOuv2 = new JButton(iconLedOff);
 		btnPOuv2.setBounds(112, 180, 40, 40);
-		btnPOuv2.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				SupervisorRequest supervisorRequest = new SupervisorRequest("SupPanelReq", "Panel", "manual", "POuv2", true);
-				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-				try {
-					System.out.println(supervisorRequest.toJSON());
-					mqttPublisher.sendMessage(supervisorRequest.toJSON().toString());
-					System.out.println(requestForStates.toJSON());
-					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		btnPOuv2.addActionListener(new SendSupPanelReq(mqttPublisher, "manual", "POuv2", true));
 		panelSupervisor.add(btnPOuv2);
 
 		lblPOuv2 = new JLabel("POuv2 :");
@@ -1629,23 +1326,7 @@ public class ElevatorView {
 		//Button for POdclose
 		btnPOdclose = new JButton(iconLedOff);
 		btnPOdclose.setBounds(112, 224, 40, 40);
-		btnPOdclose.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				SupervisorRequest supervisorRequest = new SupervisorRequest("SupPanelReq", "Panel", "manual", "POdclose", true);
-				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-				try {
-					System.out.println(supervisorRequest.toJSON());
-					mqttPublisher.sendMessage(supervisorRequest.toJSON().toString());
-					System.out.println(requestForStates.toJSON());
-					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		btnPOdclose.addActionListener(new SendSupPanelReq(mqttPublisher, "manual", "POdclose", true));
 		panelSupervisor.add(btnPOdclose);
 
 		lblPOdclose = new JLabel("POdclose :");
@@ -1655,23 +1336,7 @@ public class ElevatorView {
 		//Button for POdopen
 		btnPOdopen = new JButton(iconLedOff);
 		btnPOdopen.setBounds(112, 274, 40, 40);
-		btnPOdopen.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				SupervisorRequest supervisorRequest = new SupervisorRequest("SupPanelReq", "Panel", "manual", "POdopen", true);
-				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-				try {
-					System.out.println(supervisorRequest.toJSON());
-					mqttPublisher.sendMessage(supervisorRequest.toJSON().toString());
-					System.out.println(requestForStates.toJSON());
-					mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-				} catch (JSONException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
+		btnPOdopen.addActionListener(new SendSupPanelReq(mqttPublisher, "manual", "POdopen", true));
 		panelSupervisor.add(btnPOdopen);
 
 		lblPOdopen = new JLabel("POdopen :");
@@ -1711,17 +1376,7 @@ public class ElevatorView {
 				JSlider source = (JSlider) e.getSource();
 				if (!source.getValueIsAdjusting()) {
 					int value = (int) source.getValue();
-					SupervisorRequest supervisorRequest = new SupervisorRequest("SupPanelReq", "Panel", "manual", "POv_crawlSelect", value);
-					UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
-					try {
-						System.out.println(supervisorRequest.toJSON());
-						mqttPublisher.sendMessage(supervisorRequest.toJSON().toString());
-						System.out.println(requestForStates.toJSON());
-						mqttPublisher.sendMessage(requestForStates.toJSON().toString());
-					} catch (JSONException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					new SendSupPanelReq(mqttPublisher, "manual", "POv_crawlSelect", value).actionPerformed(null);
 				}
 			}
 		});

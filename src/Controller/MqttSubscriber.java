@@ -20,7 +20,7 @@ public class MqttSubscriber implements MqttCallback{
 	private static final String clientId = "clientId";
 
 	/** The topic. */
-	private static final String topic = "/21WS-SysArch/C1";//
+	private static final String topic = "/21WS-SysArch/#";//
     
     private String username = "H1";
    
@@ -102,7 +102,7 @@ public class MqttSubscriber implements MqttCallback{
 			elevator.treatRequestBackLevel( (RequestBackLevel) requestBack);
 			break;
 		case "DirInd":
-			System.out.println("Model.Direction");
+			System.out.println("Direction");
 			requestBack = new RequestBackDirection(jsonmsg.get("type").toString(), jsonmsg.get("device").toString(), jsonmsg.get("direction").toString(), jsonmsg.get("time").toString());
 
 			elevator.treatRequestBackDirection((RequestBackDirection) requestBack);
