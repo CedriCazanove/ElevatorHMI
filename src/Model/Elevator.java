@@ -1,8 +1,11 @@
+package Model;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+
+import Controller.Request.*;
 
 public class Elevator {
 	
@@ -266,7 +269,7 @@ public class Elevator {
 
 	private ArrayList<ElevatorListener> allListener;
 
-	Elevator() {
+	public Elevator() {
 		this.doorState = DoorState.CLOSE;
 		this.elevatorState = ElevatorState.INSERVICE;
 		this.direction = Direction.IDLE;
@@ -961,15 +964,15 @@ public class Elevator {
 	}
 
 	public String toString() {
-		return "Elevator : \n - DoorState : " + this.doorState + 
-						  "\n - ElevatorState : " + this.elevatorState +
+		return "Model.Elevator : \n - Model.DoorState : " + this.doorState +
+						  "\n - Model.ElevatorState : " + this.elevatorState +
 						  "\n - CurrentLevel : " + this.currentLevel +
-						  "\n - Direction : " + this.direction;
+						  "\n - Model.Direction : " + this.direction;
 	}
 	
 	public void treatRequestBackState(RequestBackState requestState) {
-		System.out.println("Elevator received a state request to treat");
-		if (requestState.getType().equals("DoorState")) {
+		System.out.println("Model.Elevator received a state request to treat");
+		if (requestState.getType().equals("Model.DoorState")) {
 			if (requestState.getState().equals("opened")) {
 				setDoorState(DoorState.OPEN);
 			} else if (requestState.getState().equals("closed")) {
@@ -991,7 +994,7 @@ public class Elevator {
 	}
 	
 	public void treatRequestBackLevel(RequestBackLevel requestLevel) {
-		System.out.println("Elevator received a level request to treat");
+		System.out.println("Model.Elevator received a level request to treat");
 		try {
 			System.out.println(" New Level : " + requestLevel.getLevel().toString());
 			setCurrentLevel(Integer.parseInt(requestLevel.getLevel()));
@@ -1003,7 +1006,7 @@ public class Elevator {
 	}
 
 	public void treatRequestBackDirection(RequestBackDirection requestState) {
-		System.out.println("Elevator received a direction request to treat");
+		System.out.println("Model.Elevator received a direction request to treat");
 		if (requestState.getDirection().equals("UP")) {
 			setDirection(Direction.UP);
 		} else if (requestState.getDirection().equals("DOWN")) {
@@ -1014,7 +1017,7 @@ public class Elevator {
 	}
 
 	public void treatRequestBackAnswer(RequestBackPanelAnswer requestBackPanelAnswer) throws JSONException {
-		System.out.println("Elevator received a panel answer request to treat");
+		System.out.println("Model.Elevator received a panel answer request to treat");
 		JSONArray allStates = requestBackPanelAnswer.getAnswer();
 		for (int i = 0; i < allStates.length(); i++) {
 			String name = allStates.getJSONObject(i).getString("name");

@@ -1,3 +1,5 @@
+package Model;
+
 public class Password {
 
     public interface PasswordListener {

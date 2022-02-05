@@ -1,29 +1,34 @@
+package Controller.Request;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class RequestBackDirection implements Request {
+public class LogError implements Request {
 	
 	private String type;
 	
-	private String device;
+	private String message;
 	
-	private String direction;
+	private String device;
 	
 	private String time;
 	
-	public RequestBackDirection(String type, String device, String direction, String time) {
+	private String severity;
+	
+	public LogError(String type, String message, String device, String time, String severity) {
 		this.type = type;
+		this.message = message;
 		this.device = device;
-		this.direction = direction;
-		this.time = time; 
+		this.severity = severity;
 	}
 
 	@Override
 	public JSONObject toJSON() throws JSONException {
 		JSONObject obj = new JSONObject();
 		obj.put("type", this.type);
+		obj.put("message", this.message);
 		obj.put("device", this.device);
-		obj.put("direction", this.direction);
+		obj.put("severity", this.severity);
 		obj.put("time", this.time);
 		return obj;
 	}
@@ -35,6 +40,14 @@ public class RequestBackDirection implements Request {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	@Override
@@ -55,12 +68,12 @@ public class RequestBackDirection implements Request {
 		this.time = time;
 	}
 
-	public String getDirection() {
-		return direction;
+	public String getSeverity() {
+		return severity;
 	}
 
-	public void setDirection(String direction) {
-		this.direction = direction;
+	public void setSeverity(String severity) {
+		this.severity = severity;
 	}
 
 }

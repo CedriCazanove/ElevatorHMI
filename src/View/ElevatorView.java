@@ -1,3 +1,5 @@
+package View;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
@@ -9,6 +11,10 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import Model.Elevator;
+import Model.Password;
+import Controller.Request.*;
+import Controller.MqttPublisher;
 import org.json.JSONException;
 
 public class ElevatorView {
@@ -60,166 +66,166 @@ public class ElevatorView {
 	private static Icon iconElevatorOutOfService = new ImageIcon(urlElevatorOutOfService);
 
 	//Picture for the Up button
-	private static URL urlUp = ElevatorPanelControlOutside.class.getResource("/up.png");
-	private static URL urlUpGreen = ElevatorPanelControlOutside.class.getResource("/upGreen.png");
+	private static URL urlUp = ElevatorView.class.getResource("/up.png");
+	private static URL urlUpGreen = ElevatorView.class.getResource("/upGreen.png");
 	Icon iconUp = new ImageIcon(urlUp);
 	Icon iconUpGreen = new ImageIcon(urlUpGreen);
 
 	//Picture for the down button
-	private static URL urlDown = ElevatorPanelControlOutside.class.getResource("/down.png");
-	private static URL urlDownGreen = ElevatorPanelControlOutside.class.getResource("/downGreen.png");
+	private static URL urlDown = ElevatorView.class.getResource("/down.png");
+	private static URL urlDownGreen = ElevatorView.class.getResource("/downGreen.png");
 	Icon iconDown = new ImageIcon(urlDown);
 	Icon iconDownGreen = new ImageIcon(urlDownGreen);
 
 	//Picture for the stop button
-	private static URL urlStop = ElevatorPanelControlInside.class.getResource("/stop.png");
-	private static URL urlStopPressed = ElevatorPanelControlInside.class.getResource("/stopPressed.png");
+	private static URL urlStop = ElevatorView.class.getResource("/stop.png");
+	private static URL urlStopPressed = ElevatorView.class.getResource("/stopPressed.png");
 	Icon iconStop = new ImageIcon(urlStop);
 	Icon iconStopRed = new ImageIcon(urlStopPressed);
 
 	//Picture for the open button
-	private static URL urlOpen = ElevatorPanelControlInside.class.getResource("/open.png");
-	private static URL urlOpenGreen = ElevatorPanelControlInside.class.getResource("/openGreen.png");
-	private static URL urlOpenRed = ElevatorPanelControlInside.class.getResource("/openRed.png");
+	private static URL urlOpen = ElevatorView.class.getResource("/open.png");
+	private static URL urlOpenGreen = ElevatorView.class.getResource("/openGreen.png");
+	private static URL urlOpenRed = ElevatorView.class.getResource("/openRed.png");
 	Icon iconOpen = new ImageIcon(urlOpen);
 	Icon iconOpenGreen = new ImageIcon(urlOpenGreen);
 	Icon iconOpenRed = new ImageIcon(urlOpenRed);
 
 	//Picture for the close button
-	private static URL urlClose = ElevatorPanelControlInside.class.getResource("/close.png");
-	private static URL urlCloseGreen = ElevatorPanelControlInside.class.getResource("/closeGreen.png");
-	private static URL urlCloseRed = ElevatorPanelControlInside.class.getResource("/closeRed.png");
+	private static URL urlClose = ElevatorView.class.getResource("/close.png");
+	private static URL urlCloseGreen = ElevatorView.class.getResource("/closeGreen.png");
+	private static URL urlCloseRed = ElevatorView.class.getResource("/closeRed.png");
 	Icon iconClose = new ImageIcon(urlClose);
 	Icon iconCloseGreen = new ImageIcon(urlCloseGreen);
 	Icon iconCloseRed = new ImageIcon(urlCloseRed);
 
 	//Picture for the level 0 button
-	private static URL urlLevel0 = ElevatorPanelControlInside.class.getResource("/level0.png");
-	private static URL urlLevel0Green = ElevatorPanelControlInside.class.getResource("/level0Green.png");
-	private static URL urlLevel0Red = ElevatorPanelControlInside.class.getResource("/level0Red.png");
+	private static URL urlLevel0 = ElevatorView.class.getResource("/level0.png");
+	private static URL urlLevel0Green = ElevatorView.class.getResource("/level0Green.png");
+	private static URL urlLevel0Red = ElevatorView.class.getResource("/level0Red.png");
 	Icon iconLevel0 = new ImageIcon(urlLevel0);
 	Icon iconLevel0Green = new ImageIcon(urlLevel0Green);
 	Icon iconLevel0Red = new ImageIcon(urlLevel0Red);
 
 	//Picture for the level 1 button
-	private static URL urlLevel1 = ElevatorPanelControlInside.class.getResource("/level1.png");
-	private static URL urlLevel1Green = ElevatorPanelControlInside.class.getResource("/level1Green.png");
-	private static URL urlLevel1Red = ElevatorPanelControlInside.class.getResource("/level1Red.png");
+	private static URL urlLevel1 = ElevatorView.class.getResource("/level1.png");
+	private static URL urlLevel1Green = ElevatorView.class.getResource("/level1Green.png");
+	private static URL urlLevel1Red = ElevatorView.class.getResource("/level1Red.png");
 	Icon iconLevel1 = new ImageIcon(urlLevel1);
 	Icon iconLevel1Green = new ImageIcon(urlLevel1Green);
 	Icon iconLevel1Red = new ImageIcon(urlLevel1Red);
 
 	//Picture for the level 2 button
-	private static URL urlLevel2 = ElevatorPanelControlInside.class.getResource("/level2.png");
-	private static URL urlLevel2Green = ElevatorPanelControlInside.class.getResource("/level2Green.png");
-	private static URL urlLevel2Red = ElevatorPanelControlInside.class.getResource("/level2Red.png");
+	private static URL urlLevel2 = ElevatorView.class.getResource("/level2.png");
+	private static URL urlLevel2Green = ElevatorView.class.getResource("/level2Green.png");
+	private static URL urlLevel2Red = ElevatorView.class.getResource("/level2Red.png");
 	Icon iconLevel2 = new ImageIcon(urlLevel2);
 	Icon iconLevel2Red = new ImageIcon(urlLevel2Red);
 	Icon iconLevel2Green = new ImageIcon(urlLevel2Green);
 
 	//Picture for the level 3 button
-	private static URL urlLevel3 = ElevatorPanelControlInside.class.getResource("/level3.png");
-	private static URL urlLevel3Green = ElevatorPanelControlInside.class.getResource("/level3Green.png");
-	private static URL urlLevel3Red = ElevatorPanelControlInside.class.getResource("/level3Red.png");
+	private static URL urlLevel3 = ElevatorView.class.getResource("/level3.png");
+	private static URL urlLevel3Green = ElevatorView.class.getResource("/level3Green.png");
+	private static URL urlLevel3Red = ElevatorView.class.getResource("/level3Red.png");
 	Icon iconLevel3 = new ImageIcon(urlLevel3);
 	Icon iconLevel3Green = new ImageIcon(urlLevel3Green);
 	Icon iconLevel3Red = new ImageIcon(urlLevel3Red);
 
 	//Picture for the digit 0
-	private static URL urlDigit0 = ElevatorPanelControlOutside.class.getResource("/digit0.png");
-	private static URL urlDigit0Green = ElevatorPanelControlOutside.class.getResource("/digit0Green.png");
+	private static URL urlDigit0 = ElevatorView.class.getResource("/digit0.png");
+	private static URL urlDigit0Green = ElevatorView.class.getResource("/digit0Green.png");
 	Icon iconDigit0 = new ImageIcon(urlDigit0);
 	Icon iconDigit0Green = new ImageIcon(urlDigit0Green);
 
 	//Picture for the digit 1
-	private static URL urlDigit1 = ElevatorPanelControlOutside.class.getResource("/digit1.png");
-	private static URL urlDigit1Green = ElevatorPanelControlOutside.class.getResource("/digit1Green.png");
+	private static URL urlDigit1 = ElevatorView.class.getResource("/digit1.png");
+	private static URL urlDigit1Green = ElevatorView.class.getResource("/digit1Green.png");
 	Icon iconDigit1 = new ImageIcon(urlDigit1);
 	Icon iconDigit1Green = new ImageIcon(urlDigit1Green);
 
 	//Picture for the digit 2
-	private static URL urlDigit2 = ElevatorPanelControlOutside.class.getResource("/digit2.png");
-	private static URL urlDigit2Green = ElevatorPanelControlOutside.class.getResource("/digit2Green.png");
+	private static URL urlDigit2 = ElevatorView.class.getResource("/digit2.png");
+	private static URL urlDigit2Green = ElevatorView.class.getResource("/digit2Green.png");
 	Icon iconDigit2 = new ImageIcon(urlDigit2);
 	Icon iconDigit2Green = new ImageIcon(urlDigit2Green);
 
 	//Picture for the digit 3
-	private static URL urlDigit3 = ElevatorPanelControlOutside.class.getResource("/digit3.png");
-	private static URL urlDigit3Green = ElevatorPanelControlOutside.class.getResource("/digit3Green.png");
+	private static URL urlDigit3 = ElevatorView.class.getResource("/digit3.png");
+	private static URL urlDigit3Green = ElevatorView.class.getResource("/digit3Green.png");
 	Icon iconDigit3 = new ImageIcon(urlDigit3);
 	Icon iconDigit3Green = new ImageIcon(urlDigit3Green);
 
 	//Picture for the digit 4
-	private static URL urlDigit4 = ElevatorPanelControlOutside.class.getResource("/digit4.png");
-	private static URL urlDigit4Green = ElevatorPanelControlOutside.class.getResource("/digit4Green.png");
+	private static URL urlDigit4 = ElevatorView.class.getResource("/digit4.png");
+	private static URL urlDigit4Green = ElevatorView.class.getResource("/digit4Green.png");
 	Icon iconDigit4 = new ImageIcon(urlDigit4);
 	Icon iconDigit4Green = new ImageIcon(urlDigit4Green);
 
 	//Picture for the digit 5
-	private static URL urlDigit5 = ElevatorPanelControlOutside.class.getResource("/digit5.png");
-	private static URL urlDigit5Green = ElevatorPanelControlOutside.class.getResource("/digit5Green.png");
+	private static URL urlDigit5 = ElevatorView.class.getResource("/digit5.png");
+	private static URL urlDigit5Green = ElevatorView.class.getResource("/digit5Green.png");
 	Icon iconDigit5 = new ImageIcon(urlDigit5);
 	Icon iconDigit5Green = new ImageIcon(urlDigit5Green);
 
 	//Picture for the digit 6
-	private static URL urlDigit6 = ElevatorPanelControlOutside.class.getResource("/digit6.png");
-	private static URL urlDigit6Green = ElevatorPanelControlOutside.class.getResource("/digit6Green.png");
+	private static URL urlDigit6 = ElevatorView.class.getResource("/digit6.png");
+	private static URL urlDigit6Green = ElevatorView.class.getResource("/digit6Green.png");
 	Icon iconDigit6 = new ImageIcon(urlDigit6);
 	Icon iconDigit6Green = new ImageIcon(urlDigit6Green);
 
 	//Picture for the digit 7
-	private static URL urlDigit7 = ElevatorPanelControlOutside.class.getResource("/digit7.png");
-	private static URL urlDigit7Green = ElevatorPanelControlOutside.class.getResource("/digit7Green.png");
+	private static URL urlDigit7 = ElevatorView.class.getResource("/digit7.png");
+	private static URL urlDigit7Green = ElevatorView.class.getResource("/digit7Green.png");
 	Icon iconDigit7 = new ImageIcon(urlDigit7);
 	Icon iconDigit7Green = new ImageIcon(urlDigit7Green);
 
 	//Picture for the digit 8
-	private static URL urlDigit8 = ElevatorPanelControlOutside.class.getResource("/digit8.png");
-	private static URL urlDigit8Green = ElevatorPanelControlOutside.class.getResource("/digit8Green.png");
+	private static URL urlDigit8 = ElevatorView.class.getResource("/digit8.png");
+	private static URL urlDigit8Green = ElevatorView.class.getResource("/digit8Green.png");
 	Icon iconDigit8 = new ImageIcon(urlDigit8);
 	Icon iconDigit8Green = new ImageIcon(urlDigit8Green);
 
 	//Picture for the digit 9
-	private static URL urlDigit9 = ElevatorPanelControlOutside.class.getResource("/digit9.png");
-	private static URL urlDigit9Green = ElevatorPanelControlOutside.class.getResource("/digit9Green.png");
+	private static URL urlDigit9 = ElevatorView.class.getResource("/digit9.png");
+	private static URL urlDigit9Green = ElevatorView.class.getResource("/digit9Green.png");
 	Icon iconDigit9 = new ImageIcon(urlDigit9);
 	Icon iconDigit9Green = new ImageIcon(urlDigit9Green);
 
 	//Picture for the cancel button
-	private static URL urlCross = ElevatorPanelControlOutside.class.getResource("/cross.png");
-	private static URL urlCrossPressed = ElevatorPanelControlOutside.class.getResource("/crossPressed.png");
+	private static URL urlCross = ElevatorView.class.getResource("/cross.png");
+	private static URL urlCrossPressed = ElevatorView.class.getResource("/crossPressed.png");
 	Icon iconCross = new ImageIcon(urlCross);
 	Icon iconCrossPressed = new ImageIcon(urlCrossPressed);
 
 	//Picture for the validate button
-	private static URL urlCheck = ElevatorPanelControlOutside.class.getResource("/check.png");
-	private static URL urlCheckPressed = ElevatorPanelControlOutside.class.getResource("/checkPressed.png");
+	private static URL urlCheck = ElevatorView.class.getResource("/check.png");
+	private static URL urlCheckPressed = ElevatorView.class.getResource("/checkPressed.png");
 	Icon iconCheck = new ImageIcon(urlCheck);
 	Icon iconCheckPressed = new ImageIcon(urlCheckPressed);
 
 	//Picture for the User/Supervisor mode
-	private static URL urlUser = ElevatorPanelControlOutside.class.getResource("/user.png");
-	private static URL urlSupervisor = ElevatorPanelControlOutside.class.getResource("/supervisor.png");
+	private static URL urlUser = ElevatorView.class.getResource("/user.png");
+	private static URL urlSupervisor = ElevatorView.class.getResource("/supervisor.png");
 	Icon iconUser = new ImageIcon(urlUser);
 	Icon iconSupervisor = new ImageIcon(urlSupervisor);
 
 	//Picture for the led for the supervisor button
-	private static URL urlLedOff = ElevatorPanelControlOutside.class.getResource("/ledOff.png");
-	private static URL urlLedGreen = ElevatorPanelControlOutside.class.getResource("/ledGreen.png");
-	private static URL urlLedRed = ElevatorPanelControlOutside.class.getResource("/ledRed.png");
+	private static URL urlLedOff = ElevatorView.class.getResource("/ledOff.png");
+	private static URL urlLedGreen = ElevatorView.class.getResource("/ledGreen.png");
+	private static URL urlLedRed = ElevatorView.class.getResource("/ledRed.png");
 	Icon iconLedOff = new ImageIcon(urlLedOff);
 	Icon iconLedGreen = new ImageIcon(urlLedGreen);
 	Icon iconLedRed = new ImageIcon(urlLedRed);
 
 	//Picture for the floor/direction indicator of the elevator
-	private static URL urlElevatorOff = ElevatorPanelControlOutside.class.getResource("/elevatorIndicatorOff.png");
-	private static URL urlElevator0 = ElevatorPanelControlOutside.class.getResource("/elevatorIndicator0.png");
-	private static URL urlElevator1 = ElevatorPanelControlOutside.class.getResource("/elevatorIndicator1.png");
-	private static URL urlElevator2 = ElevatorPanelControlOutside.class.getResource("/elevatorIndicator2.png");
-	private static URL urlElevator3 = ElevatorPanelControlOutside.class.getResource("/elevatorIndicator3.png");
-	private static URL urlElevatorUp = ElevatorPanelControlOutside.class.getResource("/elevatorIndicatorUp.png");
-	private static URL urlElevatorDown = ElevatorPanelControlOutside.class.getResource("/elevatorIndicatorDown.png");
-	private static URL urlElevatorSmile = ElevatorPanelControlOutside.class.getResource("/elevatorIndicatorSmile.png");
+	private static URL urlElevatorOff = ElevatorView.class.getResource("/elevatorIndicatorOff.png");
+	private static URL urlElevator0 = ElevatorView.class.getResource("/elevatorIndicator0.png");
+	private static URL urlElevator1 = ElevatorView.class.getResource("/elevatorIndicator1.png");
+	private static URL urlElevator2 = ElevatorView.class.getResource("/elevatorIndicator2.png");
+	private static URL urlElevator3 = ElevatorView.class.getResource("/elevatorIndicator3.png");
+	private static URL urlElevatorUp = ElevatorView.class.getResource("/elevatorIndicatorUp.png");
+	private static URL urlElevatorDown = ElevatorView.class.getResource("/elevatorIndicatorDown.png");
+	private static URL urlElevatorSmile = ElevatorView.class.getResource("/elevatorIndicatorSmile.png");
 	Icon iconElevatorOff = new ImageIcon(urlElevatorOff);
 	Icon iconElevator0 = new ImageIcon(urlElevator0);
 	Icon iconElevator1 = new ImageIcon(urlElevator1);
@@ -258,7 +264,7 @@ public class ElevatorView {
 
 			@Override
 			public void doorStateChanged() {
-				System.out.println("ElevatorView : The state of door changed");
+				System.out.println("View.ElevatorView : The state of door changed");
 				switch (elevatorView.getElevatorState()) {
 					case INSERVICE:
 						System.out.println(elevatorView.toString());
@@ -276,11 +282,11 @@ public class ElevatorView {
 										labelElevator.setIcon(iconElevatorInTransition);
 										break;
 									default:
-										System.out.println("ElevatorView : no match");
+										System.out.println("View.ElevatorView : no match");
 								}
 								break;
 							default:
-								System.out.println("ElevatorView is not in service");
+								System.out.println("View.ElevatorView is not in service");
 								break;
 						}
 						break;
@@ -292,7 +298,7 @@ public class ElevatorView {
 			}
 			@Override
 			public void currentLevelChanged() {
-				System.out.println("ElevatorView : currentLevelChanged");
+				System.out.println("View.ElevatorView : currentLevelChanged");
 				if (elevatorView.getCurrentLevel() >= 0) {
 					int nextLevel = (4 - elevatorView.getCurrentLevel()) * 135 + 3;
 					labelElevator.setBounds(0, nextLevel, 100, 135);
@@ -331,21 +337,21 @@ public class ElevatorView {
 								labelElevator.setIcon(iconElevatorInTransition);
 								break;
 							default:
-								System.out.println("ElevatorView : no match");
+								System.out.println("View.ElevatorView : no match");
 								break;
 						}
-						System.out.println("Elevator in service");
+						System.out.println("Model.Elevator in service");
 						break;
 					case OUTOFSERVICE:
 						labelElevator.setIcon(iconElevatorOutOfService);
-						System.out.println("Elevator out of service");
+						System.out.println("Model.Elevator out of service");
 						break;
 					case EMERGENCY:
 						System.out.println("Emergency on the elevator");
 						break;
 					case POWEROFF:
 						labelElevator.setIcon(iconElevatorClose);
-						System.out.println("Elevator power off");
+						System.out.println("Model.Elevator power off");
 						break;
 					default:
 						System.out.println("No match detected in the elevator state");
@@ -357,32 +363,32 @@ public class ElevatorView {
 				switch(elevatorView.getDirection()) {
 					case UP:
 						lblElevatorIndicator.setIcon(iconElevatorUp);
-						System.out.println("Elevator moving up");
+						System.out.println("Model.Elevator moving up");
 						break;
 					case DOWN:
 						lblElevatorIndicator.setIcon(iconElevatorDown);
-						System.out.println("Elevator moving down");
+						System.out.println("Model.Elevator moving down");
 						break;
 					case IDLE:
 						switch(elevatorView.getCurrentLevel()) {
 							case 1:
 								lblElevatorIndicator.setIcon(iconElevator0);
-								System.out.println("Elevator not moving; Actually level 0");
+								System.out.println("Model.Elevator not moving; Actually level 0");
 								break;
 							case 2:
 								lblElevatorIndicator.setIcon(iconElevator1);
-								System.out.println("Elevator not moving; Actually level 1");
+								System.out.println("Model.Elevator not moving; Actually level 1");
 								break;
 							case 3:
 								lblElevatorIndicator.setIcon(iconElevator2);
-								System.out.println("Elevator not moving; Actually level 2");
+								System.out.println("Model.Elevator not moving; Actually level 2");
 								break;
 							case 4:
 								lblElevatorIndicator.setIcon(iconElevator3);
-								System.out.println("Elevator not moving; Actually level 3");
+								System.out.println("Model.Elevator not moving; Actually level 3");
 								break;
 							default:
-								System.out.println("Elevator not moving; No match on floor detected");
+								System.out.println("Model.Elevator not moving; No match on floor detected");
 								break;
 						}
 						break;
@@ -644,7 +650,7 @@ public class ElevatorView {
 			@Override
 			public void pis_l1rChanged() {
 				if(elevatorView.getPIs_l1r()) {
-					System.out.println("ElevatorView : L1 Reached");
+					System.out.println("View.ElevatorView : L1 Reached");
 					int nextLevel = (3)*135 + 3;
 					labelElevator.setBounds(0, nextLevel, 100, 135);
 					lblElevatorIndicator.setIcon(iconElevator0);
@@ -671,7 +677,7 @@ public class ElevatorView {
 			@Override
 			public void pis_l2rChanged() {
 				if(elevatorView.getPIs_l2r()) {
-					System.out.println("ElevatorView : L2 Reached");
+					System.out.println("View.ElevatorView : L2 Reached");
 					int nextLevel = (2)*135 + 3;
 					labelElevator.setBounds(0, nextLevel, 100, 135);
 					lblElevatorIndicator.setIcon(iconElevator1);
@@ -698,7 +704,7 @@ public class ElevatorView {
 			@Override
 			public void pis_l3rChanged() {
 				if(elevatorView.getPIs_l3r()) {
-					System.out.println("ElevatorView : L3 Reached");
+					System.out.println("View.ElevatorView : L3 Reached");
 					int nextLevel = 2*135 + 3;
 					labelElevator.setBounds(0, nextLevel, 100, 135);
 					lblElevatorIndicator.setIcon(iconElevator2);
@@ -725,7 +731,7 @@ public class ElevatorView {
 			@Override
 			public void pis_l4rChanged() {
 				if(elevatorView.getPIs_l4r()) {
-					System.out.println("ElevatorView : L4 Reached");
+					System.out.println("View.ElevatorView : L4 Reached");
 					int nextLevel = 3;
 					labelElevator.setBounds(0, nextLevel, 100, 135);
 					lblElevatorIndicator.setIcon(iconElevator3);
@@ -809,7 +815,7 @@ public class ElevatorView {
 /*
 		System.out.println("Waiting for the state of the elevator..");
 		while(!elevator.getPIm_ready()) {
-			UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
+			Request.UserRequest requestForStates = new Request.UserRequest("ServPReq", "Service Panel", "show all states");
 			try {
 				System.out.println(requestForStates.toJSON());
 				mqttPublisher.sendMessage(requestForStates.toJSON().toString());
@@ -845,7 +851,7 @@ public class ElevatorView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame("Elevator");
+		frame = new JFrame("Model.Elevator");
 		//frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 540, 660);
@@ -882,7 +888,7 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "1UP");
+				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "1UP");
 				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
@@ -906,7 +912,7 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "2UP");
+				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "2UP");
 				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
@@ -930,7 +936,7 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "2DOWN");
+				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "2DOWN");
 				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
@@ -954,7 +960,7 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "3UP");
+				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "3UP");
 				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
@@ -978,7 +984,7 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "3DOWN");
+				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "3DOWN");
 				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
@@ -1002,7 +1008,7 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "4DOWN");
+				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "4DOWN");
 				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
@@ -1040,7 +1046,7 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "1REQ");
+				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "1REQ");
 				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
@@ -1064,7 +1070,7 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "2REQ");
+				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "2REQ");
 				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
@@ -1088,7 +1094,7 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "3REQ");
+				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "3REQ");
 				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
@@ -1112,7 +1118,7 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "4REQ");
+				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "4REQ");
 				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
@@ -1136,7 +1142,7 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "EMERGENCY");
+				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "EMERGENCY");
 				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
@@ -1160,7 +1166,7 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "OPEN");
+				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "OPEN");
 				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());
@@ -1184,7 +1190,7 @@ public class ElevatorView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				UserRequest request = new UserRequest("TravReq", "Elevator Panel", "CLOSE");
+				UserRequest request = new UserRequest("TravReq", "Model.Elevator Panel", "CLOSE");
 				UserRequest requestForStates = new UserRequest("ServPReq", "Service Panel", "show all states");
 				try {
 					System.out.println(request.toJSON());

@@ -1,32 +1,31 @@
+package Controller.Request;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class LogError implements Request {
+public class RequestBackState implements Request {
 	
 	private String type;
 	
-	private String message;
-	
 	private String device;
+	
+	private String state;
 	
 	private String time;
 	
-	private String severity;
-	
-	public LogError(String type, String message, String device, String time, String severity) {
+	public RequestBackState(String type, String device, String state, String time) {
 		this.type = type;
-		this.message = message;
 		this.device = device;
-		this.severity = severity;
+		this.state = state;
+		this.time = time; 
 	}
 
 	@Override
 	public JSONObject toJSON() throws JSONException {
 		JSONObject obj = new JSONObject();
 		obj.put("type", this.type);
-		obj.put("message", this.message);
 		obj.put("device", this.device);
-		obj.put("severity", this.severity);
+		obj.put("state", this.state);
 		obj.put("time", this.time);
 		return obj;
 	}
@@ -38,14 +37,6 @@ public class LogError implements Request {
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
 	}
 
 	@Override
@@ -65,13 +56,14 @@ public class LogError implements Request {
 	public void setTime(String time) {
 		this.time = time;
 	}
-
-	public String getSeverity() {
-		return severity;
+	
+	public String getState() {
+		return state;
 	}
 
-	public void setSeverity(String severity) {
-		this.severity = severity;
+	public void setState(String state) {
+		this.state = state;
 	}
+
 
 }

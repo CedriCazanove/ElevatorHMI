@@ -1,3 +1,6 @@
+package Controller;
+
+import Model.Elevator;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
@@ -6,6 +9,7 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.json.JSONObject;
+import Controller.Request.*;
 
 public class MqttSubscriber implements MqttCallback{
 	
@@ -85,7 +89,7 @@ public class MqttSubscriber implements MqttCallback{
 			elevator.treatRequestBackAnswer( (RequestBackPanelAnswer) requestBack);
 			break;
 		case "ServState":
-		case "DoorState":
+		case "Model.DoorState":
 			System.out.println("State");
 			requestBack = new RequestBackState(jsonmsg.get("type").toString(), jsonmsg.get("device").toString(), jsonmsg.get("state").toString(), jsonmsg.get("time").toString());
 			System.out.println("State");
@@ -98,7 +102,7 @@ public class MqttSubscriber implements MqttCallback{
 			elevator.treatRequestBackLevel( (RequestBackLevel) requestBack);
 			break;
 		case "DirInd":
-			System.out.println("Direction");
+			System.out.println("Model.Direction");
 			requestBack = new RequestBackDirection(jsonmsg.get("type").toString(), jsonmsg.get("device").toString(), jsonmsg.get("direction").toString(), jsonmsg.get("time").toString());
 
 			elevator.treatRequestBackDirection((RequestBackDirection) requestBack);
