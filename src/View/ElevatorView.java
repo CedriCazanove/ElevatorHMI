@@ -105,6 +105,7 @@ public class ElevatorView {
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 540, 660);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setIconImage((Image) ((ImageIcon) rsc.getIconElevatorClose()).getImage());
 		frame.getContentPane().setLayout(null);
 
 		/**
