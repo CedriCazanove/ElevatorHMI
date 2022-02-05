@@ -467,4 +467,36 @@ public class Ressource {
     public Icon getIconElevatorSmile() {
         return iconElevatorSmile;
     }
+
+    public Icon getIconElevator0Up() {
+        return iconElevator0Up;
+    }
+
+    public Icon getIconElevator0Down() {
+        return iconElevator0Down;
+    }
+
+    public Icon getIconElevator1Up() {
+        return iconElevator1Up;
+    }
+
+    public Icon getIconElevator1Down() {
+        return iconElevator1Down;
+    }
+
+    public Icon getIconElevator2Up() {
+        return iconElevator2Up;
+    }
+
+    public Icon getIconElevator2Down() {
+        return iconElevator2Down;
+    }
+
+    public Icon getIconElevator3Up() {
+        return iconElevator3Up;
+    }
+
+    public Icon getIconElevator3Down() {
+        return iconElevator3Down;
+    }
 }
