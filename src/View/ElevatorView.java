@@ -1,6 +1,8 @@
 package View;
 
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.Hashtable;
 import java.util.TimerTask;
 
@@ -65,10 +67,10 @@ public class ElevatorView {
 		 * Create the listener of the elevator which allow us to update the view
 		 */
 		this.elevator.addNewElevatorListener(new ElevatorViewAnswerElevatorListener(this, elevator));
+
 		/**
 		 * Can only display the window when we have at least received the state once
 		 */
-
 		java.util.Timer timer = new java.util.Timer();
 		TimerTask timerTask = new TimerTask() {
 			@Override

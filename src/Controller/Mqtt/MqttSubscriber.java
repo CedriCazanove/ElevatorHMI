@@ -66,13 +66,11 @@ public class MqttSubscriber implements MqttCallback{
 	@Override
 	public void connectionLost(Throwable arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void deliveryComplete(IMqttDeliveryToken arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -104,13 +102,11 @@ public class MqttSubscriber implements MqttCallback{
 		case "DirInd":
 			System.out.println("Direction");
 			requestBack = new RequestBackDirection(jsonmsg.get("type").toString(), jsonmsg.get("device").toString(), jsonmsg.get("direction").toString(), jsonmsg.get("time").toString());
-
 			elevator.treatRequestBackDirection((RequestBackDirection) requestBack);
 			break;
 		case "LogMsg":
 			System.out.println("Log Error");
 			requestBack = new LogError(jsonmsg.get("type").toString(), jsonmsg.get("message").toString(), jsonmsg.get("device").toString(), jsonmsg.get("time").toString(), jsonmsg.get("severity").toString());
-
 			break;
 		default:
 			 System.out.println("no request back match");
