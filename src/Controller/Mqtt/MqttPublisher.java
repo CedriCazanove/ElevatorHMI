@@ -91,8 +91,7 @@ public class MqttPublisher {
             me.printStackTrace();
         }  catch (JSONException e1) {
             System.out.println(e1 + "Not able to convert into JSON");
-        }
-        catch (IOException e) {
+        }  catch (IOException e) {
             System.out.println(e + "; An error occurred writing the file.");
             e.printStackTrace();
         }
