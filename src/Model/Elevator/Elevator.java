@@ -1020,6 +1020,7 @@ public class Elevator {
 		System.out.println("Elevator received a panel answer request to treat");
 		JSONArray allStates = requestBackPanelAnswer.getAnswer();
 		for (int i = 0; i < allStates.length(); i++) {
+			try {
 			String name = allStates.getJSONObject(i).getString("name");
 			switch (name) {
 				case "PIs_l1sl":
@@ -1225,6 +1226,9 @@ public class Elevator {
 				default:
 					System.out.println("No state match");
 					break;
+			}
+			} catch (JSONException e) {
+				System.out.println("Error: " + e.getMessage());
 			}
 		}
 	}
