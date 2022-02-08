@@ -1,6 +1,6 @@
 package Controller.ListenerBehaviour;
 
-import Model.Elevator;
+import Model.Elevator.Elevator;
 import View.Ressource;
 import View.ElevatorView;
 
@@ -17,7 +17,7 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
 
     @Override
     public void doorStateChanged() {
-        System.out.println("View.ElevatorView : The state of door changed");
+        System.out.println("ElevatorView : The state of door changed");
         switch (elevator.getElevatorState()) {
             case INSERVICE:
                 System.out.println(elevator.toString());
@@ -35,11 +35,11 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
                                 elevatorView.getLabelElevator().setIcon(rsc.getIconElevatorInTransition());
                                 break;
                             default:
-                                System.out.println("View.ElevatorView : no match");
+                                System.out.println("ElevatorView : no match");
                         }
                         break;
                     default:
-                        System.out.println("View.ElevatorView is not in service");
+                        System.out.println("ElevatorView is not in service");
                         break;
                 }
                 break;
@@ -51,7 +51,7 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
     }
     @Override
     public void currentLevelChanged() {
-        System.out.println("View.ElevatorView : currentLevelChanged");
+        System.out.println("ElevatorView : currentLevelChanged");
         if (elevator.getCurrentLevel() >= 0) {
             int nextLevel = (4 - elevator.getCurrentLevel()) * 135 + 3;
             elevatorView.getLabelElevator().setBounds(0, nextLevel, 100, 135);
@@ -90,21 +90,21 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
                         elevatorView.getLabelElevator().setIcon(rsc.getIconElevatorInTransition());
                         break;
                     default:
-                        System.out.println("View.ElevatorView : no match");
+                        System.out.println("ElevatorView : no match");
                         break;
                 }
-                System.out.println("Model.Elevator in service");
+                System.out.println("Elevator.Elevator in service");
                 break;
             case OUTOFSERVICE:
                 elevatorView.getLabelElevator().setIcon(rsc.getIconElevatorOutOfService());
-                System.out.println("Model.Elevator out of service");
+                System.out.println("Elevator.Elevator out of service");
                 break;
             case EMERGENCY:
                 System.out.println("Emergency on the elevator");
                 break;
             case POWEROFF:
                 elevatorView.getLabelElevator().setIcon(rsc.getIconElevatorClose());
-                System.out.println("Model.Elevator power off");
+                System.out.println("Elevator power off");
                 break;
             default:
                 System.out.println("No match detected in the elevator state");
@@ -116,7 +116,7 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
         switch(elevator.getDirection()) {
             case UP:
                 elevatorView.getLabelElevator().setIcon(rsc.getIconElevatorUp());
-                System.out.println("Model.Elevator moving up");
+                System.out.println("Elevator moving up");
                 break;
             case DOWN:
                 elevatorView.getLabelElevator().setIcon(rsc.getIconElevatorDown());
@@ -401,7 +401,7 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
     @Override
     public void pis_l1rChanged() {
         if(elevator.getPIs_l1r()) {
-            System.out.println("View.ElevatorView : L1 Reached");
+            System.out.println("ElevatorView : L1 Reached");
             int nextLevel = (3)*135 + 3;
             elevatorView.getLabelElevator().setBounds(0, nextLevel, 100, 135);
             elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator0());

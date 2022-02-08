@@ -14,10 +14,18 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import Controller.ActionListener.*;
+import Controller.ActionListener.Elevator.SendServPReq;
+import Controller.ActionListener.Elevator.SendSupPanelReq;
+import Controller.ActionListener.Elevator.SendTravReq;
+import Controller.ActionListener.Password.CancelPassword;
+import Controller.ActionListener.Password.ValidatePassword;
+import Controller.ActionListener.Password.WriteIntoPassword;
 import Controller.ListenerBehaviour.ElevatorViewAnswerElevatorListener;
 import Controller.ListenerBehaviour.ElevatorViewAnswerPasswordListener;
-import Model.Elevator;
-import Model.Password;
+import Controller.Mqtt.MqttSubscriber;
+import Controller.WindowListener.WindowListenerBehaviour;
+import Model.Elevator.Elevator;
+import Model.Password.Password;
 import Controller.Mqtt.MqttPublisher;
 
 public class ElevatorView {
@@ -27,6 +35,8 @@ public class ElevatorView {
 	private Elevator elevator;
 
 	private static MqttPublisher mqttPublisher;
+
+	private static MqttSubscriber mqttSubscriber;
 
 	private static JLabel labelElevator;
 
@@ -61,6 +71,7 @@ public class ElevatorView {
 	 */
 	public ElevatorView(Elevator elevator, MqttPublisher mqttPublisher, FileWriter myWriter) {
 		this.mqttPublisher = mqttPublisher;
+		this.mqttSubscriber = mqttSubscriber;
 		this.password = new Password();
 		this.password.addNewPasswordListener(new ElevatorViewAnswerPasswordListener(this, password));
 		initialize(mqttPublisher, password);
@@ -100,46 +111,8 @@ public class ElevatorView {
 		};
 		timer.schedule(timerTask, 0, 60000);//period is in ms (every 1min we ask)
 
-		frame.addWindowListener(new WindowListener() {
-			@Override
-			public void windowOpened(WindowEvent e) {
-
-			}
-
-			@Override
-			public void windowClosing(WindowEvent e) {
-				try {
-					myWriter.close();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
-
-			@Override
-			public void windowClosed(WindowEvent e) {
-
-			}
-
-			@Override
-			public void windowIconified(WindowEvent e) {
-
-			}
-
-			@Override
-			public void windowDeiconified(WindowEvent e) {
-
-			}
-
-			@Override
-			public void windowActivated(WindowEvent e) {
-
-			}
-
-			@Override
-			public void windowDeactivated(WindowEvent e) {
-
-			}
-		});
+		//Adding behaviour when we close the window
+		frame.addWindowListener(new WindowListenerBehaviour(myWriter, mqttPublisher));
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package Model;
+package Model.Password;
 
 import java.util.ArrayList;
 

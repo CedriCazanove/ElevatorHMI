@@ -1,4 +1,4 @@
-package Model;
+package Model.Elevator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -964,15 +964,15 @@ public class Elevator {
 	}
 
 	public String toString() {
-		return "Model.Elevator : \n - DoorState : " + this.doorState +
+		return "Model.Elevator.Elevator : \n - DoorState : " + this.doorState +
 						  "\n - ElevatorState : " + this.elevatorState +
 						  "\n - CurrentLevel : " + this.currentLevel +
 						  "\n - Direction : " + this.direction;
 	}
 	
 	public void treatRequestBackState(RequestBackState requestState) {
-		System.out.println("Model.Elevator received a state request to treat");
-		if (requestState.getType().equals("Model.DoorState")) {
+		System.out.println("Model.Elevator.Elevator received a state request to treat");
+		if (requestState.getType().equals("Model.Elevator.DoorState")) {
 			if (requestState.getState().equals("opened")) {
 				setDoorState(DoorState.OPEN);
 			} else if (requestState.getState().equals("closed")) {
@@ -994,7 +994,7 @@ public class Elevator {
 	}
 	
 	public void treatRequestBackLevel(RequestBackLevel requestLevel) {
-		System.out.println("Model.Elevator received a level request to treat");
+		System.out.println("Model.Elevator.Elevator received a level request to treat");
 		try {
 			System.out.println(" New Level : " + requestLevel.getLevel().toString());
 			setCurrentLevel(Integer.parseInt(requestLevel.getLevel()));

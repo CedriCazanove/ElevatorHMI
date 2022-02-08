@@ -1,6 +1,6 @@
 package Controller.ListenerBehaviour;
 
-import Model.Password;
+import Model.Password.Password;
 import View.ElevatorView;
 
 public class ElevatorViewAnswerPasswordListener implements Password.PasswordListener {

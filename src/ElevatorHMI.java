@@ -1,6 +1,6 @@
 import Controller.Mqtt.MqttPublisher;
 import Controller.Mqtt.MqttSubscriber;
-import Model.Elevator;
+import Model.Elevator.Elevator;
 import View.ElevatorView;
 
 import java.awt.EventQueue;

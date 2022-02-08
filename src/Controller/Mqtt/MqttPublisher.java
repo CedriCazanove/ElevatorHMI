@@ -31,8 +31,6 @@ public class MqttPublisher {
 
     private int qos = 0;
 
-    private String directory = "C:\\Users\\aleja\\Documents\\EclipseWorkspace\\Eclipse SubW SysArch\\ElevatorHMI-realMVC\\files\\file.txt";
-
     private FileWriter myWriter;
 
 

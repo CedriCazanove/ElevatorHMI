@@ -1,5 +1,6 @@
 package Controller.ActionListener;
 
+import Controller.ActionListener.Elevator.SendSupPanelReq;
 import Controller.Mqtt.MqttPublisher;
 import View.ElevatorView;
 import View.Ressource;
@@ -30,7 +31,7 @@ public class SupervisorOnOffAction implements ActionListener {
             elevatorView.getSupervisorOnOff().setIcon(rsc.getIconUser());
             elevatorView.getPassword().clear();
             //send a request to say that we are in automatic mode
-            new SendSupPanelReq(mqttPublisher, "automatic", "P0reset", false).actionPerformed(null);
+            new SendSupPanelReq(mqttPublisher, "automatic", "POreset", false).actionPerformed(null);
             elevatorView.setSupervisor(false);
             elevatorView.setCodeAccessSupervisor(false);
         }

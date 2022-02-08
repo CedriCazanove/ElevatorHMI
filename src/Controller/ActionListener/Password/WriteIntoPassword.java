@@ -1,6 +1,6 @@
-package Controller.ActionListener;
+package Controller.ActionListener.Password;
 
-import Model.Password;
+import Model.Password.Password;
 import View.ElevatorView;
 import View.Ressource;
 

@@ -1,6 +1,6 @@
 package Controller.Mqtt;
 
-import Model.Elevator;
+import Model.Elevator.Elevator;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -99,7 +99,7 @@ public class MqttSubscriber implements MqttCallback{
 				other = jsonmsg.get("states").toString();
 				break;
 			case "ServState":
-			case "Model.DoorState":
+			case "Model.Elevator.DoorState":
 				System.out.println("State");
 				requestBack = new RequestBackState(jsonmsg.get("type").toString(), jsonmsg.get("device").toString(), jsonmsg.get("state").toString(), jsonmsg.get("time").toString());
 				System.out.println("State");
