@@ -971,8 +971,8 @@ public class Elevator {
 	}
 	
 	public void treatRequestBackState(RequestBackState requestState) {
-		System.out.println("Model.Elevator.Elevator received a state request to treat");
-		if (requestState.getType().equals("Model.Elevator.DoorState")) {
+		System.out.println("Elevator received a state request to treat");
+		if (requestState.getType().equals("DoorState")) {
 			if (requestState.getState().equals("opened")) {
 				setDoorState(DoorState.OPEN);
 			} else if (requestState.getState().equals("closed")) {
@@ -1000,8 +1000,10 @@ public class Elevator {
 			setCurrentLevel(Integer.parseInt(requestLevel.getLevel()));
 			System.out.println(toString());
 		} catch(NumberFormatException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("in transition");
 			setCurrentLevel(-1); //for in transition
+			System.out.println("in transition");
 		}
 	}
 
@@ -1020,8 +1022,9 @@ public class Elevator {
 		System.out.println("Elevator received a panel answer request to treat");
 		JSONArray allStates = requestBackPanelAnswer.getAnswer();
 		for (int i = 0; i < allStates.length(); i++) {
-			try {
+			//try {
 			String name = allStates.getJSONObject(i).getString("name");
+			System.out.println("name : " + name);
 			switch (name) {
 				case "PIs_l1sl":
 					System.out.println("PIs_l1sl");
@@ -1227,9 +1230,9 @@ public class Elevator {
 					System.out.println("No state match");
 					break;
 			}
-			} catch (JSONException e) {
+			/*} catch (JSONException e) {
 				System.out.println("Error: " + e.getMessage());
-			}
+			}*/
 		}
 	}
 }

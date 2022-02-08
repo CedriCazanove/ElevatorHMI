@@ -57,16 +57,16 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
             elevatorView.getLabelElevator().setBounds(0, nextLevel, 100, 135);
             switch (elevator.getCurrentLevel()) {
                 case 1:
-                    elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator0());
+                    //elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator0());
                     break;
                 case 2:
-                    elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator1());
+                    //elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator1());
                     break;
                 case 3:
-                    elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator2());
+                    //elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator2());
                     break;
                 case 4:
-                    elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator3());
+                    //elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator3());
                     break;
                 default:
                     System.out.println("Nothing match");
@@ -291,8 +291,8 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
             elevatorView.getBtnLevel2().setIcon(rsc.getIconLevel2Red());
             elevatorView.getBtnLevel3().setIcon(rsc.getIconLevel3Red());
             elevatorView.getBtnStop().setIcon(rsc.getIconStopRed());
-            elevatorView.getBtnOpen().setIcon(rsc.getIconOpenRed());
-            elevatorView.getBtnClose().setIcon(rsc.getIconCloseRed());
+            //elevatorView.getBtnOpen().setIcon(rsc.getIconOpenRed());
+            //elevatorView.getBtnClose().setIcon(rsc.getIconCloseRed());
 
         } else {
             elevatorView.getBtnLevel0().setIcon(rsc.getIconLevel0());
@@ -300,8 +300,8 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
             elevatorView.getBtnLevel2().setIcon(rsc.getIconLevel2());
             elevatorView.getBtnLevel3().setIcon(rsc.getIconLevel3());
             elevatorView.getBtnStop().setIcon(rsc.getIconStop());
-            elevatorView.getBtnOpen().setIcon(rsc.getIconOpen());
-            elevatorView.getBtnClose().setIcon(rsc.getIconClose());
+            //elevatorView.getBtnOpen().setIcon(rsc.getIconOpen());
+            //elevatorView.getBtnClose().setIcon(rsc.getIconClose());
         }
     }
 
@@ -390,7 +390,7 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
     @Override
     public void povcrawlselectChanged() {
         elevatorView.getLblPOv_crawlValue().setText("" + elevator.getPOv_crawlSelect());
-        elevatorView.getSliderPOv_crawlSelect().setValue(elevator.getPOv_crawlSelect());
+        //elevatorView.getSliderPOv_crawlSelect().setValue(elevator.getPOv_crawlSelect());
     }
 
     @Override

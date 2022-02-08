@@ -40,7 +40,7 @@ public class ElevatorView {
 
 	private static JLabel labelElevator;
 
-	private JLabel lblFloorIndicator, lblElevatorIndicator;
+	private static JLabel lblFloorIndicator, lblElevatorIndicator;
 
 	private JButton btnUp, btnUp_1, btnDown_1, btnUp_2, btnDown_2, btnDown_3;
 
@@ -92,7 +92,7 @@ public class ElevatorView {
 				System.out.println("Waiting for the state of the elevator..");
 			}
 		};
-		timer.schedule(timerTask, 0, 5000);//period is in ms (every 5sec we ask)
+		//timer.schedule(timerTask, 0, 5000);//period is in ms (every 5sec we ask)
 /*
 		while(!elevator.getPIm_ready()) {
 		}
