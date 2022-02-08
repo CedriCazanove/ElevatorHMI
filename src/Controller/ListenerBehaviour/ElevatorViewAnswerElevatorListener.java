@@ -115,30 +115,30 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
     public void directionChanged() {
         switch(elevator.getDirection()) {
             case UP:
-                elevatorView.getLabelElevator().setIcon(rsc.getIconElevatorUp());
                 System.out.println("Elevator moving up");
+                elevatorView.getLabelElevator().setIcon(rsc.getIconElevatorUp());
                 break;
             case DOWN:
-                elevatorView.getLabelElevator().setIcon(rsc.getIconElevatorDown());
                 System.out.println("Elevator moving down");
+                elevatorView.getLabelElevator().setIcon(rsc.getIconElevatorDown());
                 break;
             case IDLE:
                 switch(elevator.getCurrentLevel()) {
                     case 1:
-                        elevatorView.getLabelElevator().setIcon(rsc.getIconElevator0());
                         System.out.println("Elevator not moving; Actually level 0");
+                        elevatorView.getLabelElevator().setIcon(rsc.getIconElevator0());
                         break;
                     case 2:
-                        elevatorView.getLabelElevator().setIcon(rsc.getIconElevator1());
                         System.out.println("Elevator not moving; Actually level 1");
+                        elevatorView.getLabelElevator().setIcon(rsc.getIconElevator1());
                         break;
                     case 3:
-                        elevatorView.getLabelElevator().setIcon(rsc.getIconElevator2());
                         System.out.println("Elevator not moving; Actually level 2");
+                        elevatorView.getLabelElevator().setIcon(rsc.getIconElevator2());
                         break;
                     case 4:
-                        elevatorView.getLabelElevator().setIcon(rsc.getIconElevator3());
                         System.out.println("Elevator not moving; Actually level 3");
+                        elevatorView.getLabelElevator().setIcon(rsc.getIconElevator3());
                         break;
                     default:
                         System.out.println("Elevator not moving; No match on floor detected");
@@ -154,160 +154,162 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
     @Override
     public void req1Changed() {
         if(elevator.getReq1()) {
-            elevatorView.getBtnLevel0().setIcon(rsc.getIconLevel0Green());
             System.out.println("Req1 is true");
+            elevatorView.getBtnLevel0().setIcon(rsc.getIconLevel0Green());
         }else {
-            elevatorView.getBtnLevel0().setIcon(rsc.getIconLevel0());
             System.out.println("Req1 is false");
+            elevatorView.getBtnLevel0().setIcon(rsc.getIconLevel0());
         }
     }
 
     @Override
     public void up1Changed() {
         if(elevator.getUp1()) {
-            elevatorView.getBtnUp().setIcon(rsc.getIconUpGreen());
             System.out.println("Up1 is true");
+            elevatorView.getBtnUp().setIcon(rsc.getIconUpGreen());
         }else {
-            elevatorView.getBtnUp().setIcon(rsc.getIconUp());
             System.out.println("Up1 is false");
+            elevatorView.getBtnUp().setIcon(rsc.getIconUp());
         }
     }
 
     @Override
     public void req2Changed() {
         if(elevator.getReq2()) {
-            elevatorView.getBtnLevel1().setIcon(rsc.getIconLevel1Green());
             System.out.println("Req2 is true");
+            elevatorView.getBtnLevel1().setIcon(rsc.getIconLevel1Green());
         }else {
-            elevatorView.getBtnLevel1().setIcon(rsc.getIconLevel1());
             System.out.println("Req2 is false");
+            elevatorView.getBtnLevel1().setIcon(rsc.getIconLevel1());
         }
     }
 
     @Override
     public void up2Changed() {
         if(elevator.getUp2()) {
-            elevatorView.getBtnUp_1().setIcon(rsc.getIconUpGreen());
             System.out.println("Up2 is true");
+            elevatorView.getBtnUp_1().setIcon(rsc.getIconUpGreen());
         }else {
-            elevatorView.getBtnUp_1().setIcon(rsc.getIconUp());
             System.out.println("Up2 is false");
+            elevatorView.getBtnUp_1().setIcon(rsc.getIconUp());
         }
     }
 
     @Override
     public void down2Changed() {
         if(elevator.getDown2()) {
-            elevatorView.getBtnDown_1().setIcon(rsc.getIconDownGreen());
             System.out.println("Down2 is true");
+            elevatorView.getBtnDown_1().setIcon(rsc.getIconDownGreen());
         }else {
-            elevatorView.getBtnDown_1().setIcon(rsc.getIconDown());
             System.out.println("Down2 is false");
+            elevatorView.getBtnDown_1().setIcon(rsc.getIconDown());
         }
     }
 
     @Override
     public void req3Changed() {
         if(elevator.getReq3()) {
-            elevatorView.getBtnLevel2().setIcon(rsc.getIconLevel2Green());
             System.out.println("Req3 is true");
+            elevatorView.getBtnLevel2().setIcon(rsc.getIconLevel2Green());
         }else {
-            elevatorView.getBtnLevel2().setIcon(rsc.getIconLevel2());
             System.out.println("Req3 is false");
+            elevatorView.getBtnLevel2().setIcon(rsc.getIconLevel2());
         }
     }
 
     @Override
     public void up3Changed() {
         if(elevator.getUp3()) {
-            elevatorView.getBtnUp_2().setIcon(rsc.getIconUpGreen());
             System.out.println("Up3 is true");
+            elevatorView.getBtnUp_2().setIcon(rsc.getIconUpGreen());
         }else {
-            elevatorView.getBtnUp_2().setIcon(rsc.getIconUp());
             System.out.println("Up3 is false");
+            elevatorView.getBtnUp_2().setIcon(rsc.getIconUp());
         }
     }
 
     @Override
     public void down3Changed() {
         if(elevator.getDown3()) {
-            elevatorView.getBtnDown_2().setIcon(rsc.getIconDownGreen());
             System.out.println("Down3 is true");
+            elevatorView.getBtnDown_2().setIcon(rsc.getIconDownGreen());
         }else {
-            elevatorView.getBtnDown_2().setIcon(rsc.getIconDown());
             System.out.println("Down3 is false");
+            elevatorView.getBtnDown_2().setIcon(rsc.getIconDown());
         }
     }
 
     @Override
     public void req4Changed() {
         if(elevator.getReq4()) {
-            elevatorView.getBtnLevel3().setIcon(rsc.getIconLevel3Green());
             System.out.println("Req4 is true");
+            elevatorView.getBtnLevel3().setIcon(rsc.getIconLevel3Green());
         }else {
-            elevatorView.getBtnLevel3().setIcon(rsc.getIconLevel3());
             System.out.println("Req4 is false");
+            elevatorView.getBtnLevel3().setIcon(rsc.getIconLevel3());
         }
     }
 
     @Override
     public void down4Changed() {
         if(elevator.getDown4()) {
-            elevatorView.getBtnDown_3().setIcon(rsc.getIconDownGreen());
             System.out.println("Down4 is true");
+            elevatorView.getBtnDown_3().setIcon(rsc.getIconDownGreen());
         }else {
-            elevatorView.getBtnDown_3().setIcon(rsc.getIconDown());
             System.out.println("Down4 is false");
+            elevatorView.getBtnDown_3().setIcon(rsc.getIconDown());
         }
     }
 
     @Override
     public void openChanged() {
         if(elevator.getOpen()) {
-            elevatorView.getBtnOpen().setIcon(rsc.getIconOpenGreen());
             System.out.println("Open is true");
+            elevatorView.getBtnOpen().setIcon(rsc.getIconOpenGreen());
         } else {
-            elevatorView.getBtnOpen().setIcon(rsc.getIconOpen());
             System.out.println("Open is false");
+            elevatorView.getBtnOpen().setIcon(rsc.getIconOpen());
         }
     }
 
     @Override
     public void closeChanged() {
         if(elevator.getClose()) {
-            elevatorView.getBtnClose().setIcon(rsc.getIconCloseGreen());
             System.out.println("Close is true");
+            elevatorView.getBtnClose().setIcon(rsc.getIconCloseGreen());
         } else {
-            elevatorView.getBtnClose().setIcon(rsc.getIconClose());
             System.out.println("Close is false");
+            elevatorView.getBtnClose().setIcon(rsc.getIconClose());
         }
     }
 
     @Override
     public void emergencyChanged() {
         if(elevator.getEmergency()) {
+            System.out.println("Emergency true");
             elevatorView.getBtnLevel0().setIcon(rsc.getIconLevel0Red());
             elevatorView.getBtnLevel1().setIcon(rsc.getIconLevel1Red());
             elevatorView.getBtnLevel2().setIcon(rsc.getIconLevel2Red());
             elevatorView.getBtnLevel3().setIcon(rsc.getIconLevel3Red());
             elevatorView.getBtnStop().setIcon(rsc.getIconStopRed());
-            //elevatorView.getBtnOpen().setIcon(rsc.getIconOpenRed());
-            //elevatorView.getBtnClose().setIcon(rsc.getIconCloseRed());
-
+            elevatorView.getBtnOpen().setIcon(rsc.getIconOpenRed());
+            elevatorView.getBtnClose().setIcon(rsc.getIconCloseRed());
         } else {
+            System.out.println("Emergency false");
             elevatorView.getBtnLevel0().setIcon(rsc.getIconLevel0());
             elevatorView.getBtnLevel1().setIcon(rsc.getIconLevel1());
             elevatorView.getBtnLevel2().setIcon(rsc.getIconLevel2());
             elevatorView.getBtnLevel3().setIcon(rsc.getIconLevel3());
             elevatorView.getBtnStop().setIcon(rsc.getIconStop());
-            //elevatorView.getBtnOpen().setIcon(rsc.getIconOpen());
-            //elevatorView.getBtnClose().setIcon(rsc.getIconClose());
+            elevatorView.getBtnOpen().setIcon(rsc.getIconOpen());
+            elevatorView.getBtnClose().setIcon(rsc.getIconClose());
         }
     }
 
     @Override
     public void poresetChanged() {
         if(elevator.getPOreset()) {
+            System.out.println("POreset true");
             elevatorView.getBtnLevel0().setIcon(rsc.getIconLevel0());
             elevatorView.getBtnLevel1().setIcon(rsc.getIconLevel1());
             elevatorView.getBtnLevel2().setIcon(rsc.getIconLevel2());
@@ -329,6 +331,7 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
             elevatorView.getBtnPOuv2().setIcon(rsc.getIconLedOff());
             elevatorView.getBtnPOuv1().setIcon(rsc.getIconLedOff());
         } else {
+            System.out.println("POreset false");
             elevatorView.getBtnPOreset().setIcon(rsc.getIconLedOff());
         }
     }
@@ -522,22 +525,22 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
     @Override
     public void pis_dopenedChanged() {
         if(elevator.getPIs_dopened()) {
-            elevatorView.getLabelElevator().setIcon(rsc.getIconElevatorOpen());
             System.out.println("Open is true");
+            elevatorView.getLabelElevator().setIcon(rsc.getIconElevatorOpen());
         } else {
-            elevatorView.getLabelElevator().setIcon(rsc.getIconElevatorClose());
             System.out.println("Open is false");
+            elevatorView.getLabelElevator().setIcon(rsc.getIconElevatorClose());
         }
     }
 
     @Override
     public void pis_dclosedChanged() {
         if(elevator.getPIs_dclosed()) {
-            elevatorView.getLabelElevator().setIcon(rsc.getIconElevatorClose());
             System.out.println("Open is true");
+            elevatorView.getLabelElevator().setIcon(rsc.getIconElevatorClose());
         } else {
-            elevatorView.getLabelElevator().setIcon(rsc.getIconElevatorOpen());
             System.out.println("Open is false");
+            elevatorView.getLabelElevator().setIcon(rsc.getIconElevatorOpen());
         }
     }
 
