@@ -3,6 +3,8 @@ package View;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Hashtable;
 import java.util.TimerTask;
 
@@ -57,7 +59,7 @@ public class ElevatorView {
 	/**
 	 * Create the application.
 	 */
-	public ElevatorView(Elevator elevator, MqttPublisher mqttPublisher) {
+	public ElevatorView(Elevator elevator, MqttPublisher mqttPublisher, FileWriter myWriter) {
 		this.mqttPublisher = mqttPublisher;
 		this.password = new Password();
 		this.password.addNewPasswordListener(new ElevatorViewAnswerPasswordListener(this, password));
@@ -67,10 +69,10 @@ public class ElevatorView {
 		 * Create the listener of the elevator which allow us to update the view
 		 */
 		this.elevator.addNewElevatorListener(new ElevatorViewAnswerElevatorListener(this, elevator));
-
 		/**
 		 * Can only display the window when we have at least received the state once
 		 */
+
 		java.util.Timer timer = new java.util.Timer();
 		TimerTask timerTask = new TimerTask() {
 			@Override
@@ -97,6 +99,47 @@ public class ElevatorView {
 			}
 		};
 		timer.schedule(timerTask, 0, 60000);//period is in ms (every 1min we ask)
+
+		frame.addWindowListener(new WindowListener() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+
+			}
+
+			@Override
+			public void windowClosing(WindowEvent e) {
+				try {
+					myWriter.close();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+
+			@Override
+			public void windowClosed(WindowEvent e) {
+
+			}
+
+			@Override
+			public void windowIconified(WindowEvent e) {
+
+			}
+
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+
+			}
+
+			@Override
+			public void windowActivated(WindowEvent e) {
+
+			}
+
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+
+			}
+		});
 	}
 
 	/**
@@ -201,7 +244,7 @@ public class ElevatorView {
 		panelFont.add(lblElevatorIndicator);
 
 		/**
-		JPanel for the button inside the elevator available for the user
+		 JPanel for the button inside the elevator available for the user
 		 */
 		JPanel panel = new JPanel();
 		panel.setBounds(230, 250, 110, 230);
