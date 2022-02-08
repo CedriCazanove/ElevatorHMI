@@ -57,16 +57,16 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
             elevatorView.getLabelElevator().setBounds(0, nextLevel, 100, 135);
             switch (elevator.getCurrentLevel()) {
                 case 1:
-                    //elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator0());
+                    elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator0());
                     break;
                 case 2:
-                    //elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator1());
+                    elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator1());
                     break;
                 case 3:
-                    //elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator2());
+                    elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator2());
                     break;
                 case 4:
-                    //elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator3());
+                    elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator3());
                     break;
                 default:
                     System.out.println("Nothing match");
