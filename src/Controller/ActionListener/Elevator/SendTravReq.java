@@ -2,6 +2,7 @@ package Controller.ActionListener.Elevator;
 
 import Controller.Mqtt.MqttPublisher;
 import Controller.Request.TestRequestCurrentLevel;
+import Controller.Request.TestRequestDirection;
 import Controller.Request.TestRequestServPAns;
 import Controller.Request.UserRequest;
 import org.json.JSONException;
@@ -25,7 +26,8 @@ public class SendTravReq implements ActionListener {
             System.out.println(request.toJSON());
             mqttPublisher.sendMessage(request.toJSON().toString());
             mqttPublisher.sendMessage(new TestRequestServPAns().toJSON().toString());
-            mqttPublisher.sendMessage(new TestRequestCurrentLevel().toJSON().toString());
+            //mqttPublisher.sendMessage(new TestRequestCurrentLevel().toJSON().toString());
+            mqttPublisher.sendMessage(new TestRequestDirection().toJSON().toString());
         } catch (JSONException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();

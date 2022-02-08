@@ -1009,11 +1009,11 @@ public class Elevator {
 
 	public void treatRequestBackDirection(RequestBackDirection requestState) {
 		System.out.println("Elevator received a direction request to treat");
-		if (requestState.getDirection().equals("UP")) {
+		if (requestState.getDirection().equals("up") | requestState.getDirection().equals("UP")) {
 			setDirection(Direction.UP);
-		} else if (requestState.getDirection().equals("DOWN")) {
+		} else if (requestState.getDirection().equals("down") | requestState.getDirection().equals("DOWN")) {
 			setDirection(Direction.DOWN);
-		} else if (requestState.getDirection().equals("IDLE")) {
+		} else if (requestState.getDirection().equals("idle") | requestState.getDirection().equals("IDLE")) {
 			setDirection(Direction.IDLE);
 		}
 	}
