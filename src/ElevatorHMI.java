@@ -1,4 +1,5 @@
 import Controller.ActionListener.Elevator.SendServPReq;
+import Controller.AskingAllStatePeriodicaly;
 import Controller.Mqtt.MqttPublisher;
 import Controller.Mqtt.MqttSubscriber;
 import Controller.Request.TestRequestServPAns;
@@ -19,6 +20,8 @@ public class ElevatorHMI {
 	private static MqttSubscriber mqttSubscriber;
 
 	private static FileWriter myWriter;
+
+	private static AskingAllStatePeriodicaly statePeriodicaly;
 
 	public static void main(String[] args) {
 		Elevator elevator = new Elevator();
@@ -50,6 +53,10 @@ public class ElevatorHMI {
 					/**
 					 * Can only display the window when we have at least received the state once
 					 */
+					statePeriodicaly = new AskingAllStatePeriodicaly(mqttPublisher);
+					statePeriodicaly.setDelay(5000);
+					statePeriodicaly.startAsking();
+					/*
 					java.util.Timer timer = new java.util.Timer();
 					TimerTask timerTask = new TimerTask() {
 						@Override
@@ -64,18 +71,21 @@ public class ElevatorHMI {
 						}
 					};
 					timer.schedule(timerTask, 0, 5000);//period is in ms (every 5sec we ask)
-
+*/
 					while(!elevator.getPIm_ready()) {
 						System.out.println("Elevator is" + (elevator.getPIm_ready() ? " " : " not") + " ready");
 					}
 					System.out.println("Elevator is" + (elevator.getPIm_ready() ? " " : " not") + " ready");
-					timer.cancel();
-
+					//timer.cancel();
+					statePeriodicaly.stopAsking();
 					windowElevator.setElevatorViewVisible(true);
 
 					/**
 					 * Asking for all the state every 1min
 					 */
+					statePeriodicaly.setDelay(60000);
+					statePeriodicaly.startAsking();
+					/*
 					timer = new java.util.Timer();
 					timerTask = new TimerTask() {
 						@Override
@@ -84,6 +94,8 @@ public class ElevatorHMI {
 						}
 					};
 					timer.schedule(timerTask, 0, 60000);//period is in ms (every 1min we ask)
+
+					 */
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
