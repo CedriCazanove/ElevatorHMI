@@ -28,8 +28,8 @@ public class TestRequestServPAns implements Request {
         obj.put("value", true);
 
         JSONObject obj2 = new JSONObject();
-        obj2.put("name","3DOWN");
-        obj2.put("value", bool);
+        obj2.put("name","3REQ");
+        obj2.put("value", false);
 
         JSONArray ja = new JSONArray();
         ja.put(obj);

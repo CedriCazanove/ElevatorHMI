@@ -22,10 +22,10 @@ public class SendTravReq implements ActionListener {
         try {
             System.out.println(request.toJSON());
             mqttPublisher.sendMessage(request.toJSON().toString());
-            mqttPublisher.sendMessage(new TestRequestServPAns().toJSON().toString());
-            mqttPublisher.sendMessage(new TestRequestCurrentLevel().toJSON().toString());
-            mqttPublisher.sendMessage(new TestRequestDirection().toJSON().toString());
-            mqttPublisher.sendMessage(new TestRequestDoorState().toJSON().toString());
+            //mqttPublisher.sendMessage(new TestRequestServPAns().toJSON().toString());
+            //mqttPublisher.sendMessage(new TestRequestCurrentLevel().toJSON().toString());
+            //mqttPublisher.sendMessage(new TestRequestDirection().toJSON().toString());
+            //mqttPublisher.sendMessage(new TestRequestDoorState().toJSON().toString());
         } catch (JSONException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();

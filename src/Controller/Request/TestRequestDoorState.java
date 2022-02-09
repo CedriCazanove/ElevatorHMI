@@ -24,7 +24,7 @@ public class TestRequestDoorState implements Request {
     public TestRequestDoorState() throws JSONException {
         this.type = "DoorState";
         this.device = "Elevator";
-        this.state = "IN MOTION";
+        this.state = "CLOSED";
         Date date = new Date(System.currentTimeMillis());
         // Conversion
         SimpleDateFormat sdf;

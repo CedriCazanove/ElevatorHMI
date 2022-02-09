@@ -27,11 +27,11 @@ public class AskingAllStatePeriodicaly {
             public void run() {
                 new SendServPReq(mqttPublisher).actionPerformed(null);
                 System.out.println("Asking for the state of the elevator..");
-                try {
+                /*try {
                     mqttPublisher.sendMessage(new TestRequestServPAns().toJSON().toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
+                }*/
             }
         };
     }
@@ -52,11 +52,11 @@ public class AskingAllStatePeriodicaly {
             public void run() {
                 new SendServPReq(mqttPublisher).actionPerformed(null);
                 System.out.println("Asking for the state of the elevator..");
-                try {
+                /*try {
                     mqttPublisher.sendMessage(new TestRequestServPAns().toJSON().toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
-                }
+                }*/
             }
         };
     }

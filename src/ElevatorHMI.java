@@ -25,16 +25,12 @@ public class ElevatorHMI {
 
 	public static void main(String[] args) {
 		Elevator elevator = new Elevator();
-		System.out.println(elevator.toString());
-
+		//System.out.println(elevator.toString());
 		try {
 			File file= new File ("files","file.txt");
-			if (file.exists())
-			{
+			if (file.exists()) {
 				myWriter = new FileWriter(file,true);//if file exists append to file. Works fine.
-			}
-			else
-			{
+			} else {
 				myWriter = new FileWriter(file);// If file does not exist. Create it. This throws a FileNotFoundException. Why?
 			}
 		} catch (IOException e1) {
@@ -51,10 +47,10 @@ public class ElevatorHMI {
 					ElevatorView windowElevator = new ElevatorView(elevator, mqttPublisher, myWriter);
 
 					/**
-					 * Can only display the window when we have at least received the state once
+					 * Can only display the window when we have at least received the state once to initialize the elevator and the view
 					 */
 					statePeriodicaly = new AskingAllStatePeriodicaly(mqttPublisher);
-					statePeriodicaly.setDelay(5000);
+					statePeriodicaly.setDelay(5000); //asking every 5 secondes
 					statePeriodicaly.startAsking();
 					/*
 					java.util.Timer timer = new java.util.Timer();
