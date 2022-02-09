@@ -38,9 +38,9 @@ public class ElevatorView {
 
 	private static MqttSubscriber mqttSubscriber;
 
-	private static JLabel labelElevator;
+	private JLabel labelElevator;
 
-	private static JLabel lblFloorIndicator, lblElevatorIndicator;
+	private JLabel lblFloorIndicator, lblElevatorIndicator;
 
 	private JButton btnUp, btnUp_1, btnDown_1, btnUp_2, btnDown_2, btnDown_3;
 
@@ -80,10 +80,7 @@ public class ElevatorView {
 		 * Create the listener of the elevator which allow us to update the view
 		 */
 		this.elevator.addNewElevatorListener(new ElevatorViewAnswerElevatorListener(this, elevator));
-		/**
-		 * Can only display the window when we have at least received the state once
-		 */
-
+/*
 		java.util.Timer timer = new java.util.Timer();
 		TimerTask timerTask = new TimerTask() {
 			@Override
@@ -92,17 +89,16 @@ public class ElevatorView {
 				System.out.println("Waiting for the state of the elevator..");
 			}
 		};
-		//timer.schedule(timerTask, 0, 5000);//period is in ms (every 5sec we ask)
-/*
+		timer.schedule(timerTask, 0, 5000);//period is in ms (every 5sec we ask)
+
 		while(!elevator.getPIm_ready()) {
 		}
 		timer.cancel();
-*/
+
 		this.frame.setVisible(true);
 
-		/**
-		 * Asking for all the state every 1min
-		 */
+		//Asking for all the state every 1min
+
 		timerTask = new TimerTask() {
 			@Override
 			public void run() {
@@ -110,7 +106,7 @@ public class ElevatorView {
 			}
 		};
 		timer.schedule(timerTask, 0, 60000);//period is in ms (every 1min we ask)
-
+*/
 		//Adding behaviour when we close the window
 		frame.addWindowListener(new WindowListenerBehaviour(myWriter, mqttPublisher));
 	}
@@ -535,7 +531,7 @@ public class ElevatorView {
 		return mqttPublisher;
 	}
 
-	public static JLabel getLabelElevator() {
+	public JLabel getLabelElevator() {
 		return labelElevator;
 	}
 
@@ -749,5 +745,9 @@ public class ElevatorView {
 
 	public JSlider getSliderPOv_crawlSelect() {
 		return sliderPOv_crawlSelect;
+	}
+
+	public void setElevatorViewVisible(Boolean bool) {
+		frame.setVisible(bool);
 	}
 }

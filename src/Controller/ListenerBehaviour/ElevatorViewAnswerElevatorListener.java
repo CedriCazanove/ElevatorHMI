@@ -116,29 +116,69 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
         switch(elevator.getDirection()) {
             case UP:
                 System.out.println("Elevator moving up");
-                elevatorView.getLabelElevator().setIcon(rsc.getIconElevatorUp());
+                switch(elevator.getCurrentLevel()) {
+                    case 1:
+                        System.out.println("Elevator moving up; Actually level 0");
+                        elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator0Up());
+                        break;
+                    case 2:
+                        System.out.println("Elevator moving up; Actually level 1");
+                        elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator1Up());
+                        break;
+                    case 3:
+                        System.out.println("Elevator moving up; Actually level 2");
+                        elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator2Up());
+                        break;
+                    case 4:
+                        System.out.println("Elevator moving up; Actually level 3");
+                        elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator3Up());
+                        break;
+                    default:
+                        System.out.println("Elevator moving up; No match on floor detected");
+                        break;
+                }
                 break;
             case DOWN:
                 System.out.println("Elevator moving down");
-                elevatorView.getLabelElevator().setIcon(rsc.getIconElevatorDown());
+                switch(elevator.getCurrentLevel()) {
+                    case 1:
+                        System.out.println("Elevator moving down; Actually level 0");
+                        elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator0Down());
+                        break;
+                    case 2:
+                        System.out.println("Elevator moving down; Actually level 1");
+                        elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator1Down());
+                        break;
+                    case 3:
+                        System.out.println("Elevator moving down; Actually level 2");
+                        elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator2Down());
+                        break;
+                    case 4:
+                        System.out.println("Elevator moving down; Actually level 3");
+                        elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator3Down());
+                        break;
+                    default:
+                        System.out.println("Elevator moving down; No match on floor detected");
+                        break;
+                }
                 break;
             case IDLE:
                 switch(elevator.getCurrentLevel()) {
                     case 1:
                         System.out.println("Elevator not moving; Actually level 0");
-                        elevatorView.getLabelElevator().setIcon(rsc.getIconElevator0());
+                        elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator0());
                         break;
                     case 2:
                         System.out.println("Elevator not moving; Actually level 1");
-                        elevatorView.getLabelElevator().setIcon(rsc.getIconElevator1());
+                        elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator1());
                         break;
                     case 3:
                         System.out.println("Elevator not moving; Actually level 2");
-                        elevatorView.getLabelElevator().setIcon(rsc.getIconElevator2());
+                        elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator2());
                         break;
                     case 4:
                         System.out.println("Elevator not moving; Actually level 3");
-                        elevatorView.getLabelElevator().setIcon(rsc.getIconElevator3());
+                        elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator3());
                         break;
                     default:
                         System.out.println("Elevator not moving; No match on floor detected");
@@ -560,6 +600,7 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
 
     @Override
     public void pis_vChanged() {
-
+        //elevatorView.getSliderPOv_crawlSelect().setValue(elevator.getPIs_v());
+        elevatorView.getLblPOv_crawlValue().setText("" + elevator.getPIs_v());
     }
 }

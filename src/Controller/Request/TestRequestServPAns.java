@@ -24,11 +24,11 @@ public class TestRequestServPAns implements Request {
         this.type = "ServPAns";
         this.device = "Elevator";
         JSONObject obj = new JSONObject();
-        obj.put("name","1REQ");
-        obj.put("value", bool);
+        obj.put("name","PIm_ready");
+        obj.put("value", true);
 
         JSONObject obj2 = new JSONObject();
-        obj2.put("name","CLOSE");
+        obj2.put("name","3DOWN");
         obj2.put("value", bool);
 
         JSONArray ja = new JSONArray();

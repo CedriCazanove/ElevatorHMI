@@ -1,12 +1,16 @@
+import Controller.ActionListener.Elevator.SendServPReq;
 import Controller.Mqtt.MqttPublisher;
 import Controller.Mqtt.MqttSubscriber;
+import Controller.Request.TestRequestServPAns;
 import Model.Elevator.Elevator;
 import View.ElevatorView;
+import org.json.JSONException;
 
 import java.awt.EventQueue;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.TimerTask;
 
 public class ElevatorHMI {
 
@@ -42,6 +46,44 @@ public class ElevatorHMI {
 					mqttSubscriber = new MqttSubscriber(elevator, myWriter);
 					mqttSubscriber.subscribe();
 					ElevatorView windowElevator = new ElevatorView(elevator, mqttPublisher, myWriter);
+
+					/**
+					 * Can only display the window when we have at least received the state once
+					 */
+					java.util.Timer timer = new java.util.Timer();
+					TimerTask timerTask = new TimerTask() {
+						@Override
+						public void run() {
+							new SendServPReq(mqttPublisher).actionPerformed(null);
+							System.out.println("Waiting for the state of the elevator..");
+							try {
+								mqttPublisher.sendMessage(new TestRequestServPAns().toJSON().toString());
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+						}
+					};
+					timer.schedule(timerTask, 0, 5000);//period is in ms (every 5sec we ask)
+
+					while(!elevator.getPIm_ready()) {
+						System.out.println("Elevator is" + (elevator.getPIm_ready() ? " " : " not") + " ready");
+					}
+					System.out.println("Elevator is" + (elevator.getPIm_ready() ? " " : " not") + " ready");
+					timer.cancel();
+
+					windowElevator.setElevatorViewVisible(true);
+
+					/**
+					 * Asking for all the state every 1min
+					 */
+					timer = new java.util.Timer();
+					timerTask = new TimerTask() {
+						@Override
+						public void run() {
+							new SendServPReq(mqttPublisher).actionPerformed(null);
+						}
+					};
+					timer.schedule(timerTask, 0, 60000);//period is in ms (every 1min we ask)
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

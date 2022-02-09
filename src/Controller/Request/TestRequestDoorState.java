@@ -1,6 +1,5 @@
 package Controller.Request;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -8,28 +7,24 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
-public class TestRequestCurrentLevel implements Request {
+public class TestRequestDoorState implements Request {
 
     private String type;
 
     private String device;
 
-    private Object level;
+    private String state;
 
     private String time;
 
-    private static int floor = 1;
+    private static int floor = 4;
 
     private static boolean bool = true;
 
-    public TestRequestCurrentLevel() throws JSONException {
-        this.type = "CurrentLevel";
+    public TestRequestDoorState() throws JSONException {
+        this.type = "DoorState";
         this.device = "Elevator";
-        this.level = floor++;
-        if ((int) this.level >= 5) {
-            floor = 1;
-            this.level = floor;
-        }
+        this.state = "IN MOTION";
         Date date = new Date(System.currentTimeMillis());
         // Conversion
         SimpleDateFormat sdf;
@@ -43,7 +38,7 @@ public class TestRequestCurrentLevel implements Request {
         JSONObject obj = new JSONObject();
         obj.put("type", this.type);
         obj.put("device", this.device);
-        obj.put("level", this.level);
+        obj.put("state", this.state);
         obj.put("time", this.time);
         return obj;
     }
@@ -58,8 +53,8 @@ public class TestRequestCurrentLevel implements Request {
         return this.device;
     }
 
-    public Object getLevel() {
-        return this.level;
+    public Object getState() {
+        return this.state;
     }
 
     @Override
@@ -75,8 +70,8 @@ public class TestRequestCurrentLevel implements Request {
         this.device = device;
     }
 
-    public void setLevel(Object level) {
-        this.level = level;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public void setTime(String time) {

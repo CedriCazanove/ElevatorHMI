@@ -22,7 +22,7 @@ public class TestRequestDirection implements Request {
     public TestRequestDirection() throws JSONException {
         this.type = "DirInd";
         this.device = "Elevator";
-        this.direction = "DOWN";
+        this.direction = (bool ? "idle" : "up");
         Date date = new Date(System.currentTimeMillis());
         // Conversion
         SimpleDateFormat sdf;
@@ -38,6 +38,7 @@ public class TestRequestDirection implements Request {
         obj.put("device", this.device);
         obj.put("direction", this.direction);
         obj.put("time", this.time);
+        bool = ! bool;
         return obj;
     }
 

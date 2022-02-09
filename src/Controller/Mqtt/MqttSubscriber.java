@@ -91,7 +91,7 @@ public class MqttSubscriber implements MqttCallback{
 		JSONObject jsonmsg = new JSONObject(new String(message.getPayload()));
 		System.out.println("Type : " + jsonmsg.get("type").toString());
 		Request requestBack = null;
-		//try {
+		try {
 			switch (jsonmsg.get("type").toString()) {
 				case "ServPAns":
 					System.out.println("ServPAns");
@@ -127,9 +127,9 @@ public class MqttSubscriber implements MqttCallback{
 					System.out.println("no request back match");
 					break;
 			}
-		/*} catch (JSONException e) {
+		} catch (JSONException e) {
 			System.out.println("JSONException: " + e.getMessage());
-		}*/
+		}
 
 		printMessageInFile(jsonmsg.get("type").toString(), jsonmsg.get("time").toString(), jsonmsg.get("device").toString(), other);
 		System.out.println("END");
