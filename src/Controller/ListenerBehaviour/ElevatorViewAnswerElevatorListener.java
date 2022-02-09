@@ -55,7 +55,8 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
         if (elevator.getCurrentLevel() >= 0) {
             int nextLevel = (4 - elevator.getCurrentLevel()) * 135 + 3;
             elevatorView.getLabelElevator().setBounds(0, nextLevel, 100, 135);
-            switch (elevator.getCurrentLevel()) {
+            directionChanged();
+            /*switch (elevator.getCurrentLevel()) {
                 case 1:
                     elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator0());
                     break;
@@ -70,7 +71,7 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
                     break;
                 default:
                     System.out.println("Nothing match");
-            }
+            }*/
         }
     }
 
@@ -211,6 +212,7 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
             System.out.println("Up1 is false");
             elevatorView.getBtnUp().setIcon(rsc.getIconUp());
         }
+
     }
 
     @Override
@@ -443,13 +445,40 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
 
     @Override
     public void pis_l1rChanged() {
-        if(elevator.getPIs_l1r()) {
-            System.out.println("ElevatorView : L1 Reached");
-            int nextLevel = (3)*135 + 3;
-            elevatorView.getLabelElevator().setBounds(0, nextLevel, 100, 135);
-            elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator0());
-        } else {
-            directionChanged();
+        switch(elevator.getDirection()) {
+            case UP:
+                if(elevator.getPIs_l1r()) {
+                    System.out.println("ElevatorView : L1 Reached");
+                    int nextLevel = (3)*135 + 3;
+                    elevatorView.getLabelElevator().setBounds(0, nextLevel, 100, 135);
+                    elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator0Up());
+                } else {
+                    directionChanged();
+                }
+                break;
+            case DOWN:
+                if(elevator.getPIs_l1r()) {
+                    System.out.println("ElevatorView : L1 Reached");
+                    int nextLevel = (3)*135 + 3;
+                    elevatorView.getLabelElevator().setBounds(0, nextLevel, 100, 135);
+                    elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator0Down());
+                } else {
+                    directionChanged();
+                }
+                break;
+            case IDLE:
+                if(elevator.getPIs_l1r()) {
+                    System.out.println("ElevatorView : L1 Reached");
+                    int nextLevel = (3)*135 + 3;
+                    elevatorView.getLabelElevator().setBounds(0, nextLevel, 100, 135);
+                    elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator0());
+                } else {
+                    directionChanged();
+                }
+                break;
+            default:
+                System.out.println("No match detected in the elevator direction");
+                break;
         }
     }
 
@@ -470,13 +499,40 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
 
     @Override
     public void pis_l2rChanged() {
-        if(elevator.getPIs_l2r()) {
-            System.out.println("ElevatorView : L2 Reached");
-            int nextLevel = (2)*135 + 3;
-            elevatorView.getLabelElevator().setBounds(0, nextLevel, 100, 135);
-            elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator1());
-        } else {
-            directionChanged();
+        switch(elevator.getDirection()) {
+            case UP:
+                if(elevator.getPIs_l2r()) {
+                    System.out.println("ElevatorView : L2 Reached");
+                    int nextLevel = (2)*135 + 3;
+                    elevatorView.getLabelElevator().setBounds(0, nextLevel, 100, 135);
+                    elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator1Up());
+                } else {
+                    directionChanged();
+                }
+                break;
+            case DOWN:
+                if(elevator.getPIs_l2r()) {
+                    System.out.println("ElevatorView : L2 Reached");
+                    int nextLevel = (2)*135 + 3;
+                    elevatorView.getLabelElevator().setBounds(0, nextLevel, 100, 135);
+                    elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator1Down());
+                } else {
+                    directionChanged();
+                }
+                break;
+            case IDLE:
+                if(elevator.getPIs_l2r()) {
+                    System.out.println("ElevatorView : L2 Reached");
+                    int nextLevel = (2)*135 + 3;
+                    elevatorView.getLabelElevator().setBounds(0, nextLevel, 100, 135);
+                    elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator1());
+                } else {
+                    directionChanged();
+                }
+                break;
+            default:
+                System.out.println("No match detected in the elevator direction");
+                break;
         }
     }
 
@@ -497,13 +553,40 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
 
     @Override
     public void pis_l3rChanged() {
-        if(elevator.getPIs_l3r()) {
-            System.out.println("ElevatorView : L3 Reached");
-            int nextLevel = 2*135 + 3;
-            elevatorView.getLabelElevator().setBounds(0, nextLevel, 100, 135);
-            elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator2());
-        } else {
-            directionChanged();
+        switch(elevator.getDirection()) {
+            case UP:
+                if(elevator.getPIs_l3r()) {
+                    System.out.println("ElevatorView : L3 Reached");
+                    int nextLevel = (1)*135 + 3;
+                    elevatorView.getLabelElevator().setBounds(0, nextLevel, 100, 135);
+                    elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator2Up());
+                } else {
+                    directionChanged();
+                }
+                break;
+            case DOWN:
+                if(elevator.getPIs_l3r()) {
+                    System.out.println("ElevatorView : L3 Reached");
+                    int nextLevel = (1)*135 + 3;
+                    elevatorView.getLabelElevator().setBounds(0, nextLevel, 100, 135);
+                    elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator2Down());
+                } else {
+                    directionChanged();
+                }
+                break;
+            case IDLE:
+                if(elevator.getPIs_l3r()) {
+                    System.out.println("ElevatorView : L3 Reached");
+                    int nextLevel = (1)*135 + 3;
+                    elevatorView.getLabelElevator().setBounds(0, nextLevel, 100, 135);
+                    elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator2());
+                } else {
+                    directionChanged();
+                }
+                break;
+            default:
+                System.out.println("No match detected in the elevator direction");
+                break;
         }
     }
 
@@ -524,11 +607,40 @@ public class ElevatorViewAnswerElevatorListener implements Elevator.ElevatorList
 
     @Override
     public void pis_l4rChanged() {
-        if(elevator.getPIs_l4r()) {
-            System.out.println("ElevatorView : L4 Reached");
-            int nextLevel = 3;
-            elevatorView.getLabelElevator().setBounds(0, nextLevel, 100, 135);
-            elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator3());
+        switch(elevator.getDirection()) {
+            case UP:
+                if(elevator.getPIs_l4r()) {
+                    System.out.println("ElevatorView : L4 Reached");
+                    int nextLevel = 3;
+                    elevatorView.getLabelElevator().setBounds(0, nextLevel, 100, 135);
+                    elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator3Up());
+                } else {
+                    directionChanged();
+                }
+                break;
+            case DOWN:
+                if(elevator.getPIs_l4r()) {
+                    System.out.println("ElevatorView : L4 Reached");
+                    int nextLevel = 3;
+                    elevatorView.getLabelElevator().setBounds(0, nextLevel, 100, 135);
+                    elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator3Down());
+                } else {
+                    directionChanged();
+                }
+                break;
+            case IDLE:
+                if(elevator.getPIs_l4r()) {
+                    System.out.println("ElevatorView : L1 Reached");
+                    int nextLevel = 3;
+                    elevatorView.getLabelElevator().setBounds(0, nextLevel, 100, 135);
+                    elevatorView.getLblElevatorIndicator().setIcon(rsc.getIconElevator3());
+                } else {
+                    directionChanged();
+                }
+                break;
+            default:
+                System.out.println("No match detected in the elevator direction");
+                break;
         }
     }
 

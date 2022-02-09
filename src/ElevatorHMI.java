@@ -68,6 +68,7 @@ public class ElevatorHMI {
 					};
 					timer.schedule(timerTask, 0, 5000);//period is in ms (every 5sec we ask)
 */
+
 					while(!elevator.getPIm_ready()) {
 						System.out.println("Elevator is" + (elevator.getPIm_ready() ? " " : " not") + " ready");
 					}

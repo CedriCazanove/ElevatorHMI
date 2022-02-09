@@ -77,8 +77,10 @@ public class MqttPublisher {
             String other;
             if(jsonmsg.get("type").equals("SupPanelReq")) {
                 other = "\n\tMode: " + jsonmsg.get("mode").toString() +"\n\tControl: " +jsonmsg.get("control").toString() + "\n\tState: "+ jsonmsg.get("state").toString();
-            } else {
+            } else if(jsonmsg.get("type").equals("TravReq")) {
                 other = jsonmsg.get("request").toString();
+            } else {
+                other = "null";
             }
             myWriter.write("Sent message type: " + jsonmsg.get("type").toString() + " at " + jsonmsg.get("time").toString() +"\n------------------------------- \nMessage: " + other + " \nDevice: "+ jsonmsg.get("device").toString() + "\n------------------------------------------------------------------------------------------------\n");
 
